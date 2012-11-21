@@ -1,0 +1,11 @@
+*/config/development
+*/logs/log-*.php
+*/logs/!index.html
+*/cache/*
+*/cache/!index.html
+books/*
+system/*
+captcha/*
+.project
+index.php
+application/config/config.php

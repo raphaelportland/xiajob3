@@ -1,0 +1,104 @@
+/* CSS SPECIFIQUE */
+
+html,
+body {
+	background: black;
+	height: 100%;
+}
+
+#footer {
+	margin: 40px 0 0 0;
+	padding: 10px;
+	text-align: center;
+}
+
+#myCarousel {
+	background-color: black;
+	height: 100%;
+	margin-bottom: 0;
+}
+
+
+img.carousel_pic {
+	mmin-width: 100%;
+	margin: 0 auto;
+	height: 100%;
+}
+
+.book-description {
+	width: 200px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.carousel-caption {
+	width: 40%;
+	margin-bottom: 20px;
+	margin-left: 20px;
+}
+
+.book-social {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 1000;
+}
+
+.picture_flowers {
+	position: absolute;
+	right: 20px; 
+	bottom: 70px;
+	width: 350px;
+	text-align: right;
+	z-index: 600;
+}
+
+.picture_flowers span {
+	display: inline-block;
+	margin-top: 5px;
+}
+
+.black-panel {
+	display: none; 
+	background-color: rgba(0, 0, 0, 0.7);
+	position: absolute;
+	width: 250px; 
+	right: 80px;
+	top: 0px; 
+	height: 100%;
+	color: white;
+	padding : 60px 20px 20px 40px;	
+	z-index: 500;	
+} 
+
+.comment {
+	padding-bottom: 10px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.comment .meta-data {
+	padding-bottom: 10px;
+	font-size: 10px;
+}
+
+.comment-form {
+	margin-top: 20px;
+}
+
+.ajaxLoader {
+	display: none;
+	width: 40px;
+	height: 65px;
+	padding: 15px 105px 15px 105px;
+}
+
+.ajaxLoader img {
+	width: 35px;
+	height: 35px;
+}
+
+.social-share-item {
+	margin: 20px;
+	float: left;
+}

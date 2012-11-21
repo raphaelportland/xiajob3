@@ -1,0 +1,155 @@
+/* CSS SPECIFIQUE */
+
+body {
+	padding-top: 40px;
+	padding-bottom: 40px;
+}
+
+.fj_container {
+	background: white;
+}
+
+#footer {
+	margin: 40px 0 0 0;
+	padding: 10px;
+	text-align: center;
+}
+
+#captcha td {
+	padding-top: 40px;
+}
+
+.box {
+	background-color: #fff;
+	overflow: hidden;
+	_overflow: visible;
+	padding: 30px;
+	-webkit-box-shadow: 0px 0px 2px 2px #F1F1F1;
+	box-shadow: 0px 0px 2px 2px #F1F1F1;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #EDEDED;	
+}
+
+#argu-candidat-1 .lead {
+	font-style: italic;
+	text-align: center;
+}
+
+
+#offre-speciale-1 {
+	width: 180px;
+	height: 160px;
+	background-color: #cc0001;
+	-webkit-border-radius: 100px;
+	border-radius: 100px;
+	padding: 20px 10px;
+	color: white;
+	float: right;
+	margin: 10px;
+	text-align: center;	
+}
+
+#offre-speciale-1 h1 {
+	text-transform: uppercase;
+}
+
+#chevrons {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+.subhead {
+	color: white;
+	background-image: url('../img/flowerd.jpg');
+	background-size: cover;
+	margin: 0;
+	width: 100%;
+	padding: 0px 0 60px 0;
+	margin-bottom: 20px;
+	background-color: #EEE;
+}
+
+.subhead-recruteur {
+	background-image: url('../img/flower-recruteur.jpg');
+}
+
+
+
+.subhead h1 {
+margin-bottom: 0;
+padding-top: 60px;
+font-size: 60px;
+line-height: 1;
+letter-spacing: -1px;
+color: inherit;
+}
+
+.subhead p {
+font-size: 18px;
+font-weight: 200;
+line-height: 30px;
+color: inherit;
+}
+
+
+#fj_searchbar_annonces .navbar-inner {
+
+}
+
+#specific-access {
+	list-style-type: none;
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+#specific-access .btn {
+	-webkit-border-radius: 0 0 4px 4px;
+	-moz-border-radius: 0 0 4px 4px;
+	border-radius: 0 0 4px 4px;
+	border-top: 0;	
+}
+
+#specific-access li {
+	float: right;
+	margin-left: 3px;
+}
+
+form .help-block {
+	margin-top: -10px;
+	color: #AAA;
+}
+
+.clonedXp {
+	border-bottom: 1px silver solid;
+	padding-bottom: 10px;
+	margin-bottom: 10px; 
+}
+
+#btnDelFormation[disabled],
+#btnDelXp[disabled],
+#btnDelRecomp[disabled] {
+	display: none;
+}
+
+.red {
+	color: red;
+}
+
+#modal_replace form {
+	margin: 0;
+}
+
+#myCarousel {
+	mheight: 600px;
+	moverflow: hidden;
+	background-color: black;
+}
+
+
+.carousel img {
+	mmin-width: 100%;
+	margin: 0 auto;
+	height: 600px;
+}
