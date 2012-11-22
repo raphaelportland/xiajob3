@@ -204,7 +204,10 @@ class Books extends CI_Model {
     
     function get_popular($limit = null) {
         
-        $this->db->select('book_id, count(fj_user_fav.id) as nb_fav')
+        $this->db
+        //->distinct('book_id')
+        ->select('book_id, count(fj_user_fav.id) as nb_fav')
+        ->group_by('book_id')
         ->from('user_fav');
         
         if(isset($limit)) {
