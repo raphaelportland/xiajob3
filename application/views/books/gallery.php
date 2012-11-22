@@ -41,6 +41,11 @@
 <?php endif; ?>
 
 
+<?php // partie recherche de photos
+$this->load->view('books/pic_search'); 
+?>
+
+
 <?php if(isset($books->popular)) : // les books populaires ?>
 <div class='row-fluid'>
         <p class='lead'>Les books les plus populaires</p>
