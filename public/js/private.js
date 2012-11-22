@@ -75,27 +75,16 @@ $('.autosubmit-input-link').click(function(){
 		$('form#ajax_form').trigger('submit');
 	});
 
-
-
-    
-    
-    // autosubmit
-    /*
-    $('.autosubmit').change(function() {
-        var c = $(this);
-        
-        var div = '#' + $(this).attr('data-div_id');
-        
-        $.when(
-        c.focusout()).then(function() {
-        	alert('ok');       	
-        });     	
-        	
-        	$() = $(this).value();  	
-        	
-        	//$('form#ajax_form').trigger('submit');  	
-    });*/
   
-    
+	$('.private-link').click(function(){
+	
+		book_id = $(this).attr('data-book_id');
+		
+		$('#share-modal-'+book_id).modal('show');
+		
+		return false; 
+		
+	});	
+	  
 
 }); 

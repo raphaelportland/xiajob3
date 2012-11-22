@@ -1,7 +1,9 @@
+<?php $this->load->view('common/social-share/social-share-scripts'); ?>
+
+
 <p class='lead'>
    <i class="icon icon-book"></i> Mes Books
 </p>
-
 
 <?php $this->load->view('books/modal-share'); ?>
 
@@ -45,12 +47,36 @@
     <?php echo anchor("book/del_book/$book->id","<i class='icon-trash icon-white'></i> Supprimer",'class="btn btn-danger confirm"'); ?>   
     </div>
     </td><td>
-    <?php echo anchor("book/share/$book->id","<i class='icon icon-share-alt'></i> Partager",'class="btn private-link"'); ?>
+    <?php echo anchor("book/share/$book->id","<i class='icon icon-share-alt'></i> Partager",'data-book_id="'.$book->id.'" class="btn private-link"'); ?>
         
-    <?php echo("</td></tr>");
+    <?php echo("</td></tr>"); ?>
     
-}
-?>       
+
+            <div id='share-modal-<?= $book->id; ?>' class="modal hide fade">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Partager mon book</h3>
+              </div>
+              <div class="modal-body">
+                <!-- <p>Photo id : <?= $picture->id; ?></p> -->
+                
+                <?php
+                $social_share_data['picture_url'] = $book->short_url; 
+                $social_share_data['picture_description'] = $book->description;
+                $social_share_data['site_url'] = base_url().'index.php/book/view/'.$book->id;
+                $social_share_data['show_pinterest'] = false;
+                ?>
+                
+                <?php $this->load->view('common/social-share/social-share.php',$social_share_data); ?>
+                
+              </div>
+             <!--<div class="modal-footer">
+              </div>-->
+            </div>     
+    
+    
+    
+<?php } ?>       
         
     </tbody>
 </table>
@@ -58,4 +84,4 @@
 <?php echo anchor("book/create_book","Ajouter un book",'class="btn"'); ?>
 
 
-<script src="<?= base_url(); ?>public/js/book.js"></script>
+

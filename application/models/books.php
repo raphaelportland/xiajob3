@@ -938,6 +938,52 @@ class Books extends CI_Model {
         $this->db->update($post['table'], $data); 
         
     }
+    
+    
+    
+    
+    
+    /**
+     * Charge un book avec ses paramètres
+     * 
+     * @param int
+     * @param array
+     * 
+     * @return object
+     * 
+     */    
+    function get_book($book_id, $params = null) {
+       $q = $this->db
+            ->select('*, occasions.id as occasion_id, user_book.id as book_id, user_book.name as book_name')
+            ->from('user_book')
+            ->join('occasions', 'occasions.id = user_book.id_occasion')
+            ->where('user_book.id', $book_id)
+            ->get();
+             
+       if($q->num_rows() == 0) {
+           return false;
+       }       
+       
+       $book = $q->row();    
+       
+       // les informations sur le propriétaire
+       if(isset($params['with_owner'])) {
+           $book->owner = $this->get_owner_by_id($book->user_id);   
+       }
+       
+       // les photos
+       if(isset($params['with_pictures'])) {
+            $book->pictures = $this->get_pics($book_id, $params);     
+       }
+       
+       $book->id = $book->book_id;
+       unset($book->book_id);
+       
+       return $book;
+    }    
+    
+    
+    
 
     
 }

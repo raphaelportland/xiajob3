@@ -15,18 +15,6 @@ if($this->session->userdata('user_id')) {
 } 
 ?>        
 
-<!--        
-    <header class='subhead'>
-        
-<?php //$this->load->view('common/specific-access'); ?>            
-        
-        <div class='container'>
-        <h1>FlorBook</h1>             
-        <p>Révélez vos talents</p>             
-        </div>        
-    </header>
--->
-
     
 <div class="container-fluid">         
 <?php //$this->load->view('common/search-annonces'); ?>

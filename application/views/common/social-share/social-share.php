@@ -25,6 +25,8 @@
         data-show-faces="true"></div>    
     </div>   
 
+    <?php if(isset($show_pinterest) && ($show_pinterest == false)) :
+else : ?> 
      
     <!-- Pinterest -->
     <div class='social-share-item social-pinterest'>    
@@ -32,5 +34,6 @@
             <img border="0" src="<?= base_url().'public/img/pinterest-btn.png'; ?>" title="Pin It" />
         </a>          
     </div>
+<?php endif; ?>    
 
 </div>

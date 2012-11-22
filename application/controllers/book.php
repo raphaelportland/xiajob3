@@ -154,11 +154,6 @@ class Book extends CI_Controller
        } 
        else { redirect('book/my_books'); }         
     }
- 
- 
- 
- 
- 
 
     
     /**
@@ -185,8 +180,7 @@ class Book extends CI_Controller
      */
     function create_book() {
         $this->load->model('generic_user');        
-        $this->generic_user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
-
+        $this->generic_user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.
         
         
         if($this->input->post()) {           
@@ -205,9 +199,7 @@ class Book extends CI_Controller
         $data['view'] = 'books/create-book';
         $this->load->view('common/templates/main',$data);        
         
-    } 
-    
-    
+    }
     
     
     
@@ -228,42 +220,6 @@ class Book extends CI_Controller
         
     }
         
-
-
-
-    
-    /**
-     * Affichage du partage
-     * 
-     */
-    function share($book_id) {        
-        $this->load->model('generic_user');        
-        $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
-                
-
-        
-        if($this->generic_user->is_book_owner($book_id)) :
-            $this->load->model('books');
-            $this->books->load($book_id);            
-            $book_data = $this->books->books;
-            $book_data->user_is_owner = true;
-        else :
-            $book_data = new stdClass();
-            $book_data->user_is_owner = false;    
-        endif;        
-        
-        $data['view'] = 'books/share';
-        
-        if($this->input->post('ajax')) {
-            $this->load->view($data['view'],$book_data);            
-        } else {    
-            $this->load->view('common/templates/main',$data);
-        }
-
-    } 
-    
-    
-    
     
     
     
