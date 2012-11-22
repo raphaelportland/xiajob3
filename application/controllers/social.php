@@ -53,8 +53,14 @@ class Social extends CI_Controller
         //stop_code($favs);
         
         $this->load->model('books');
+        
+        $params = array(
+        'with_pictures' => true,
+        );
+        
         foreach ($favs as $key => $book) {
-            $books[] = $this->books->get_book_by_id($book->book_id);
+            
+            $books[] = $this->books->get_book($book->book_id, $params);
         }
         
         $data['books'] = $books;
