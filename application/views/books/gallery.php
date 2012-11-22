@@ -7,7 +7,11 @@
 ?>
     
 <h2>Exploration des books</h2> 
+
+<?php if(isset($books->featured)) : ?>
 <div class='row-fluid'>
+
+    
         <p class='lead'>A découvrir sur FlorBook !</p>
         
         
@@ -34,11 +38,29 @@
 
    
 </div>
+<?php endif; ?>
+
+
+<?php if(isset($books->popular)) : // les books populaires ?>
+<div class='row-fluid'>
+        <p class='lead'>Les books les plus populaires</p>
+ 
+        <?php foreach ($books->popular as $key => $book) : ?>       
+            
+            <?php $this->load->view('books/templates/book_thumb',$book); ?>
+            
+        <?php endforeach; ?> 
+     
+    <?php echo anchor('book/popular','Voir tous les books populaires','class="btn"'); ?>       
+</div>
+
+<?php endif; ?>
+
 
 <div class='row-fluid'>
         <p class='lead'>Les books les plus récents</p>
  
-        <?php foreach ($books->latest as $key => $book) : ?>       
+        <?php foreach ($books->latest as $key => $book) : // les books récents?>       
             
             <?php $this->load->view('books/templates/book_thumb',$book); ?>
             

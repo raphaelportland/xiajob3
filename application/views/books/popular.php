@@ -1,7 +1,7 @@
 
  
 <div class='row-fluid'> 
-        <h2>Les books les plus récents</h2>
+        <h2>Les books les plus populaires</h2>
  
         <?php foreach ($books as $key => $book) : ?>       
             

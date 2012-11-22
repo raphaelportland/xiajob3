@@ -131,36 +131,34 @@ class Books extends CI_Model {
      * Récupère les books les plus récents
      * et les place dans data->latest
      * 
-     * @param int $nb
+     * @param array $params
      * @return object
      */
-    function get_recent($nb = 'all') {
+    function get_latest($limit = null) {
         
+        $latest_params = array(
+        'order_by' => array('field' => 'id', 'direction' => 'desc'),
+        'limit' => $limit,
+        );
         
-        $this->db->select('*, user_book.id as book_id, occasions.id as occasion_id');
-        $this->db->from('user_book');
-        $this->db->join('occasions', 'occasions.id = user_book.id_occasion');          
-        
-        
-        $this->db->order_by('user_book.id','desc');
-                
-        if($nb != 'all') {
-            $this->db->limit($nb);
-        }
-                
-        $q = $this->db->get();
-
-        $result = $q->result();
-                               
-        foreach ($result as $key => $book) {
+        if($books_list = $this->get_books($latest_params)) {        
+            $latest_books = array();
             
-            $result[$key]->pictures = $this->get_pictures($book->book_id);
+            $book_params = array(
+            'with_pictures' => true,
+            );
             
-        }      
-        
-        $this->books->latest = $result;
-        return $this->books->latest;
-    } 
+            foreach ($books_list as $key => $book) {          
+                $latest_books[] = $this->get_book($book->id, $book_params);
+            }
+            
+            $this->books->latest = $latest_books;
+            return $this->books->latest;  
+                     
+        } else {
+            return null;
+        }        
+    }
     
     
     
@@ -178,20 +176,69 @@ class Books extends CI_Model {
         
         $q = $this->db->get('featured_books');
         
-        $result = $q->result();
+        if($q->num_rows() > 0) {
+ 
+            $result = $q->result();
+            
+            // la librairie de books vide
+            $books = array();
+                                   
+            foreach ($result as $key => $book) {          
+                $books[$key] = $this->get_book_by_id($book->book_id);           
+            }
+            
+            //code($books);
+            
+            $this->books->featured = $books;
+            return $this->books->featured;  
+ 
+            
+        } else {
+            return null;
+        }        
+       
+    }
+    
+    
+    
+    
+    function get_popular($limit = null) {
         
-        // la librairie de books vide
-        $books = array();
-                               
-        foreach ($result as $key => $book) {          
-            $books[$key] = $this->get_book_by_id($book->book_id);           
+        $this->db->select('book_id, count(fj_user_fav.id) as nb_fav')
+        ->from('user_fav');
+        
+        if(isset($limit)) {
+            $this->db->limit($limit);
+        }        
+        
+        $this->db->order_by('nb_fav','desc');
+        $q = $this->db->get();
+        
+        if($q->num_rows() > 0) {
+            $result = $q->result();
+            
+            $fav_books = array();
+            
+            $params = array(
+            'with_pictures' => true,
+            );
+            
+            foreach ($result as $key => $book) {
+                $fav_books[] = $this->get_book($book->book_id, $params);
+            }            
+            
+            $this->books->popular = $fav_books;
+            
+            return $this->books->popular;
+
+        } else {
+            return null;
         }
         
-        //code($books);
         
-        $this->books->featured = $books;
-        return $this->books->featured;        
     }
+    
+    
     
     
     
@@ -955,8 +1002,10 @@ class Books extends CI_Model {
     function get_book($book_id, $params = null) {
        $q = $this->db
             ->select('*, occasions.id as occasion_id, user_book.id as book_id, user_book.name as book_name')
+            ->select('count(fj_book_pics.id) as pic_nb')   
             ->from('user_book')
             ->join('occasions', 'occasions.id = user_book.id_occasion')
+            ->join('book_pics', 'book_pics.book_id = user_book.id')
             ->where('user_book.id', $book_id)
             ->get();
              
@@ -973,14 +1022,52 @@ class Books extends CI_Model {
        
        // les photos
        if(isset($params['with_pictures'])) {
-            $book->pictures = $this->get_pics($book_id, $params);     
+           $this->load->model('picture_model');
+            $book->pictures = $this->picture_model->get_pics($book_id, $params);     
        }
        
        $book->id = $book->book_id;
        unset($book->book_id);
        
        return $book;
-    }    
+    }  
+    
+    
+    
+    
+    /**
+     * Renvoie X id de books selon les paramètres renseignés
+     * @param array $params
+     * @return object
+     */
+    function get_books($params) {
+        
+        $this->db->select('user_book.id')
+        ->from('user_book');
+        
+        // limite
+        if(isset($params['limit'])) {
+            $this->db->limit($params['limit']);
+        }
+        
+        // ordre
+        if(isset($params['order'])) {
+            $this->db->order_by($params['order']['field'], $params['order']['direction']);
+        }
+
+        $q = $this->db->get();
+        
+        if($q->num_rows() > 0) {
+            return $q->result();
+        } else {
+            return false;
+        }
+        
+    }
+    
+    
+    
+
     
     
     

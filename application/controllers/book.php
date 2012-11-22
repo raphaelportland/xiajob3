@@ -15,7 +15,11 @@ class Book extends CI_Controller
         
         $this->load->model('books');
         $this->books->get_featured_books(4);
-        $this->books->get_recent(8);
+        
+        $this->books->get_latest(8);      
+        
+        
+        $this->books->get_popular(8);
                 
         $data['books'] = $this->books->books;
         
@@ -32,16 +36,19 @@ class Book extends CI_Controller
      */
      function latest() {
          
-        $this->load->model('books');
-        $this->books->get_recent();
-
-        $this->load->model('liste');
-        
-        $data['books'] = $this->books->books;
-        $data['occasions'] = $this->liste->occasions(); 
-        
-        $this->load->view('books/latest',$this->books->books);         
+        $this->load->model('books');                    
+        $data['books'] = $this->books->get_latest(); 
+        $data['view'] = 'books/latest';    
+        $this->load->view('common/templates/main',$data);      
          
+     }
+     
+     
+     function popular() {
+        $this->load->model('books');
+        $data['books'] = $this->books->get_popular();
+        $data['view'] = 'books/popular';    
+        $this->load->view('common/templates/main',$data);    
      }
     
 
@@ -170,8 +177,6 @@ class Book extends CI_Controller
         }
         redirect('book/my_books');
     }
-    
-
 
     
     /**

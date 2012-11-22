@@ -15,19 +15,6 @@
 class Picture_model extends CI_Model {
     
     /**
-     * Id unique de la photo
-     * @var int $id
-     */
-    public $id;
-    
-    /**
-     * le nom de l'image
-     */
-    public $pic;
-    
-    
-    
-    /**
      * Renvoie les photos enregistrées dans le book
      * 
      * @param int $book_id
@@ -37,13 +24,14 @@ class Picture_model extends CI_Model {
      * 
      */
     function get_pics($book_id, $params = null) {
-       $q = $this->db
+       $q = $this->db    
             ->where('book_id',$book_id)
             ->get('book_pics');
             
        
        if($q->num_rows() > 0) {
            $pics = $q->result();
+           
        } else {
            return false;           
        }

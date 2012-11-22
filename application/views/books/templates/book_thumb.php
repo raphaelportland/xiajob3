@@ -2,12 +2,11 @@
             <div class='book-thumb'>
                 <a class='' href='<?= $short_url; ?>' target='_blank'>
                     
-                    <?php if($pictures->nb > 0): ?>
-                    
+                    <?php if(isset($pictures[0])) : // nouvelle fonction ?>
+                        
                     <div class='th_crop'>
-                    <img width='280' height='187' src='<?= base_url().$pictures->pics[0]->th_url; ?>' />    
-                    </div>
-                    
+                    <img width='280' height='187' src='<?= base_url().$pictures[0]->th_url; ?>' />    
+                    </div>                   
                     
                     <?php else: ?>
                         
