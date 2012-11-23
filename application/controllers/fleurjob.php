@@ -15,7 +15,13 @@ class Fleurjob extends CI_Controller
      */
     function index() {
          
-        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggué                  
+        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggué      
+        
+            $this->load->model('books');
+            $this->books->get_latest(4);
+        
+            $data['books'] = $this->books->books;
+                    
             $data['view'] = 'candidat/home';
         
             $this->load->view('common/templates/main',$data);
