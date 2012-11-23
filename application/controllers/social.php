@@ -83,6 +83,43 @@ class Social extends CI_Controller
     }
     
     
+    /**
+     * Page de contact par mail
+     */
+    function contact() {
+        
+        $this->load->library('form_validation');
+        
+        $this->form_validation->set_rules('subject', 'Le sujet du mail', 'required');
+        $this->form_validation->set_rules('message', 'Le message', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');        
+        
+        // validation
+        if ($this->form_validation->run())
+        {
+            // le formulaire est envoyé
+            $this->load->library('email');
+            
+            $this->email->from($this->input->post('email'));
+            $this->email->to('florbooks@gmail.com'); 
+            $this->email->cc($this->input->post('email')); 
+            
+            $this->email->subject('[florBooks] '.$this->input->post('subject'));
+            $this->email->message($this->input->post('message'));  
+            
+            $this->email->send();
+            
+            // message de réussite
+            $data['view'] = 'common/contact-form-submitted';
+            $this->load->view('common/templates/main',$data);
+        } else {
+
+            // affichage du formulaire
+            $data['view'] = 'common/contact-form';
+            $this->load->view('common/templates/main',$data);                
+            
+        }
+    }
     
     
 }
