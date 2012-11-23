@@ -50,7 +50,9 @@ $this->load->view('books/pic_search');
 <div class='row-fluid'>
         <p class='lead'>Les books les plus populaires</p>
  
-        <?php foreach ($books->popular as $key => $book) : ?>       
+        <?php foreach ($books->popular as $key => $book) : ?>      
+            
+            <?php //code($book); ?> 
             
             <?php $this->load->view('books/templates/book_thumb',$book); ?>
             

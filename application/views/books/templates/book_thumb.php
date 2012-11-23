@@ -2,7 +2,14 @@
             <div class='book-thumb'>
                 <a class='' href='<?= $short_url; ?>' target='_blank'>
                     
-                    <?php if(isset($pictures[0])) : // nouvelle fonction ?>
+                    
+                    <?php if(isset($cover_pic) && $cover_pic != '0') : ?>
+                        
+                    <div class='th_crop'>
+                    <img width='280' height='187' src='<?= base_url().$cover->th_url; ?>' />    
+                    </div>                          
+                    
+                    <?php elseif(isset($pictures[0])) : ?>
                         
                     <div class='th_crop'>
                     <img width='280' height='187' src='<?= base_url().$pictures[0]->th_url; ?>' />    

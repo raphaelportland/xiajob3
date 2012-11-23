@@ -2,11 +2,17 @@
 
 class Migrate extends CI_Controller{
 
-    public function index($version){
-        $this->load->library("migration");
+    public function index(){
+        $this->load->library('migration');
+        $this->migration->current();
+    }
+    
+    public function version($version) {
+      $this->load->library("migration");
 
       if(!$this->migration->version($version)){
           show_error($this->migration->error_string());
-      }   
+      }           
     }
+    
 }

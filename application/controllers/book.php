@@ -300,4 +300,12 @@ class Book extends CI_Controller
     }
     
     
+    
+    function update_cover($book_id, $pic_id) {
+        $this->load->model('books');
+        $this->books->update_cover_pic($book_id, $pic_id);
+        redirect('book/edit/'.$book_id);
+    }
+    
+    
 }

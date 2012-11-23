@@ -65,10 +65,13 @@ $pic_desc = array(
             
         </td> 
         
-        <?php echo form_hidden('pic_id'.$key,$pic->id); ?>       
+        <?php echo form_hidden('pic_id'.$key,$pic->id); ?>  
+        
+        <?php //code($pic); ?>     
         
         <td>
             <div class="btn-group">
+                <?php echo anchor('book/update_cover/'.$pic->book_id.'/'.$pic->id,'Choisir comme couverture', 'class="btn"'); ?>
                 <?php echo anchor('book/add_flowers/'.$pic->id,'Identifier / Modifier les fleurs','class="btn"'); ?>
                 <?php echo anchor('book/del_picture/'.$pic->id,'<i class="icon icon-white icon-trash"></i> Supprimer','class="btn btn-danger delete-pic"');?>
             </div>

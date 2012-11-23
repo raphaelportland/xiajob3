@@ -166,12 +166,12 @@ class Books extends CI_Model {
      * Renvoie les books mis en avant par l'équipe florbook
      * 
      */
-    function get_featured_books($nb = 'all') {
+    function get_featured_books($limit = null) {
         
         $this->db->select('book_id')->order_by('id','desc');
                 
-        if($nb != 'all') {
-            $this->db->limit($nb);
+        if(isset($limit)) {
+            $this->db->limit($limit);
         } 
         
         $q = $this->db->get('featured_books');
@@ -183,13 +183,20 @@ class Books extends CI_Model {
             // la librairie de books vide
             $books = array();
                                    
-            foreach ($result as $key => $book) {          
-                $books[$key] = $this->get_book_by_id($book->book_id);           
+            $params = array(
+            'with_pictures' => true,
+            );                                   
+                                   
+            foreach ($result as $key => $book) {
+                          
+                $books[$key] = $this->get_book($book->book_id, $params);  
             }
             
             //code($books);
             
             $this->books->featured = $books;
+            
+            //code($books);
             return $this->books->featured;  
  
             
@@ -1023,6 +1030,16 @@ class Books extends CI_Model {
            $book->owner = $this->get_owner_by_id($book->user_id);   
        }
        
+       // la cover
+       if($book->cover_pic != '') {
+           $q2 = $this->db->where('id', $book->cover_pic)
+           ->get('book_pics');
+           
+           if($q2->num_rows() > 0) {
+               $book->cover = $q2->row(); 
+           }
+       }
+       
        // les photos
        if(isset($params['with_pictures'])) {
            $this->load->model('picture_model');
@@ -1069,7 +1086,18 @@ class Books extends CI_Model {
     }
     
     
-    
+    /**
+     * Met à jour la couverture de l'album
+     * @param int $book_id
+     * @param int $pic_id
+     * @return none
+     */
+    function update_cover_pic($book_id, $pic_id) {
+        
+        $this->db->where('id',$book_id)
+        ->update('user_book', array('cover_pic' => $pic_id));
+        
+    }
 
     
     
