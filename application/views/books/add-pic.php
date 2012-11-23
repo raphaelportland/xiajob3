@@ -1,5 +1,11 @@
 <h2>Ajouter des images</h2>
 <p class='lead'>Ajoutez des images à votre book <strong>"<?= $book->name; ?>"</strong></p>
+
+<div class='alert alert-info'>
+    <strong>Attention</strong>
+    Pour des books de qualité, merci de vous limiter à 10 photos maximum par book.</div>
+
+
         <?php $this->load->view('books/upload_view'); ?>   
         
                  
