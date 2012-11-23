@@ -245,6 +245,44 @@ class Fleurjob extends CI_Controller
     } 
 
 
+    /**
+     * Emmène à la validation des CGU pour les utilisateurs
+     * qui viennent de facebook
+     * 
+     */
+    function cgu() {
+        
+        $test_session = serialize(array(
+            'user_id'   => '113',
+            'username'  => 'Test3',
+            'status'    => '1',
+        ));  
+        
+        $this->session->set_userdata('secret_session', $test_session);      
+        
+        $secret_session = $this->session->userdata('secret_session');
+        
+        $data['infos'] = unserialize($secret_session);        
+        $data['view'] = 'common/accept-cgu-form';
+        $this->load->view('common/templates/main', $data);
+        
+    }
+    
+    
+    function valid_cgu() {
+        $this->load->model('generic_user');        
+        $this->generic_user->valid_cgu();
+      
+        
+    }
+    
+    function decline_cgu() {
+        // on supprime la session
+        $this->session->sess_destroy();        
+        // on redirige l'utilisateur à la porte
+        redirect('fleurjob');
+    }
+
 
     
 }

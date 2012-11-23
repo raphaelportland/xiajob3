@@ -28,8 +28,7 @@ class ExtLinks extends CI_Controller
         
         $this->load->library('fbconnect');
         
-        if($this->fbconnect->user) {
-            
+        if($this->fbconnect->user) {            
             
             $facebook_user = $this->fbconnect->user;
             $facebook_user['profile'] = $profile;

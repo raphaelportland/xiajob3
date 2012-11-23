@@ -11,6 +11,12 @@ class Pages extends CI_Controller
     function coming_soon() {
         $data['view'] = 'common/coming_soon';
         $this->load->view('common/templates/main',$data);
-    }    
+    }
+    
+    
+    function cgu() {
+        $data['view'] = 'common/pages/cgu';
+        $this->load->view('common/templates/main',$data);
+    }
     
 }

@@ -160,9 +160,15 @@ class Auth extends CI_Controller
 			if ($use_username) {
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
 			}
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean|valid_email');
-			$this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
-			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|xss_clean|matches[password]');
+            
+            $this->form_validation->set_message('required', '%s est obligatoire.');
+            
+			$this->form_validation->set_rules('email', 'Votre adresse email', 'trim|required|xss_clean|valid_email');
+			$this->form_validation->set_rules('password', 'Indiquer un mot de passe', 'trim|required|xss_clean|min_length['.$this->config->item('password_min_length', 'tank_auth').']|max_length['.$this->config->item('password_max_length', 'tank_auth').']|alpha_dash');
+			$this->form_validation->set_rules('confirm_password', 'Confirmer le mot de passe', 'trim|required|xss_clean|matches[password]');
+            $this->form_validation->set_rules('optin_cgu', 'Accepter les CGU','required');
+            
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');
 
 			$captcha_registration	= $this->config->item('captcha_registration', 'tank_auth');
 			$use_recaptcha			= $this->config->item('use_recaptcha', 'tank_auth');
@@ -195,6 +201,7 @@ class Auth extends CI_Controller
 					// - le profil
 					// - l'étape de remplissage de son profil (1 pour juste la création du compte)
 					// - le statut (étudiant / pro)
+					// - l'optin pour les CGU
 					
 					$this->load->model('generic_user');
                     $this->generic_user->set_id($data['user_id']);
@@ -206,6 +213,7 @@ class Auth extends CI_Controller
                     
                     $user_data['profile'] = $profile;
                     $user_data['user_id'] = $data['user_id'];
+                    $user_data['optin_cgu'] = $this->input->post('optin_cgu');
                     
                     //stop_code($user_data);
                     

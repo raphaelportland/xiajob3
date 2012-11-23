@@ -341,11 +341,28 @@ class Generic_user extends Users {
                 ->get('users');
         
         if($q->num_rows() == 1) :
-            $user_id = $q->row()->id;
+            
+            $user = $q->row();
+            
+            $this->user_id = $user->id;            
+            $username = $this->get_username();
+            
+            // on vérifie s'il a accepté les CGU
+            if($user->optin_cgu != 1) {
+                // si ce n'est pas le cas on le redirige vers les CGU
+                $secret_session = serialize(array(
+                    'user_id' => $user->id,
+                    'user_name' => $this->get_username,
+                    'status' => '1',
+                ));
+                    
+                $this->session->set_userdata('secret_session',$secret_session);
+                redirect('fleurjob/cgu');
+            }          
             
             // on met l'utilisateur en session
             $this->session->set_userdata(array(
-                    'user_id'   => $user_id,
+                    'user_id'   => $user->id,
                     'username'  => $this->get_username(),
                     'status'    => '1',
             )); 
@@ -356,13 +373,31 @@ class Generic_user extends Users {
             
             // on met à jour les paramètres de log-in
             $this->update_login_info(
-            $user_id,
+            $user->id,
             $this->config->item('login_record_ip', 'tank_auth'),
             $this->config->item('login_record_time', 'tank_auth'));            
                         
         endif;               
     }
     
+    
+    function valid_cgu() {
+        $secret_session = $this->session->userdata('secret_session');
+        $infos = unserialize($secret_session);
+        
+        // on met à jour la variable optin_cgu
+        $this->db->where('user_id', $infos['user_id'])->update('user_data', array('optin_cgu' => 1));        
+        
+        // on met l'utilisateur en session pour de bon
+        $this->session->set_userdata($infos);
+            
+        // on met à jour les paramètres de log-in
+        $this->update_login_info(
+        $infos['user_id'],
+        $this->config->item('login_record_ip', 'tank_auth'),
+        $this->config->item('login_record_time', 'tank_auth'));
+        redirect('fleurjob');        
+    }    
     
     
     

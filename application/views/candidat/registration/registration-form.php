@@ -1,4 +1,3 @@
-<div class='span4 offset8'>
 
 <?php
 if ($use_username) {
@@ -55,6 +54,18 @@ $captcha = array(
     'id'    => 'captcha',
     'maxlength' => 8,
 );
+
+
+$optin_cgu = array(
+    'name'        => 'optin_cgu',
+    'id'          => 'optin_cgu',
+    'value'       => '1',
+    'checked'     => false,
+    );
+
+
+
+
 ?>
 <?php echo form_open($this->uri->uri_string()); ?>
 
@@ -96,6 +107,17 @@ $captcha = array(
     </div>    
 </div>
 
+
+<div class='control-group'>
+    <?php echo form_error($optin_cgu['name']); ?>
+    <div class='controls'>
+        <label class="checkbox">
+        <?php echo form_checkbox($optin_cgu); ?> J'accepte les <?php echo anchor('pages/cgu',"Conditions Générales d'Utilisation",'target="_blank"'); ?> de florBooks
+        </label>
+    </div>
+</div>
+
+
 <?php echo form_hidden('profile',$profile); ?>
 
 <div class='control-group'>
@@ -112,5 +134,3 @@ $captcha = array(
 </div>
 
 <?php echo form_close(); ?>
-
-</div>
