@@ -336,9 +336,11 @@ class Generic_user extends Users {
     function facebook_log_in($facebook_user) {
         
         // on récupère l'id fleurjob de l'utilisateur
-        $q = $this->db
+        $q = $this->db->select('users.facebook_id, users.id, user_data.optin_cgu')
+                ->from('users')
+                ->join('user_data', 'users.id = user_data.user_id')
                 ->where('facebook_id',$facebook_user['id'])
-                ->get('users');
+                ->get();
         
         if($q->num_rows() == 1) :
             
@@ -352,7 +354,7 @@ class Generic_user extends Users {
                 // si ce n'est pas le cas on le redirige vers les CGU
                 $secret_session = serialize(array(
                     'user_id' => $user->id,
-                    'user_name' => $this->get_username,
+                    'user_name' => $this->get_username(),
                     'status' => '1',
                 ));
                     
