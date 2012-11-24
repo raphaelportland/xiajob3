@@ -472,12 +472,9 @@ class Generic_user extends Users {
      * pour lui permettre la double connexion
      * 
      */
-    function facebook_merge_account($facebook_user) {
-        
-        
-        
-        
-        
+    function facebook_merge_account($facebook_user) {     
+        $this->db->where('email',$facebook_user['email'])
+        ->update('users', array('facebook_id' => $facebook_user['id']));
     }
     
     
