@@ -13,8 +13,7 @@ if($this->session->userdata('user_id')) {
 } else {
     $this->load->view('candidat/elmt/public-head-nav');     
 } 
-?>        
-
+?>
     
 <div class="container">         
 <?php //$this->load->view('common/search-annonces'); ?>
@@ -23,6 +22,8 @@ if($this->session->userdata('user_id')) {
 <div class='row'> 
  
 <?php $this->load->view($view); ?>
+
+</div>
 
 </div>
 

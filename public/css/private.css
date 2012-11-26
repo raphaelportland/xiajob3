@@ -3,17 +3,10 @@
 body {
 	mbackground: url('../img/text-herb.jpg') top left;
 	padding-top: 40px;
-	padding-bottom: 40px;
 }
 
 .fj_container {
 	background: white;
-}
-
-#footer {
-	margin: 40px 0 0 0;
-	padding: 10px;
-	text-align: center;
 }
 
 #captcha td {
@@ -353,4 +346,19 @@ div.book-content {
 	height: 300px;
 	overflow-y: scroll;
 	margin-bottom: 30px;
+}
+
+
+#big-footer {
+	padding-top: 40px;
+	margin-top: 40px;
+	background: black url('../img/footer-bkg.jpg') top left repeat-x;
+	color: white;
+}
+
+#footer {
+	margin: 0;
+	padding: 10px;
+	padding-bottom: 40px;
+	text-align: center;
 }

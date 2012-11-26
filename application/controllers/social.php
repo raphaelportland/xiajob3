@@ -111,12 +111,12 @@ class Social extends CI_Controller
             
             // message de réussite
             $data['view'] = 'common/contact-form-submitted';
-            $this->load->view('common/templates/main',$data);
+            $this->load->view('common/templates/main-fixed',$data);
         } else {
 
             // affichage du formulaire
             $data['view'] = 'common/contact-form';
-            $this->load->view('common/templates/main',$data);                
+            $this->load->view('common/templates/main-fixed',$data);                
             
         }
     }

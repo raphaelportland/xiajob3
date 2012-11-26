@@ -26,4 +26,6 @@ if($this->session->userdata('user_id')) {
 
 </div>
 
+</div>
+
 <?php $this->load->view('common/footer'); ?>
