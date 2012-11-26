@@ -9,7 +9,7 @@
                         <ul class="dropdown-menu">
                             <li><?php echo anchor("book",'<i class="icon icon-eye-open"></i> Voir'); ?></li>
                             <li><?php echo anchor("book/my_books",'<i class="icon icon-camera"></i> Créer','class=""'); ?></li>
-                            <li><?php echo anchor("book/advice",'<i class="icon icon-question-sign"></i> Conseils','class=""'); ?></li>                          
+                            <li><?php echo anchor("pages/hints",'<i class="icon icon-question-sign"></i> Conseils','class=""'); ?></li>                          
                         </ul>
                      </li>
                      <li><?php echo anchor("fleurjob/welcome",'Mon Espace'); ?></li>

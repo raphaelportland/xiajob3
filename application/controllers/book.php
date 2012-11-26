@@ -307,5 +307,4 @@ class Book extends CI_Controller
         redirect('book/edit/'.$book_id);
     }
     
-    
 }
