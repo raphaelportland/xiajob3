@@ -626,7 +626,8 @@ class Books extends CI_Model {
     function get_owner_by_id($user_id) {
         
         $this->load->model('generic_user');
-        $this->owner = $this->generic_user->get_user_basic_infos($params);
+        
+        $this->owner = $this->generic_user->get_user_basic_infos();
          
     }
     
@@ -1089,6 +1090,54 @@ class Books extends CI_Model {
         }
         
     }
+    
+    /**
+     * Renvoie des books selon les paramètres
+     * 
+     * @param array $params
+     * @return array
+     */
+    function get_library($params) {
+        
+        if(isset($params)) {
+            extract($params);
+        }
+        
+        $this->db->select('user_book.id, user_book.name, user_book.description');
+        $this->db->from('user_book');
+           
+        // nombre de favoris de chaque book
+        if(isset($with_fav_count)) :
+            $this->db->select('count(fj_user_fav.id) as fav_count');
+            $this->db->group_by('user_book.id');            
+            $this->db->join('user_fav', 'user_fav.book_id = user_book.id','left');
+        endif;
+        
+        if(isset($with_pictures_count)) :
+            $this->db->select('count(fj_book_pics.id) as pic_count');
+            $this->db->group_by('user_book.id');            
+            $this->db->join('book_pics', 'book_pics.book_id = user_book.id','left');
+        endif;            
+        
+
+        
+        if(isset($user_id)) {
+            $this->db->where('user_book.user_id', $user_id);
+        }
+        
+        $q = $this->db->get();
+        
+        $library = $q->result();
+
+        return $library;
+        
+    }
+    
+    
+    
+    
+    
+    
     
     
     /**

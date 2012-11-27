@@ -121,7 +121,13 @@ class Book extends CI_Controller
         $this->load->model('candidat');
         $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.         
 
-        $books = $this->candidat->get_all_user_books($this->session->userdata('user_id'));
+        $books_params = array(
+        'with_pictures_count' => true,
+        'user_id' => $this->session->userdata('user_id'),
+        );
+        
+        $this->load->model('books');
+        $books = $this->books->get_library($books_params);
         
         // si pas de book créé, on l'envoie en créer un
         if(!isset($books)) { redirect('book/create_book'); } 

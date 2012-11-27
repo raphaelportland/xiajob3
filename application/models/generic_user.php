@@ -228,7 +228,7 @@ class Generic_user extends Users {
      * @param array
      * @return object
      */
-    function get_user_basic_infos($params) {
+    function get_user_basic_infos($params = null) {
         
         if(isset($params)) {
             extract($params);
