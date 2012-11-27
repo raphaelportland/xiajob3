@@ -35,4 +35,9 @@ class Pages extends CI_Controller
         $this->load->view('common/templates/main', $data);
     }
     
+    function pitch() {
+        $data['view'] = 'common/pages/pitch';
+        $this->load->view('common/templates/main-fixed', $data);        
+    }
+    
 }
