@@ -139,8 +139,26 @@ class Generic_user extends Users {
             
             // récupération des books
             if(isset($with_books)) :
-                $user->books = $this->get_all_user_books($user_id);
-            endif;            
+                $this->load->model('books', 'book_model');
+                
+                if(!isset($books_params)) :
+                    $books_params = array();
+                endif;
+                
+                $user->books = $this->book_model->get_library($books_params);
+                
+                
+                
+               // $user->books = $this->get_all_user_books($user_id);
+            endif;     
+            
+            // récupération des favoris
+            if(isset($with_favorites)) :
+                $this->load->model('social_model');
+                $user->favorites = $this->social_model->get_user_favs($user_id);
+            endif;
+            
+                   
             
             if(isset($with_address)) :
                 // récupération de l'adresse
@@ -219,12 +237,13 @@ class Generic_user extends Users {
         // si l'id n'est pas défini dans les paramètres, on prend celui de l'objet (celui de l'utilisateur courant)
         if(!isset($user_id)) { $user_id = $this->user_id; }
         
-        $q = $this->db
-                ->select('*, user_data.username as pseudo')
-                ->from('users')
-                ->join('user_data','user_data.user_id = users.id')
-                ->where('users.id',$user_id)
-                ->get();
+        $this->db->select('*, user_data.username as pseudo');
+                
+        $this->db->from('users')
+            ->join('user_data','user_data.user_id = users.id')
+            ->where('users.id',$user_id);
+                
+        $q = $this->db->get();
                 
         if($q->num_rows() > 0) {
             
@@ -246,7 +265,11 @@ class Generic_user extends Users {
             
             if(isset($with_dob)) :
                 $basic_info->dob = $user->dob;     
-            endif;           
+            endif;    
+            
+            if(isset($with_member_since)) {
+                $basic_info->member_since = strtotime($user->created);
+            }                   
             
             
             // traitement du pseudo

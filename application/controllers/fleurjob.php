@@ -51,6 +51,15 @@ class Fleurjob extends CI_Controller
         
         $params = array(
         'with_options' => true,
+        'with_member_since' => true,
+        'with_resume' => true,
+        'with_skills' => true,
+        'with_books' => true,
+        'books_params' => array(
+                            'user_id' => $this->session->userdata('user_id'),
+                            'with_fav_count' => true, 
+                            ),      
+        'with_favorites' => true,
         );
         
         $data['user'] = $this->generic_user->get_user($params);;     
@@ -146,8 +155,6 @@ class Fleurjob extends CI_Controller
         $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         $data['user'] = $this->generic_user->get_user($params);
-        
-        code($data['user']->username);
         
         $data['rubrique'] = $rubrique;       
         $data['view'] = "candidat/profile/profile"; // mini-template pour les différents onglets du profil
