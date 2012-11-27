@@ -387,3 +387,7 @@ div.book-content {
 	font-size: 400%;
 	line-height: 100%;
 }
+
+dd {
+	margin-bottom: 20px;
+}
