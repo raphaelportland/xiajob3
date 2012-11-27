@@ -5,7 +5,7 @@
                     <strong>FLOR... QUI ?</strong>
                     <br /><br />
                     <ul class="unstyled">
-                         <li><?php echo anchor('pages/coming_soon','Qui sommes nous ?'); ?></li>
+                         <li><?php echo anchor('pages/meet_the_gnomes','Qui sommes nous ?'); ?></li>
                          <li><?php echo anchor('pages/coming_soon','florBooks en quelques mots'); ?></li>
                          <li><?php echo anchor('pages/coming_soon','Est-ce que l\'équipe est sympa ?'); ?></li>
                          <li><?php echo anchor('social/contact','Envie de participer ?'); ?></li>
