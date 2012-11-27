@@ -17,7 +17,7 @@
                     
                 
                    <?php echo anchor('pages/coming_soon', 'Achat/Vente magasin','class="pull-right btn btn-info"'); ?>                                       
-                   <?php echo anchor('pages/coming_soon', 'Accès Emploi/Recrutement','class="pull-right btn btn-primary"'); ?>   
+                   <?php echo anchor('pages/coming_soon', 'Emploi/Recrutement','class="pull-right btn btn-primary"'); ?>   
                    
                 <ul class="nav pull-right">
                     <li><?php echo anchor("auth/login","Connectez-vous"); ?></li>

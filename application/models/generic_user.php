@@ -88,7 +88,7 @@ class Generic_user extends Users {
         
         parent::__construct();   
         
-        if($user_id == null) {
+        if(!isset($user_id)) {
             $this->user_id = $this->tank_auth->get_user_id();            
         } else {
             $this->user_id = $user_id;
@@ -97,63 +97,106 @@ class Generic_user extends Users {
     }
     
     /**
-     * Récupère toutes les données sur l'utilisateur
+     * Récupère les données sur l'utilisateur
+     * en fonction de la liste des paramètres demandés
      * -Complétée par la fonction get_candidat() de la classe Candidat
      * 
-     * @param int
+     * @param int $user_id
+     * @param array $params
      * @return object
      */
-    function get_user($user_id = null) {
-        if(!$user_id) { $user_id = $this->user_id; }
+    function get_user($params = null) {
+                
+        if(isset($params)) {
+            extract($params);
+        }
         
-            if($this->get_user_basic_infos($user_id)) {
-            
+        // si l'id n'est pas défini dans les paramètres, on prend celui de l'objet (celui de l'utilisateur courant)
+        if(!isset($user_id)) { $user_id = $this->user_id; }
+
+        // dans tous les cas on récupère les infos de base
+        if($user = $this->get_user_basic_infos($params)) {
+        
             // récupération des options           
-            $q = $this->db
-                    ->where('user_id',$user_id)
-                    ->get('user_options');
-            
-            if(!isset($this->options)) $this->options = new stdClass();
-            
-            if($q->num_rows() > 0) :
-                foreach ($q->result() as $key => $option) {
-                    
-                   $opt_name = $option->option;
-                   $opt_value = $option->value;
-                    
-                   $this->options->$opt_name = $opt_value;
-                } 
+            if(isset($with_options)) :
+                
+                $q = $this->db
+                        ->where('user_id',$user_id)
+                        ->get('user_options');
+                
+                if(!isset($user->options)) $user->options = new stdClass();
+                
+                if($q->num_rows() > 0) :
+                    foreach ($q->result() as $key => $option) {
+                        
+                       $opt_name = $option->option;
+                       $opt_value = $option->value;
+                        
+                       $user->options->$opt_name = $opt_value;
+                    } 
+                endif;
             endif;
             
             // récupération des books
-            $this->get_all_user_books($user_id);
+            if(isset($with_books)) :
+                $user->books = $this->get_all_user_books($user_id);
+            endif;            
             
-            
-            // récupération de l'adresse
-            $q = $this->db
-                    ->where('user_id', $user_id)
-                    ->get('user_address');
-            
-            if($q->num_rows() > 0) :
+            if(isset($with_address)) :
+                // récupération de l'adresse
+                $q = $this->db
+                        ->where('user_id', $user_id)
+                        ->get('user_address');
                 
-                $ad = $q->row();
-                
-                $this->address = new stdClass();
-                                
-                $this->address->street = $ad->street;
-                $this->address->complement = $ad->complement;
-                $this->address->postcode = $ad->postcode;
-                $this->address->city = $ad->city;
-                $this->address->country = $ad->country;
-                
-            else:
-                $this->address = null;
-                
+                if($q->num_rows() > 0) :
+                    
+                    $ad = $q->row();
+                    
+                    $user->address = new stdClass();
+                                    
+                    $user->address->street = $ad->street;
+                    $user->address->complement = $ad->complement;
+                    $user->address->postcode = $ad->postcode;
+                    $user->address->city = $ad->city;
+                    $user->address->country = $ad->country;
+                    
+                else:
+                    $user->address = null;
+                    
+                endif;
             endif;
-            
+                
             // resume : dans la classe Candidat
+            if(isset($with_resume)) :                
+                $this->load->model('candidat');
+                $user->resume = new stdClass();
+                
+                if(isset($with_awards)) :
+                    $user->resume->awards = $this->candidat->get_awards();
+                endif;
+                       
+                if(isset($with_diplomas)) :
+                    $user->resume->diplomas = $this->candidat->get_diplomas();
+                endif;
+                
+                if(isset($with_xppro)) :       
+                    $user->resume->xppro = $this->candidat->get_xppro();
+                endif;
+                
+                if(isset($with_skills)) :       
+                    $user->resume->skills = $this->candidat->get_skills();                
+                endif;  
+                
+                if(isset($with_computer_skills)) :       
+                    $user->resume->computer_skill = $this->candidat->get_computer_skill();
+                endif;    
+            endif;            
+                  
+            if(isset($with_description)) :
+                $user->description = $this->candidat->get_description();
+            endif;      
             
-            return $this;
+            return $user;
             
         } else { return false; }             
         
@@ -164,10 +207,18 @@ class Generic_user extends Users {
 
     /**
      * renvoie les infos de base sur un utilisateur
-     * @param int
+     * @param array
      * @return object
      */
-    function get_user_basic_infos($user_id) {
+    function get_user_basic_infos($params) {
+        
+        if(isset($params)) {
+            extract($params);
+        }
+        
+        // si l'id n'est pas défini dans les paramètres, on prend celui de l'objet (celui de l'utilisateur courant)
+        if(!isset($user_id)) { $user_id = $this->user_id; }
+        
         $q = $this->db
                 ->select('*, user_data.username as pseudo')
                 ->from('users')
@@ -179,27 +230,35 @@ class Generic_user extends Users {
             
             $user = $q->row();
             
-            $this->first_name = $user->prenom;
-            $this->last_name = $user->nom;
-            $this->full_name = $user->prenom. ' ' .$user->nom;
-            $this->username = $user->pseudo;
-            $this->dob = $user->dob;
-            $this->mobile_phone = $user->mobile_phone;
-            $this->profile = $user->profile;
-            $this->email = $user->email;       
-            
             $basic_info = new stdClass();
             $basic_info->id = $user_id;
             $basic_info->first_name = $user->prenom;
-            $basic_info->full_name = $this->full_name;
+            $basic_info->last_name = $user->nom;
+            $basic_info->full_name = $user->prenom. ' ' .$user->nom;
             $basic_info->username = $user->pseudo;
             $basic_info->profile = $user->profile;
             $basic_info->email = $user->email;
             
-            if($this->username == '') {
-                $this->username = $this->get_username();
-                $basic_info->username = $this->username;
-            }
+            
+            if(isset($with_phone)) :
+                $basic_info->mobile_phone = $user->mobile_phone;
+            endif;
+            
+            if(isset($with_dob)) :
+                $basic_info->dob = $user->dob;     
+            endif;           
+            
+            
+            // traitement du pseudo
+            
+            if($basic_info->username == '') {
+                if($basic_info->first_name != '') {               
+                    $basic_info->username = $basic_info->first_name;
+                } else {                
+                    $decoup = explode('@',$basic_info->email);
+                    $basic_info->username = $decoup[0];
+                }
+            }        
             
             return $basic_info;
         } else {
@@ -265,45 +324,41 @@ class Generic_user extends Users {
      * et le place en session
      * @return string
      */
-    function get_username() {
+    function get_username($user_id = null) {
+        
+        if(!isset($user_id)) {
+            $user_id = $this->user_id;
+        }
         
         if(isset($this->username)) {
-            
-            $this->session->set_userdata('username', $this->username);
-            return $this->username;
+
             
         } else {
             
             $q = $this->db->select('prenom, nom, user_data.username, users.email')
             ->from('user_data')
             ->join('users', 'users.id = user_data.user_id')
-            ->where('users.id', $this->user_id)
+            ->where('users.id', $user_id)
             ->get();
             
             $result = $q->row();
             
             if($result->username != '') {
-                $this->username = $result->username;    
-                            
-            } elseif($result->prenom != '' || $result->nom != '') {                
-                $this->username = '';
-                
-                if($result->prenom != '') {                
-                    $this->username = $result->prenom .' ';
-                }
-                
-                if($result->nom != '') {
-                    $this->username .= $result->nom;
-                }
-                
+                $this->username = $result->username;
+            } elseif($result->prenom != '') {                            
+                $this->username = $result->prenom;                
             } else {                
                 $decoup = explode('@',$result->email);
-                $this->username = $decoup[0];                 
-            }            
+                $this->username = $decoup[0];  
+                               
+            } 
             
-            $this->session->set_userdata('username', $this->username);
-            
-            //stop_code($this->session->userdata('username'));                        
+            if($user_id == $this->session->userdata('user_id')) :           
+                $this->session->set_userdata('username', $this->username);
+            endif;
+                         
+            return $this->username;
+                  
         }
         
         
@@ -834,9 +889,8 @@ class Generic_user extends Users {
      * @param int
      * @param array
      */
-    function update_profile($step,$source) {
+    function update_profile($step, $source) {
         unset($source['register']);
-        $this->get_user();
         
         switch ($step) {
             
@@ -879,7 +933,10 @@ class Generic_user extends Users {
                 if(isset($source['nom'])) { $user_data['nom'] = $source['nom']; }
                 else { $user_data['nom'] = ''; }
                 
-                if(isset($source['username'])) { $user_data['username'] = $source['username']; }
+                if(isset($source['username'])) {
+                    $this->session->set_userdata('username', $source['username']);
+                    $user_data['username'] = $source['username']; 
+                }
                 else { $user_data['username'] = ''; }
                 
 

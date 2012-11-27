@@ -15,10 +15,7 @@ class Book extends CI_Controller
         
         $this->load->model('books');
         $this->books->get_featured_books(4);
-        
         $this->books->get_latest(8);      
-        
-        
         $this->books->get_popular(8);
                 
         $data['books'] = $this->books->books;
@@ -62,8 +59,16 @@ class Book extends CI_Controller
      */
     function view($book_id) {
                 
-        $this->load->model('books');      
-        $data = $this->books->get_book_by_id($book_id, true);
+        $this->load->model('books');     
+        
+        $params = array(
+        'with_pictures' => true,
+        'with_owner' => true,
+        'with_comments' => true,
+        'with_flowers' => true,        
+        );
+         
+        $data = $this->books->get_book($book_id, $params);
 
             $this->load->library('tank_auth');
 
@@ -74,7 +79,8 @@ class Book extends CI_Controller
                 'user_id' => $this->session->userdata('user_id'),
                 'book_id' => $book_id,
                 );
-                $data->is_fav = $this->social_model->is_fav($infos_fav);            
+                $data->is_fav = $this->social_model->is_fav($infos_fav);    
+                $data->logged_in = true;        
 
             
                 $this->load->model('generic_user');
@@ -87,6 +93,7 @@ class Book extends CI_Controller
             } else {
                     $data->viewer_is_owner = false;
                     $data->viewer_is_logged_in = false;
+                    $data->logged_in = false;
             }
 
             $this->load->view('books/templates/book_tpl',$data);

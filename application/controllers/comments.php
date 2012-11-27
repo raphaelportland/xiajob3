@@ -20,7 +20,7 @@ class Comments extends CI_Controller
             $this->load->model('books');
             $data['pic'] = $this->books->get_pic_by_id($pic_id);
             $data['view'] = 'comments/pic_comments';
-            $this->load->view('candidat/templates/public',$data);
+            $this->load->view('common/templates/main-fixed',$data);
         }
     }
     

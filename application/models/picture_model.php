@@ -40,13 +40,14 @@ class Picture_model extends CI_Model {
 
            // on ajoute les fleurs si nécessaire
            if(isset($params['with_flowers'])) {
-                $pics[$key]->flower_data = $this->get_pic_flowers($pic->id);
+               $this->load->model('books');
+               $pics[$key]->flower_data = $this->books->get_pic_flowers($pic->id);
            }
            
            // on ajoute les commentaires si nécessaire     
            if(isset($params['with_comments'])) {              
                $this->load->model('comments_model');
-               $pictures->pics[$key]->comments = $this->comments_model->get_pic_comments($pic->id);
+               $pics[$key]->comments = $this->comments_model->get_pic_comments($pic->id);
            }
        }
        return $pics;

@@ -116,9 +116,12 @@ class Comments_model extends CI_Model {
                 ->where('comments.pic_id', $pic_id);
                 
         $q = $this->db->get();
+        
+        $comments = new stdClass(); 
                 
         if($q->num_rows() > 0) {
-            $comments->nb = $this->get_comment_nb($pic_id);   
+            //$comments->nb = $this->get_comment_nb($pic_id);   
+            $comments->nb = $q->num_rows();
             
             foreach ($q->result() as $key => $comment) {
                 

@@ -45,9 +45,14 @@ class Candidat extends Generic_user {
         
        if($user_id) {
            $this->set_id($user_id);
-       }     
-       
-       $this->get_user();    // generic_user   
+       } else {
+           $user_id = $this->user_id;
+       }    
+      
+       $params = array(
+       'user_id' => $user_id,
+       );
+       $this->get_user($params);    // generic_user   
        $this->get_awards();       
        $this->get_diplomas();       
        $this->get_xppro();      
@@ -305,7 +310,7 @@ class Candidat extends Generic_user {
         if($q->num_rows() > 0) {
             $competences = $q->result();            
         } else {
-            $competences = null;
+            $competences = $this->setup_skills();
         }            
 
         $this->resume->skills = $competences;
@@ -337,8 +342,21 @@ class Candidat extends Generic_user {
                 $competences[$comp->id]->picto = $comp->picto;
                 $competences[$comp->id]->skill_id = $comp->id;
             }
+            
+            // on insère les valeurs en base de données
+            $batch = array();
+            foreach($competences as $key => $comp) :
+                $batch[] = array(
+                    'user_id' => $this->user_id,
+                    'competence' => $comp->skill_id,
+                    'score'=> 1,            
+                ); 
+            endforeach;
+            
+            $this->db->insert_batch('user_autoevaluation', $batch);
           
-            $this->resume->skills = $competences;             
+            $this->resume->skills = $competences;    
+            return $competences;         
     }
 
 
@@ -744,9 +762,6 @@ class Candidat extends Generic_user {
             }            
         }
         
-        //code('old comp');
-        //stop_code($old_comp);
-        
         $i = 1;
         while(isset($source[$i])) {
 
@@ -757,6 +772,7 @@ class Candidat extends Generic_user {
             );            
             
             if(isset($old_comp[$i])) :
+                
                 // update
                 $this->db
                     ->where('user_id',$this->user_id)

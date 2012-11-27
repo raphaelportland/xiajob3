@@ -3,13 +3,6 @@
  * Template pour les books
  * 
  */
-
-if($this->session->userdata('user_id')) {
-    // l'utilisateur est connecté
-    $logged_in = 'true';
-} else {
-	$logged_in = 'false';
-}
  
 ?>
 
@@ -17,47 +10,32 @@ if($this->session->userdata('user_id')) {
 <?php $this->load->view('books/head'); ?>
 
 <?php $this->load->view('common/social-share/social-share-scripts'); ?>
-  
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-          <div class='container-fluid'>
-               <a class='brand'><?= $name; ?></a> 
-                
-                <?php echo anchor('fleurjob','découvrez florBooks <i class="icon icon-white icon-share-alt"></i>','class="btn btn-primary pull-right"'); ?>
-                
-                <?php echo anchor('book','Explorer d\'autres Books','class="btn"'); ?>
-                
-                <ul class="nav pull-left">
-                    
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">en savoir plus sur ce book...<b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                          <li class='book-description'>
-                              <?php
-                              
-                              if(isset($description)) {
-                                  echo $description;
-                              } else {
-                                  echo "Aucune description n'a été donnée à ce book.";
-                              }
-                              ?>
-                          </li>
-                        </ul>
-                      </li>
-                </ul> 
-        </div>
-      </div> 
-    </div>
+
+
+<?php
+
+$data_head = array(
+    'description' => $description,
+    'name' => $name,
+    'owner' => $owner,
+);
+
+if($logged_in) :
+    $this->load->view('books/private-head-nav', $data_head);
+else :
+    $this->load->view('books/public-head-nav', $data_head);
+endif;
+?>
     
     <div id="myCarousel-fullscreen" class="carousel ">
       <!-- Carousel items -->
       <div class="carousel-inner">
          
     <?php $i = 0; ?>
-    <?php foreach ($pictures->pics as $picture) : ?>
+    <?php foreach ($pictures as $key => $picture) : ?>
         
         <?php
-            if(isset($picture->comments->nb)) {
+            if(isset($picture->comments->nb)) {  // à vérifier
                 $comments_nb = $picture->comments->nb;
             } else {
                 $comments_nb = 0;

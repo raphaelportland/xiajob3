@@ -626,7 +626,7 @@ class Books extends CI_Model {
     function get_owner_by_id($user_id) {
         
         $this->load->model('generic_user');
-        $this->owner = $this->generic_user->get_user_basic_infos($user_id);
+        $this->owner = $this->generic_user->get_user_basic_infos($params);
          
     }
     
@@ -1027,7 +1027,12 @@ class Books extends CI_Model {
        
        // les informations sur le propriétaire
        if(isset($params['with_owner'])) {
-           $book->owner = $this->get_owner_by_id($book->user_id);   
+           $user_params = array(
+           'user_id' => $book->user_id,
+           );
+           
+           $this->load->model('generic_user');
+           $book->owner = $this->generic_user->get_user_basic_infos($user_params);
        }
        
        // la cover

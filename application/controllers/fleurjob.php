@@ -46,12 +46,14 @@ class Fleurjob extends CI_Controller
      * 
      */
     function welcome() {
-        $this->load->model('candidat');
-        $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas. 
- 
-        $this->candidat->get_candidat();
+        $this->load->model('generic_user');
+        $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas. 
         
-        $data['user'] = $this->candidat;     
+        $params = array(
+        'with_options' => true,
+        );
+        
+        $data['user'] = $this->generic_user->get_user($params);;     
         $data['view'] = "candidat/dashboard";
         $this->load->view("common/templates/main",$data);
     }       
@@ -66,16 +68,22 @@ class Fleurjob extends CI_Controller
      * 
      */
     function edit_profile($rubrique = 0) {
-        $this->load->model('candidat');        
-        $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
-        
+
         if($rubrique == 0) {
             if($this->input->post()) {
                 
-                $this->candidat->update_profile(0,$this->input->post());                
-                //$this->candidat->update_options($this->input->post());            
+                $this->load->model('candidat');
+                $this->candidat->update_profile(0,$this->input->post());
             }
-            $this->candidat->all_options();             
+            
+            $params = array(   
+            'with_address' => true,
+            'with_options' => true, 
+            'with_phone' => true,
+            'with_dob' => true,       
+            );
+            
+            //$this->candidat->all_options();             
         }     
 
         
@@ -89,18 +97,36 @@ class Fleurjob extends CI_Controller
             $data['type_etab_list'] = $this->liste->types_etablissement();
             $data['postes_list'] = $this->liste->postes();            
             $data['months'] = $this->liste->months();
+            
+            $params = array(
+            'with_resume' => true,
+            'with_diplomas' => true,
+            'with_awards' => true,
+            'with_xppro' => true,
+            );
+            
         }
         
         if($rubrique == 2) {
             
-            if($this->input->post('submit')) {                      
+            if($this->input->post('submit')) {
+                $this->load->model('candidat');                      
                 $this->candidat->update_competences($this->input->post());                
             }
                         
             $this->load->model('liste');
             $data['comp_list'] = $this->liste->competences();
             $data['recomp_list'] = $this->liste->recompenses();
-            $this->load->helper('profile');                               
+            $this->load->helper('profile');   
+            
+            $params = array(
+            'with_resume' => true,
+            'with_skills' => true,
+            'with_computer_skills' => true,
+            'with_options'=> true,
+            'with_description' => true,
+            );
+                                        
         }
         
         if($rubrique == 3) {
@@ -116,7 +142,13 @@ class Fleurjob extends CI_Controller
             
         }
         
-        $data['user'] = $this->candidat->get_candidat();
+        $this->load->model('generic_user');        
+        $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        
+        $data['user'] = $this->generic_user->get_user($params);
+        
+        code($data['user']->username);
+        
         $data['rubrique'] = $rubrique;       
         $data['view'] = "candidat/profile/profile"; // mini-template pour les différents onglets du profil
         

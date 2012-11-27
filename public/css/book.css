@@ -102,3 +102,18 @@ img.carousel_pic {
 	margin: 20px;
 	float: left;
 }
+
+
+ul.book-infos {
+	mmargin-left: 40px !important;
+}
+
+.book-title {
+	color: white !important;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.book-title i {
+	margin-top: 5px;
+}
