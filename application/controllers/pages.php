@@ -49,4 +49,9 @@ class Pages extends CI_Controller
         $data['view'] = 'common/pages/participate';
         $this->load->view('common/templates/main-fixed', $data);           
     }  
+
+    function faq() {
+        $data['view'] = 'common/pages/faq';
+        $this->load->view('common/templates/main-fixed', $data);           
+    }  
 }

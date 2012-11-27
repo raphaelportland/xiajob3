@@ -88,11 +88,18 @@ class Social extends CI_Controller
      */
     function contact() {
         
+        $this->load->model('generic_user');
+        $data['user'] = $this->generic_user->get_user();
+        
         $this->load->library('form_validation');
         
         $this->form_validation->set_rules('subject', 'Le sujet du mail', 'required');
         $this->form_validation->set_rules('message', 'Le message', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');        
+        $this->form_validation->set_rules('email', 'Indiquer votre adresse email', 'required|valid_email'); 
+        $this->form_validation->set_rules('motive', 'Indiquer la raison de votre message', 'required');
+        
+        $this->form_validation->set_message('required', '%s est obligatoire.');
+        $this->form_validation->set_error_delimiters('<div class="alert alert-danger">', '</div>');       
         
         // validation
         if ($this->form_validation->run())

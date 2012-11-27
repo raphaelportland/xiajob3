@@ -9,7 +9,7 @@
                          <li><?php echo anchor('pages/pitch','florBooks en quelques mots'); ?></li>
                          <li><?php echo anchor('pages/team','Est-ce que l\'équipe est sympa ?'); ?></li>
                          <li><?php echo anchor('pages/participate','Envie de participer ?'); ?></li>
-                         <li><?php echo anchor('pages/coming_soon','FAQ'); ?></li>
+                         <li><?php echo anchor('pages/faq','FAQ'); ?></li>
                          <li><?php echo anchor('social/contact','Laissez nous un message'); ?></li>
                     </ul>
                     
