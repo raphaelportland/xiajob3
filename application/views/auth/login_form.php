@@ -85,4 +85,3 @@ Pas encore inscrit ? <?php echo anchor('auth/register/candidat', 'Créez votre c
 
 <?php echo form_close(); ?>
 
-

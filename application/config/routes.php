@@ -39,7 +39,7 @@
 */
 
 $route['default_controller'] = "fleurjob";
-$route['404_override'] = '';
+$route['404_override'] = 'pages/oups';
 
 
 /* End of file routes.php */

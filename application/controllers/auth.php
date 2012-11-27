@@ -106,11 +106,8 @@ class Auth extends CI_Controller
 				}
 			}
             
-            
-			//$this->load->view('auth/login_form', $data);
-            
             $data['view'] = "auth/login_form";
-            $this->load->view('common/templates/main',$data);
+            $this->load->view('common/templates/main-fixed',$data);
 		}
 	}
 

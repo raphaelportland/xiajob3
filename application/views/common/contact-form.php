@@ -1,3 +1,5 @@
+<div class='centered'>
+    
 <h2>Contactez nous</h2>
 
 <?php echo validation_errors(); ?>
@@ -51,4 +53,4 @@ $message = array(
 </div>
 <?php echo form_close(); ?>
 
-
+</div>

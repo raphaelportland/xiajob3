@@ -3,6 +3,7 @@
 body {
 	mbackground: url('../img/text-herb.jpg') top left;
 	padding-top: 40px;
+	height: 100%;
 }
 
 .fj_container {
@@ -30,6 +31,8 @@ body {
 	font-style: italic;
 	text-align: center;
 }
+
+
 
 
 #offre-speciale-1 {
@@ -354,6 +357,7 @@ div.book-content {
 	margin-top: 40px;
 	background: black url('../img/footer-bkg.jpg') top left repeat-x;
 	color: white;
+	bottom: 0;
 }
 
 #footer {
@@ -361,4 +365,25 @@ div.book-content {
 	padding: 10px;
 	padding-bottom: 40px;
 	text-align: center;
+}
+
+
+.centered {
+	text-align: center;
+}
+
+.big {
+	font-size: 200%;
+	line-height: 150%;
+	padding-top: 30px;
+}
+
+
+.big p.medium {
+	font-size: 70%;
+}
+
+.big p.huge {
+	font-size: 400%;
+	line-height: 100%;
 }

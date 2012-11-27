@@ -25,4 +25,9 @@ class Pages extends CI_Controller
         $this->load->view('common/templates/main-fixed', $data);
     }
     
+    function oups() {
+        $data['view'] = 'common/pages/404';
+        $this->load->view('common/templates/main-fixed', $data); 
+    }
+    
 }
