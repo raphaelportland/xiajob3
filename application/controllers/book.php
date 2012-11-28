@@ -123,6 +123,9 @@ class Book extends CI_Controller
 
         $books_params = array(
         'with_pictures_count' => true,
+        'with_fav_count' => true,
+        'with_covers' => true,
+        'with_occasions' => true,
         'user_id' => $this->session->userdata('user_id'),
         );
         

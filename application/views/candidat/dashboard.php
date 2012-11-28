@@ -1,15 +1,14 @@
-<?php //setlocale (LC_TIME, 'fr');
+<br />
+<p class='lead'>Mon Espace</p>
 
+
+<?php
 if($user->options->profile_step != 'finished') {
-    
     $this->load->view('candidat/elmt/please_finish_your_profile');
-    
 }
-
-
 ?>
 
-<h2>Mon Espace</h2>
+
 
 <div class='row-fluid'>
     <div class='span3'>

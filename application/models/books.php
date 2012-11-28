@@ -1103,23 +1103,30 @@ class Books extends CI_Model {
             extract($params);
         }
         
-        $this->db->select('user_book.id, user_book.name, user_book.description');
+        $this->db->select('user_book.id, user_book.name, user_book.description, user_book.short_url');
         $this->db->from('user_book');
+        
+        if(isset($with_covers)) :
+            $this->db->select('user_book.cover_pic');
+        endif;
            
         // nombre de favoris de chaque book
         if(isset($with_fav_count)) :
-            $this->db->select('count(fj_user_fav.id) as fav_count');
-            $this->db->group_by('user_book.id');            
+            $this->db->select('count(fj_user_fav.id) as fav_count');          
             $this->db->join('user_fav', 'user_fav.book_id = user_book.id','left');
         endif;
         
         if(isset($with_pictures_count)) :
-            $this->db->select('count(fj_book_pics.id) as pic_count');
-            $this->db->group_by('user_book.id');            
+            $this->db->select('count(fj_book_pics.id) as pic_count');          
             $this->db->join('book_pics', 'book_pics.book_id = user_book.id','left');
-        endif;            
-        
+        endif;
 
+        if(isset($with_occasions)) :
+            $this->db->select('occasions.occasion_name');          
+            $this->db->join('occasions', 'occasions.id = user_book.id_occasion','left');
+        endif;        
+        
+        $this->db->group_by('user_book.id'); 
         
         if(isset($user_id)) {
             $this->db->where('user_book.user_id', $user_id);
@@ -1128,6 +1135,30 @@ class Books extends CI_Model {
         $q = $this->db->get();
         
         $library = $q->result();
+        
+        // remontage de l'objet
+        foreach ($library as $key => $book) :
+            
+            if(isset($with_covers)) :
+    
+                   if($book->cover_pic != '0') {
+                       $q2 = $this->db->where('id', $book->cover_pic)
+                       ->get('book_pics');
+                       
+                       if($q2->num_rows() > 0) {
+                           $book->cover = $q2->row(); 
+                       }
+                   }                
+            endif;
+            
+            if(isset($with_occasions)) :
+                
+                $book->occasion = new stdClass();
+                $book->occasion->name = $book->occasion_name;
+                
+            endif;
+            
+        endforeach;
 
         return $library;
         
