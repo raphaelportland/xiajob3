@@ -3,15 +3,13 @@
  * Template publique pour la partie candidat
  * 
  */
-?>
  
-<?php $this->load->view('common/head'); ?>
+ //code($user);
+ 
+?> 
 
-<?php $this->load->view('candidat/elmt/public-head-nav'); ?>       
+<div class='row-fluid'>
 
-<div class="container-fluid">    
-    
-    <div class="row-fluid">
     <!-- photo -->
     <!--
     <div class='span2'>
@@ -27,18 +25,18 @@
     <!-- Infos générales -->
     <div class='span6'>
         <h1><?php 
-        if(isset($username) && ($username != '')) : 
-            echo $username; 
+        if(isset($user->username) && ($user->username != '')) : 
+            echo $user->username; 
         else : 
-            if(isset($first_name) && ($first_name != '')) :
-                echo($first_name);
+            if(isset($user->first_name) && ($user->first_name != '')) :
+                echo($user->first_name);
             else :
                 echo "Anonymous"; 
             endif;
         endif; ?>
         <br />
-        <small><?php if(isset($address->country)) : echo $address->country; else : echo "(France)"; endif; ?> </small>
-        <span class="badge badge-success badge-large"><?php if(isset($options->status)) : echo $options->status; else : echo "statut non défini"; endif; ?></span></h1>
+        <small><?php if(isset($user->address->country)) : echo $user->address->country; else : echo "(France)"; endif; ?> </small>
+        <span class="badge badge-success badge-large"><?php if(isset($user->options->status)) : echo $user->options->status; else : echo "statut non défini"; endif; ?></span></h1>
             
         
         <!--
@@ -49,7 +47,7 @@
         
         <br />
         <blockquote>
-            <p class=''><?php if(isset($description)) : echo $description; endif; ?></p>
+            <p class=''><?php if(isset($user->description)) : echo $user->description; endif; ?></p>
         </blockquote>
         
     </div>
@@ -59,19 +57,19 @@
     <div class='span4'>
         <h3>Styles pratiqués</h3>
         
-        <?php if(isset($options->libreservice) && ($options->libreservice == 1)) : ?>
+        <?php if(isset($user->options->libreservice) && ($user->options->libreservice == 1)) : ?>
         <span class="badge badge-info badge-large">Libre service</span><br />   
         <?php endif; ?> 
             
-        <?php if(isset($options->even) && ($options->even == 1)) : ?>
+        <?php if(isset($user->options->even) && ($user->options->even == 1)) : ?>
         <span class="badge badge-info badge-large">Evénementiel</span><br />   
         <?php endif; ?>         
         
-        <?php if(isset($options->design) && ($options->design == 1)) : ?>
+        <?php if(isset($user->options->design) && ($user->options->design == 1)) : ?>
         <span class="badge badge-info badge-large">Designer Floral</span><br />   
         <?php endif; ?>         
         
-        <?php if(isset($options->tradi) && ($options->tradi == 1)) : ?>
+        <?php if(isset($user->options->tradi) && ($user->options->tradi == 1)) : ?>
         <span class="badge badge-info badge-large">Traditionnel</span><br />   
         <?php endif; ?>         
         
@@ -82,11 +80,11 @@
     
     
     
-    <?php if($books): ?>
+    <?php if($user->books): ?>
     <div class='row-fluid'>
         <h2>Mes books</h2>
         
-        <?php foreach ($books as $key => $book) {
+        <?php foreach ($user->books as $key => $book) {
             
             //code($book);
             //@$book->occasion = $occasions[$book->id_occasion];
@@ -101,7 +99,7 @@
     </div>
     <?php endif; ?>
     
-<?php if(isset($resume->skills)) : ?>
+<?php if(isset($user->resume->skills)) : ?>
     <div class='row-fluid'>
         <h2>Compétences</h2>
         
@@ -111,10 +109,9 @@
 
             <?php 
             
-            foreach($resume->skills as $key => $competence) :
+            foreach($user->resume->skills as $key => $competence) :
             
                 $score = $competence->score;
-                $rating = $comp_rating[$score];
                 
                 echo("<tr><td><p class='lead'>".$competence->nom."</p></td><td>");  
                 
@@ -133,7 +130,7 @@
                     <?php endif;
                 }
                 
-                echo("</td><td><small>$rating</small></td></tr>");
+                echo("</td></tr>");
 
             endforeach; ?>
     </table>
@@ -154,7 +151,7 @@
 
 <?php
 
-foreach ($resume->diplomas as $key => $diplome) {   
+foreach ($user->resume->diplomas as $key => $diplome) {   
     echo("<tr><td>$diplome->annee_diplome</td>");
     
     if($diplome->formation_id != 0) {
@@ -191,11 +188,11 @@ foreach ($resume->diplomas as $key => $diplome) {
 
 <?php
 
-foreach ($resume->xppro as $key => $xp) {   
+foreach ($user->resume->xppro as $key => $xp) {   
     echo("<tr><td>de $xp->month_start/$xp->year_start à $xp->month_end/$xp->year_end</td>");
     echo("<td>$xp->etablissement</td><td>$xp->type_name</td><td>$xp->poste_name</td>");  
     
-    echo("<td></tr>");
+    echo("</tr>");
 }
 ?>     
     </tbody>  
@@ -209,7 +206,3 @@ foreach ($resume->xppro as $key => $xp) {
     </div>     
     -->
        
-
-</div> <!-- /container -->
-
-<?php $this->load->view('common/footer'); ?>
