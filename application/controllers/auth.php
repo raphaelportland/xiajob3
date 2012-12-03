@@ -343,6 +343,8 @@ class Auth extends CI_Controller
 
                 // s'il est bien loggué, on le renvoie sur la page de remerciement
                 
+                
+                
                 redirect('register/activated');
             }
 

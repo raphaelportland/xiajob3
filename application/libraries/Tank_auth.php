@@ -83,6 +83,15 @@ class Tank_auth
 						$this->error = array('banned' => $user->ban_reason);
 
 					} else {
+					    
+                        if($user->username == '') {
+                            $this->ci->load->model('generic_user');
+                            $user->username = $this->ci->generic_user->get_username($user->id);
+                        }
+                        
+                        
+                        
+                        
 						$this->ci->session->set_userdata(array(
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
