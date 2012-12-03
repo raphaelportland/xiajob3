@@ -3,7 +3,7 @@
 <h2>Mes alertes</h2>
 <p>à venir prochainement</p>
 
-<?php echo form_open('fleurjob/register','class="form"'); ?>
+<?php echo form_open('main/register','class="form"'); ?>
 
 <?php 
 

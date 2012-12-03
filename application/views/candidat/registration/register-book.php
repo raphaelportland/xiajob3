@@ -13,7 +13,7 @@
 
 <?php echo anchor('register/ignore_register',"ignorer et passer à l'étape suivante",'class="btn btn-warning btn-large"'); ?>
 
-<?php echo anchor("fleurjob/create_book","Créer mon premier book", "class='btn btn-primary btn-large pull-right'");?>
+<?php echo anchor("main/create_book","Créer mon premier book", "class='btn btn-primary btn-large pull-right'");?>
 
 </div>
 

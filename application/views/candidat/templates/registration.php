@@ -14,11 +14,7 @@
     
     <div class='span12'>
  
-<?php //$this->load->view('candidat/registration/register-progress'); ?> 
- 
-<?php $this->load->view('candidat/registration/'.$view); ?>
- 
-
+        <?php $this->load->view('candidat/registration/'.$view); ?>
 
     </div>
 </div>
