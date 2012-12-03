@@ -1,6 +1,6 @@
 <?php // mes compétences ?>
 
-<?php echo form_open('fleurjob/edit_profile/2','class="form"'); ?>
+<?php echo form_open('main/edit_profile/2','class="form"'); ?>
 
 <?php
 $description = array(

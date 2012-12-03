@@ -14,7 +14,7 @@ if($user->options->profile_step != 'finished') {
     <div class='span3'>
         <!-- User -->
         <h3><?= $user->username; ?></h3>
-        <?= anchor('fleurjob/edit_profile','<i class="icon icon-white icon-user"></i> Modifier mon profil','class="btn btn-primary"'); ?>
+        <?= anchor('main/edit_profile','<i class="icon icon-white icon-user"></i> Modifier mon profil','class="btn btn-primary"'); ?>
         
         <br /><br />
         <p class='muted'>Membre depuis le <?= date("d F Y", $user->member_since); ?></p>
@@ -23,7 +23,7 @@ if($user->options->profile_step != 'finished') {
     
     <div class='span9'>
         <!-- Skills -->
-        <?php echo anchor('fleurjob/edit_profile/2','<h3>Compétences</h3>'); ?>
+        <?php echo anchor('main/edit_profile/2','<h3>Compétences</h3>'); ?>
 
         <div class='span4'>
             <table class='table'>

@@ -1,7 +1,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
           <div class='container-fluid'>
-                <?php echo anchor('fleurjob',' florBooks','class="brand"'); ?>
+                <?php echo anchor('main',' florBooks','class="brand"'); ?>
                 <ul class="nav pull-left">
                     <li><a>FR</a></li>                           
                     <li class="dropdown">

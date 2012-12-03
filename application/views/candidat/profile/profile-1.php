@@ -23,9 +23,9 @@ foreach ($user->resume->awards as $key => $recompense) {
     echo("<tr><td>$recompense->name</td><td>$recompense->autre_recomp</td><td>$recompense->year_recomp</td>
     <td>"); ?>
     <div class="btn-group">
-    <?php //echo anchor("fleurjob/edit_recomp/$recompense->user_recomp_id",'Modifier', 'class="btn btn-mini"');
-    echo anchor("fleurjob/edit/recomp/$recompense->user_recomp_id", 'Modifier', 'role="button" class="btn btn-mini edit"');
-    echo anchor("fleurjob/del/recomp/$recompense->user_recomp_id",'Supprimer', 'class="btn btn-mini btn-danger confirm"');
+    <?php //echo anchor("main/edit_recomp/$recompense->user_recomp_id",'Modifier', 'class="btn btn-mini"');
+    echo anchor("main/edit/recomp/$recompense->user_recomp_id", 'Modifier', 'role="button" class="btn btn-mini edit"');
+    echo anchor("main/del/recomp/$recompense->user_recomp_id",'Supprimer', 'class="btn btn-mini btn-danger confirm"');
 ?>  </div>  
     <?php echo("</td></tr>");
 }
@@ -69,8 +69,8 @@ foreach ($user->resume->diplomas as $key => $diplome) {
     <div class="btn-group">
             
     <?php 
-    echo anchor("fleurjob/edit/formations/$diplome->user_form_id", 'Modifier', 'role="button" class="btn btn-mini edit"');
-    echo anchor("fleurjob/del/formations/$diplome->user_form_id",'Supprimer', 'class="btn btn-mini btn-danger confirm"'); ?>
+    echo anchor("main/edit/formations/$diplome->user_form_id", 'Modifier', 'role="button" class="btn btn-mini edit"');
+    echo anchor("main/del/formations/$diplome->user_form_id",'Supprimer', 'class="btn btn-mini btn-danger confirm"'); ?>
     </div>
     <?php echo("</td></tr>");
 }
@@ -104,9 +104,9 @@ foreach ($user->resume->xppro as $key => $xp) {
     echo("<td>"); ?>
     <div class="btn-group">
         
-    <?php echo anchor("fleurjob/edit/expepro/$xp->user_xp_id",'Modifier', 'class="btn btn-mini edit"');
+    <?php echo anchor("main/edit/expepro/$xp->user_xp_id",'Modifier', 'class="btn btn-mini edit"');
     
-    echo anchor("fleurjob/del/expepro/$xp->user_xp_id",'Supprimer', 'class="btn btn-mini btn-danger confirm"'); ?>
+    echo anchor("main/del/expepro/$xp->user_xp_id",'Supprimer', 'class="btn btn-mini btn-danger confirm"'); ?>
     </div>
     <?php echo("</td></tr>");
 }

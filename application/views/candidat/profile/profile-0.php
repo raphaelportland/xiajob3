@@ -161,7 +161,7 @@ $amateur_status = array(
     'checked'     => $amateur_status_checked,
 );      
 
-echo form_open('fleurjob/edit_profile/0','class="form"'); ?>
+echo form_open('main/edit_profile/0','class="form"'); ?>
 
 <div class='row-fluid'>
     <div class='span6'>
