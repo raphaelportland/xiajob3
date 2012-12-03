@@ -127,7 +127,7 @@ class Register extends CI_Controller
                 
             case 'finished' :
                 // on redirige sur le dashboard
-                redirect('fleurjob/welcome');
+                redirect('main/welcome');
                 break;
             
             default : 
@@ -201,7 +201,7 @@ class Register extends CI_Controller
         if($newstep == 'finished') : 
         switch($this->generic_user->userdata->profile) {
             case 'candidat' :
-                redirect('fleurjob/welcome');
+                redirect('main/welcome');
                 break;
             case 'recruteur' :
                 redirect('recruteur/welcome');
@@ -246,10 +246,14 @@ class Register extends CI_Controller
         $this->load->model('generic_user');
         $this->generic_user->login_test();
         
-        $this->generic_user->get_user();
+        $params = array(
+        'with_options' => true,
+        );
+        
+        $user = $this->generic_user->get_user($params);
                        
         $data['view'] = 'activated';      
-        $data['step'] = $this->generic_user->options->profile_step;
+        $data['step'] = $user->options->profile_step;
         
         switch($this->generic_user->profile) {
             case 'candidat':
@@ -280,7 +284,7 @@ class Register extends CI_Controller
         $this->load->library('tank_auth');
         $this->tank_auth->logout();
         
-        redirect('fleurjob');
+        redirect('main');
     }    
     
 }

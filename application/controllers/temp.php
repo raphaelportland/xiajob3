@@ -23,7 +23,6 @@ class Temp extends CI_Controller
         $this->generic_user->delete_user();
         
         echo($user_id . " deleted.");
-        //redirect('fleurjob');
     }   
     
     // A SUPPRIMER AVANT LE LANCEMENT :

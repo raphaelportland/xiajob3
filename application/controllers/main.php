@@ -5,7 +5,7 @@
  * 
  * 
  */
-class Fleurjob extends CI_Controller
+class Main extends CI_Controller
 {
           
     /**
@@ -30,7 +30,7 @@ class Fleurjob extends CI_Controller
             $this->load->model('generic_user');
             $profile = $this->generic_user->profile();
          
-            if($profile == 'candidat') : redirect('fleurjob/welcome');
+            if($profile == 'candidat') : redirect('main/welcome');
             else : redirect('recruteur/welcome');
             endif;                    
         }           
@@ -141,7 +141,7 @@ class Fleurjob extends CI_Controller
         if($rubrique == 3) {
             
             if(!$this->candidat->has_book()) {
-                redirect('fleurjob/create_book');
+                redirect('main/create_book');
             } else {
                 
                 $this->load->model('books');
@@ -180,7 +180,7 @@ class Fleurjob extends CI_Controller
             $this->candidat->add('recomp', $this->input->post());                 
         endif;
         
-        redirect("fleurjob/edit_profile/1");            
+        redirect("main/edit_profile/1");            
     }  
 
 
@@ -201,7 +201,7 @@ class Fleurjob extends CI_Controller
             $this->candidat->add('diplome', $this->input->post());                 
         endif;
         
-        redirect("fleurjob/edit_profile/1");            
+        redirect("main/edit_profile/1");            
     }    
     
     
@@ -220,7 +220,7 @@ class Fleurjob extends CI_Controller
             $this->candidat->add('xp', $this->input->post());                 
         endif;
         
-        redirect("fleurjob/edit_profile/1");            
+        redirect("main/edit_profile/1");            
     } 
     
     
@@ -237,7 +237,7 @@ class Fleurjob extends CI_Controller
 
         $this->candidat->delete_info($type,$id);
         
-        redirect("fleurjob/edit_profile/1");
+        redirect("main/edit_profile/1");
         
     }
     
@@ -249,7 +249,7 @@ class Fleurjob extends CI_Controller
         
         if($this->input->post('submit')) {          
             $this->candidat->update_attrib($type,$id,$this->input->post());           
-            redirect('fleurjob/edit_profile/1');           
+            redirect('main/edit_profile/1');           
         }
         
         $data['data'] = $this->candidat->get_attrib($type, $id);
@@ -319,7 +319,7 @@ class Fleurjob extends CI_Controller
         // on supprime la session
         $this->session->sess_destroy();        
         // on redirige l'utilisateur à la porte
-        redirect('fleurjob');
+        redirect('main');
     }
 
 

@@ -27,7 +27,7 @@ if($user->options->profile_step != 'finished') {
 
         <div class='span4'>
             <table class='table'>
-                    <?php for ($j=0; $j < 5; $j++) :
+                    <?php for ($j=1; $j < 6; $j++) :
                         
                         $competence = $user->resume->skills[$j]; 
                         $score = $competence->score;
@@ -48,7 +48,7 @@ if($user->options->profile_step != 'finished') {
         </div>
         <div class='span4'>
             <table class='table'>
-                    <?php for ($j=5; $j < 9; $j++) :
+                    <?php for ($j=6; $j < 9; $j++) :
                         
                         $competence = $user->resume->skills[$j]; 
                         $score = $competence->score;

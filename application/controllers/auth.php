@@ -77,7 +77,7 @@ class Auth extends CI_Controller
                     $profile = $this->generic_user->profile();
                     $this->generic_user->get_username();
                     
-                    if($profile == 'candidat') : redirect('fleurjob/welcome'); 
+                    if($profile == 'candidat') : redirect('main/welcome'); 
                     else : redirect('recruteur/welcome');
                     endif;   
 
@@ -122,7 +122,7 @@ class Auth extends CI_Controller
 
 		//$this->_show_message($this->lang->line('auth_message_logged_out'));
         
-        redirect('fleurjob');
+        redirect('main');
 	}
 
 	/**
@@ -194,7 +194,7 @@ class Auth extends CI_Controller
 
 						
 					// l'utilisateur est créé
-					// fleurjob doit enregistrer en base 
+					// florbooks doit enregistrer en base 
 					// - le profil
 					// - l'étape de remplissage de son profil (1 pour juste la création du compte)
 					// - le statut (étudiant / pro)
@@ -599,7 +599,7 @@ class Auth extends CI_Controller
    */     
 
         
-        $this->email->from('webmaster_fleurjob@xiaohld.com');          
+        $this->email->from('no-reply@florbooks.com');          
         $this->email->to($email);
         $this->email->subject(sprintf($this->lang->line('auth_subject_'.$type), $this->config->item('website_name', 'tank_auth')));
         $this->email->message($this->load->view('email/'.$type.'-fr-html', $data, TRUE));

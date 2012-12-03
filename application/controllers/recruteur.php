@@ -22,7 +22,7 @@ class Recruteur extends CI_Controller
             $this->load->model('generic_user');
             $profile = $this->generic_user->profile();
             
-            if($profile == 'candidat') : redirect('fleurjob/welcome');
+            if($profile == 'candidat') : redirect('main/welcome');
             else : redirect('recruteur/welcome');
             endif;               
         }        

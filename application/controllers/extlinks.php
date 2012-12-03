@@ -1,10 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
- * Controleur global
- * Ne sert qu'à rediriger entre les controleur Fleurjob(candidat)
- * et recruteur
- * 
+ * Contrôleur des liens externes au site
+ * gère l'authentification via facebook
  * 
  */
 class ExtLinks extends CI_Controller
@@ -37,18 +35,18 @@ class ExtLinks extends CI_Controller
             if($this->generic_user->is_facebook_member($facebook_user['id'])) {
                 // l'utilisateur a déjà un compte via facebook
                 $this->generic_user->facebook_log_in($facebook_user);
-                redirect('fleurjob');
+                redirect('main');
             } else {                
                 if($this->generic_user->is_site_member($facebook_user['email'])) {
                     // l'utilisateur a déjà un compte sur le site, mais pas via facebook
                     $this->generic_user->facebook_merge_account($facebook_user);
                     $this->generic_user->facebook_log_in($facebook_user);
-                    redirect('fleurjob');
+                    redirect('main');
                 } else {
                     // l'utilisateur n'a pas de compte du tout    
                     $this->generic_user->facebook_sign_in($facebook_user);
                     $this->generic_user->facebook_log_in($facebook_user);
-                    redirect('fleurjob');
+                    redirect('main');
                 }
             }
         }
