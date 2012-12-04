@@ -48,7 +48,7 @@ $this->load->view('books/pic_search');
 
 <?php if(isset($books->popular)) : // les books populaires ?>
 <div class='row-fluid'>
-        <p class='lead'>Les books les plus populaires</p>
+        <p class='lead'>Les books les plus populaires <?php echo anchor('book/popular','Voir tous les books populaires','class="btn"'); ?>    </p>
  
         <?php foreach ($books->popular as $key => $book) : ?>      
             
@@ -58,14 +58,14 @@ $this->load->view('books/pic_search');
             
         <?php endforeach; ?> 
      
-    <?php echo anchor('book/popular','Voir tous les books populaires','class="btn"'); ?>       
+       
 </div>
 
 <?php endif; ?>
 
 
 <div class='row-fluid'>
-        <p class='lead'>Les books les plus récents</p>
+        <p class='lead'>Les books les plus récents <?php echo anchor('book/latest','Voir tous les books récents','class="btn"'); ?></p>
  
         <?php foreach ($books->latest as $key => $book) : // les books récents?>       
             
@@ -73,5 +73,5 @@ $this->load->view('books/pic_search');
             
         <?php endforeach; ?> 
      
-    <?php echo anchor('book/latest','Voir tous les books récents','class="btn"'); ?>       
+           
 </div>
