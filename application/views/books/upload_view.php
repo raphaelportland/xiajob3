@@ -10,7 +10,7 @@
 
                 <!-- The fileinput-button span is used to style the file input field as button -->
                 
-                <?php if(isset($book->pictures->nb) && ($book->pictures->nb < 9)) : ?>
+                <?php if(isset($book->pictures->nb) && ($book->pictures->nb < 10)) : ?>
                 
 <div class='alert alert-info'>
     <strong>Attention</strong>
