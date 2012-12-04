@@ -11,7 +11,7 @@ if(isset($book->pictures->nb))
         <?php $this->load->view('books/upload_view'); ?>   
         
                  
-<?php echo anchor("book/my_books", "Retour à mes books", 'class="btn"'); ?>
+<?php echo anchor("book/edit/".$book->id, "Modifier votre book", 'class="btn btn-primary"'); ?>
 
 <br />
 <br />
