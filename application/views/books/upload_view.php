@@ -5,20 +5,43 @@
         
         <?php echo form_hidden('book_id',$book->id)?>
         
-        
         <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
         <div class="row-fluid fileupload-buttonbar">
-            <div class="span7">
+
                 <!-- The fileinput-button span is used to style the file input field as button -->
+                
+                <?php if(isset($book->pictures->nb) && ($book->pictures->nb < 10)) : ?>
+                
+<div class='alert alert-info'>
+    <strong>Attention</strong>
+    Pour des books de qualité, merci de vous limiter à 10 photos maximum par book.
+</div><div class="span7">
+       
                 <span class="btn btn-success fileinput-button">
                     <i class="icon-plus icon-white"></i>
                     <span>Choisir des photos...</span>
                     <input type="file" name="userfile" multiple>
                 </span>
-                <button type="submit" class="btn start">
-                    <i class="icon-upload"></i>
+                
+                <?php else : ?>
+                    
+<div class='alert alert-danger'>
+    <strong>Trop d'images ! </strong>
+    Vous devez d'abord supprimer certaines photos pour pouvoir en rajouter : <?php echo anchor('book/edit/'.$book->id, 'Modifier votre book'); ?>
+</div><div class="span7">                    
+                    
+                <span class="btn btn-success disabled">
+                    <i class="icon-plus icon-white"></i>
+                    <span>Choisir des photos...</span>
+                </span>
+                
+                <?php endif; ?>
+                <!--
+                <button type="submit" class="btn start btn-primary">
+                    <i class="icon-upload icon-white"></i>
                     <span>Charger toutes les photos</span>
                 </button>
+                -->
                 <!--
                 <button type="reset" class="btn btn-warning cancel">
                     <i class="icon-ban-circle icon-white"></i>

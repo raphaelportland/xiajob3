@@ -123,7 +123,7 @@ class Book extends CI_Controller
 
         $books_params = array(
         'with_pictures_count' => true,
-        'with_fav_count' => true,
+        //'with_fav_count' => true,
         'with_covers' => true,
         'with_occasions' => true,
         'user_id' => $this->session->userdata('user_id'),
@@ -132,8 +132,10 @@ class Book extends CI_Controller
         $this->load->model('books');
         $books = $this->books->get_library($books_params);
         
+        //stop_code($books);
+        
         // si pas de book créé, on l'envoie en créer un
-        if(!isset($books)) { redirect('book/create_book'); } 
+        if(!isset($books) || count($books) == 0) { redirect('book/create_book'); } 
         
         $data['view'] = "books/my_books";
         $data['books'] = $books;

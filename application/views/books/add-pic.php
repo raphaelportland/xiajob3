@@ -1,10 +1,12 @@
-<h2>Ajouter des images</h2>
-<p class='lead'>Ajoutez des images à votre book <strong>"<?= $book->name; ?>"</strong></p>
-
-<div class='alert alert-info'>
-    <strong>Attention</strong>
-    Pour des books de qualité, merci de vous limiter à 10 photos maximum par book.</div>
-
+<h2>"<?= $book->name; ?>"</h2>
+<p class='lead'>Ajoutez des images à votre florBook <?php 
+if(isset($book->pictures->nb)) 
+{
+    echo "(".$book->pictures->nb." photo";
+    
+    if($book->pictures->nb > 1) echo "s";
+    
+    echo ")"; } ?></p>
 
         <?php $this->load->view('books/upload_view'); ?>   
         
@@ -14,7 +16,7 @@
 <br />
 <br />
 
-<?php if(isset($book->pictures->pics)) : ?>
+<?php if(isset($book->pictures->pics) && $book->pictures->nb != 0) : ?>
 
 <div class="accordion" id="accordion2">
   <div class="accordion-group">
