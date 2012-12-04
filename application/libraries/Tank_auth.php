@@ -21,7 +21,6 @@ class Tank_auth
     
     function login_test() {
         if(!$this->is_logged_in()) {
-            //redirect('fleurjob');
             die;
         }
     }
