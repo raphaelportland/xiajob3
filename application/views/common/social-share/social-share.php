@@ -20,10 +20,12 @@
     <div class="social-share-item social-facebook-like">     
         <div class="fb-like" 
         data-href="<?= $picture_url; ?>" 
-        data-send="false" 
+        data-send="true" 
         data-width="450" 
         data-show-faces="true"></div>    
-    </div>   
+    </div>
+    
+       
 
     <?php if(isset($show_pinterest) && ($show_pinterest == false)) :
 else : ?> 
@@ -35,5 +37,6 @@ else : ?>
         </a>          
     </div>
 <?php endif; ?>    
+
 
 </div>
