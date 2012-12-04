@@ -80,9 +80,15 @@ class Main extends CI_Controller
 
         if($rubrique == 0) {
             if($this->input->post()) {
-                
-                $this->load->model('candidat');
-                $this->candidat->update_profile(0,$this->input->post());
+                $this->load->library('form_validation');                
+                $this->form_validation->set_rules('status', 'Votre statut', 'required');   
+                $this->form_validation->set_message('required', '%s doit être renseigné');
+                $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><strong>Erreur : </strong> ', '</div>');
+                      
+                if($this->form_validation->run() != FALSE) :
+                    $this->load->model('candidat');
+                    $this->candidat->update_profile(0,$this->input->post());
+                endif;
             }
             
             $params = array(   
@@ -119,9 +125,12 @@ class Main extends CI_Controller
         if($rubrique == 2) {
             
             if($this->input->post('submit')) {
-                $this->load->model('candidat');                      
-                $this->candidat->update_competences($this->input->post());                
-            }
+                
+                if($this->form_validation->run() != "FALSE") :                
+                    $this->load->model('candidat');                      
+                    $this->candidat->update_competences($this->input->post());                   
+                endif;
+            }    
                         
             $this->load->model('liste');
             $data['comp_list'] = $this->liste->competences();

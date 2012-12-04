@@ -1,5 +1,8 @@
 <?php // mes infos personnelles ?>
 
+<?php echo validation_errors(); ?>
+
+
 <?php
 
 if(isset($user->dob)) :
@@ -161,6 +164,25 @@ $amateur_status = array(
     'checked'     => $amateur_status_checked,
 );      
 
+if(isset($user->options->status) && ($user->options->status == 'apprenti')) { $apprenti_status_checked = true; } else { $apprenti_status_checked = false; }
+$apprenti_status = array(
+    'name'        => 'status',
+    'id'          => 'apprenti_status',
+    'value'       => 'apprenti',
+    'checked'     => $apprenti_status_checked,
+); 
+
+if(isset($user->options->status) && ($user->options->status == 'photographe')) { $photographe_status_checked = true; } else { $photographe_status_checked = false; }
+$photographe_status = array(
+    'name'        => 'status',
+    'id'          => 'photographe_status',
+    'value'       => 'photographe',
+    'checked'     => $photographe_status_checked,
+); 
+
+
+
+
 echo form_open('main/edit_profile/0','class="form"'); ?>
 
 <div class='row-fluid'>
@@ -175,7 +197,7 @@ echo form_label('Votre nom', 'nom', 'class="control-label"');
 echo form_input($nom);
 
 
-echo form_label('Pseudonyme', 'username', 'class="control-label"');
+echo form_label('Pseudonyme (public)', 'username', 'class="control-label"');
 echo form_input($pseudo);
 echo("</div>");
 
@@ -194,6 +216,8 @@ echo form_label('N° de téléphone', 'mobile', 'class="control-label"');
 echo form_input($mobile);
 echo("</div>"); ?>    
 
+
+
 <div class='control-group'>
 <?php echo form_label('Votre statut : '); ?>
 
@@ -209,6 +233,16 @@ echo("</div>"); ?>
     <?php echo form_radio($amateur_status); ?>
     Amateur
 </label>
+<label class="radio">
+    <?php echo form_radio($apprenti_status); ?>
+    Apprenti
+</label>
+<label class="radio">
+    <?php echo form_radio($photographe_status); ?>
+    Photographe
+</label>
+
+
 </div>
 
 
@@ -240,5 +274,7 @@ echo("</div>"); ?>
 </div>
 
 
+<div class='well muted'><strong>Information sur la confidentialité</strong><br />Les informations personnelles sont privées et n’apparaissent pas en public à l’exception de :<br />
+votre pseudo (ou prenom, ou racine de votre adresse email à défaut), votre statut professionnel, votre âge et votre pays d’origine.</div>
 
 

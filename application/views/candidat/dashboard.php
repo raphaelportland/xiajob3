@@ -75,7 +75,7 @@ if($user->options->profile_step != 'finished') {
     <div class='span6'>
         <?php echo anchor('book/my_books','<h3>Mes florBooks ('.count($user->books).')</h3>'); ?>
         <table class='table'>
-            <tr><th>Nom</th><th>Favoris</th></tr>
+            <tr><th>Nom</th><th><i class='icon icon-star'></i> (Favoris)</th></tr>
         <?php
         foreach ($user->books as $key => $book) {
           

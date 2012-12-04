@@ -760,8 +760,11 @@ class Generic_user extends Users {
         foreach ($source as $key => $option) {
             
             $option['user_id'] = $this->user_id;
+            
+            // il faut d'abord récupérer les options
+            $current_options = $this->all_options();
                     
-            if(isset($this->options->$option['option'])) {                
+            if(isset($current_options['option'])) {                
                 $this->db
                     ->where('user_id',$this->user_id)
                     ->where('option',$option['option'])
@@ -918,7 +921,6 @@ class Generic_user extends Users {
         switch ($step) {
             
             case '0': // LE PROFIL DE BASE
-                         
                          
                 // on enregistre les options si elles existent
                 $options = array();
