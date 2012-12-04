@@ -68,7 +68,18 @@ class Temp extends CI_Controller
     
     function info() {
         phpinfo();
-    }  
+    } 
+    
+    
+    
+    function add_list_1() {
+        
+        $data = array(
+        '');
+        
+        //$this->db->insert('');
+        
+    } 
     
     
 } 

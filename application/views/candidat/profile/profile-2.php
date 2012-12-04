@@ -7,7 +7,7 @@ $description = array(
     'name' => 'description',
     'id'    => 'description',
     'value' => set_value('description',$user->description),
-    'placeholder' => 'Description courte (140 mots)',
+    'placeholder' => 'exemple : Passionné de décoration florale moderne, je pratique avec un style très naturel autour de couleur blanche et verte.',
     'rows' => '4',
     'cols' => '140',
     'class' => 'span10',
@@ -31,6 +31,7 @@ $informatique = array(
 <p class='lead'>Description rapide</p>
 
 <div class='well'>
+    <p>Décrivez en 2 lignes votre style de pratique, votre passion.</p>
     <?php echo form_textarea($description); ?>
 </div>
 

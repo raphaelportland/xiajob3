@@ -7,7 +7,7 @@
         
         <link rel="stylesheet" href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css">       
         <link rel="stylesheet" href="<?= base_url(); ?>public/css/jquery.fileupload-ui.css" type="text/css" media="all"/>
-        
+        <link rel="stylesheet" href="<?= base_url(); ?>public/css/icon-color.css" type="text/css" media="all"/>
         <link rel="stylesheet" href="<?= base_url(); ?>public/css/private.css" type="text/css" media="all"/>
         
      
