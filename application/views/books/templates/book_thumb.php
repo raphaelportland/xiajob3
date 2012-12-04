@@ -2,6 +2,8 @@
             <div class='book-thumb'>
                 <a class='' href='<?= $short_url; ?>'>
                     
+                    <?php //code($book->pictures); ?>
+                    
                     <?php if(isset($cover_pic) && $cover_pic != '0') : ?>
                         
                     <div class='th_crop'>

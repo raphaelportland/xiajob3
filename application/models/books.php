@@ -712,29 +712,31 @@ class Books extends CI_Model {
      * Renvoie les photos enregistrées dans le book
      * 
      */
-    function get_pictures($book_id, $comments = false) {
+    function get_pictures($params = null) {
+        
+       extract($params);
+       
+       if(!isset($book_id)) :
+           return false;
+       endif;
+        
        $q = $this->db
             ->where('book_id',$book_id)
             ->get('book_pics'); 
-            
-       $pictures = new stdClass();
-       
-       if(!$q->num_rows() > 0) {
-           $pictures->nb = 0;
-       } else {
-           $pictures->nb = $q->num_rows();           
-       }
 
-       $pictures->pics = $q->result();
+       $pictures = $q->result();
        
-       foreach ($pictures->pics as $key => $pic) {
+       // détail en fonction des options passées
+       foreach ($pictures as $key => $pic) {
            
-           $pictures->pics[$key]->flower_data = $this->get_pic_flowers($pic->id);
+           if(isset($with_flowers)) :
+                $pictures[$key]->flower_data = $this->get_pic_flowers($pic->id);
+           endif;
            
            // on ajoute les commentaires si nécessaire              
-           if($comments) {
+           if(isset($with_comments)) {
                $this->load->model('comments_model');
-               $pictures->pics[$key]->comments = $this->comments_model->get_pic_comments($pic->id); 
+               $pictures[$key]->comments = $this->comments_model->get_pic_comments($pic->id); 
            }
           
        }
@@ -1098,7 +1100,7 @@ class Books extends CI_Model {
      * @param array $params
      * @return array
      */
-    function get_library($params) {
+    function get_library($params = null) {
         
         if(isset($params)) {
             extract($params);
@@ -1151,6 +1153,16 @@ class Books extends CI_Model {
                        }
                    }                
             endif;
+            
+            if(isset($with_pictures)) :
+                
+                $book_params = array(
+                'book_id' => $book->id,
+                );
+                $book->pictures = $this->get_pictures($book_params);
+                
+            endif;
+            
             
             if(isset($with_occasions)) :
                 

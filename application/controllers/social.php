@@ -66,7 +66,7 @@ class Social extends CI_Controller
         $data['books'] = $books;
         $data['view'] = 'candidat/favorites';
         
-        $this->load->view('candidat/templates/private', $data);
+        $this->load->view('common/templates/main', $data);
     }
     
     

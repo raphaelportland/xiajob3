@@ -13,7 +13,7 @@
                             <li><?php echo anchor("pages/hints",'<i class="icon icon-question-sign"></i> Conseils','class=""'); ?></li>                          
                         </ul>
                     </li>
-                    <li><?php echo anchor("fleurjob/welcome",'Mon Espace'); ?></li>
+                    <li><?php echo anchor("main/welcome",'Mon Espace'); ?></li>
                  </ul>
  
                 
@@ -21,7 +21,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello <?= $this->session->userdata('username'); ?> <b class="caret"></b></a>                        
                         <ul class="dropdown-menu">
-                            <li><?php echo anchor("fleurjob/edit_profile",'<i class="icon icon-user"></i> Mon profil'); ?></li>
+                            <li><?php echo anchor("main/edit_profile",'<i class="icon icon-user"></i> Mon profil'); ?></li>
                             <li><?php echo anchor("auth/logout",'<i class="icon icon-off"></i> Déconnexion'); ?></li>                          
                         </ul>
                      </li>

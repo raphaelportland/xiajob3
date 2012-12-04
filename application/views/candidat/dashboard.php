@@ -89,19 +89,17 @@ if($user->options->profile_step != 'finished') {
     
     <div class='span6'>
         <?= anchor('social/favorites','<h3>Favoris</h3>'); ?>
-        
-        <?php $fav_count = count($user->favorites); 
-        if($fav_count == 0) :
-            $msg = "Vous n'avez pas de florBooks favoris pour le moment";
-        elseif($fav_count == 1) :
-            $msg = "1 florBook favori.";
+
+        <?php         
+        if(!isset($user->favorites)) :
+            echo "<p>Vous n'avez pas de florBooks favoris pour le moment</p>";
+            
+        elseif(count($user->favorites) == 1) :
+            echo "<p>Vous avez 1 florBook favori.</p>";
         else :
-            $msg = $fav_count." floBooks favoris.";
+            echo "<p>Vous avez ".count($user->favorites)." floBooks favoris.</p>";
         endif;        
-        ?>
-        <p><?php if($fav_count != 0) :
-        echo 'Vous avez '.anchor('social/favorites', $msg);
-        else : echo $msg; endif; ?></p>    
+        ?>   
     </div>       
     
 </div>
