@@ -2,7 +2,7 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
           <div class='container-fluid'>
-                <?php echo anchor('fleurjob',' florBooks','class="brand"'); ?>
+                <?php echo anchor('book',' florBooks','class="brand"'); ?>
                 <ul class="nav">
                     <li><a>FR</a></li>                           
                     <li class="dropdown">
