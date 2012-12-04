@@ -1,7 +1,6 @@
         <div class='book-main'>
             <div class='book-thumb'>
-                <a class='' href='<?= $short_url; ?>' target='_blank'>
-                    
+                <a class='' href='<?= $short_url; ?>'>
                     
                     <?php if(isset($cover_pic) && $cover_pic != '0') : ?>
                         
