@@ -499,6 +499,7 @@ class Books extends CI_Model {
             'order' => $this->get_next_book_order($source['user_id']),
             'private_key' => $book_private_key,
             'id_occasion' => $source['occasion'],
+            'cover_pic' => 0, // par défaut la couverture vaut 0
             'short_url' => '',
         );
         

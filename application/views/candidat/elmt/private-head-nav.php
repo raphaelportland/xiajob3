@@ -8,7 +8,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Books <b class="caret"></b></a>                        
                         <ul class="dropdown-menu">
                             <li><?php echo anchor("book",'<i class="icon icon-eye-open"></i> Voir'); ?></li>
-                            <li><?php echo anchor("auth/register/candidat",'<i class="icon icon-camera"></i> Créer','class=""'); ?></li>
+                            <li><?php echo anchor("book/my_books",'<i class="icon icon-camera"></i> Créer','class=""'); ?></li>
                             <li><?php echo anchor("pages/hints",'<i class="icon icon-question-sign"></i> Conseils','class=""'); ?></li>                          
                         </ul>
                      </li>
