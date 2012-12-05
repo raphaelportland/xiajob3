@@ -96,6 +96,7 @@ class="book-social-fav btn btn-large btn-inverse">
             
             <div class='black-panel' id='black-panel<?= $picture->id; ?>'>
                 <div id='commentaires<?= $picture->id; ?>'> 
+                <a title="fermer" class="close book-social-comment pull-right black-panel-close" data-pic_id="<?= $picture->id; ?>">&times;</a>                    
                     <?php 
                     $com_data['pic_id'] = $picture->id;
                     $com_data['comments'] = $picture->comments->comments;

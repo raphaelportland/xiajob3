@@ -59,7 +59,7 @@ img.carousel_pic {
 }
 
 .black-panel {
-	display: none; 
+	display: block; 
 	background-color: rgba(0, 0, 0, 0.7);
 	position: absolute;
 	width: 250px; 
@@ -69,7 +69,16 @@ img.carousel_pic {
 	color: white;
 	padding : 60px 20px 20px 40px;	
 	z-index: 500;	
-} 
+}
+
+a.black-panel-close {
+	color: silver;
+	opacity: .8;
+}
+
+a.black-panel-close:hover {
+	color: white;
+}
 
 .comment {
 	padding-bottom: 10px;
