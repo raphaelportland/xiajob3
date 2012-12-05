@@ -36,7 +36,18 @@ else : ?>
             <img border="0" src="<?= base_url().'public/img/pinterest-btn.png'; ?>" title="Pin It" />
         </a>          
     </div>
-<?php endif; ?>    
+<?php endif; ?>   
+
+    <div class='social-share-item social-permalink'>
+        <p class=''><strong>Lien direct vers ce book</strong></p>
+        <div class="input-prepend">
+        <span class="add-on"><i class='icon icon-share-alt'></i></span>
+        <input type="text" value="<?= $short_url; ?>" class='input input-xlarge' />
+        </div> 
+        <p><small>URL raccourcie avec <?php echo anchor('https://bitly.com/','BitLy','target="_blank"'); ?></small></p>                
+    </div>
+
+ 
 
 
 </div>

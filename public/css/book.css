@@ -117,3 +117,8 @@ ul.book-infos {
 .book-title i {
 	margin-top: 5px;
 }
+
+
+div.social-permalink {
+	clear: left;
+}
