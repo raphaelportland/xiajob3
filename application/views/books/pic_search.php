@@ -1,7 +1,7 @@
 <div class='well'>
 <p class='lead'>Recherche de photos par fleur</p>
     
-<?php echo form_open('pic_search/add_flowers', 'class="form-inline"'); ?>
+<?php echo form_open('pic_search/add_flowers', 'class="form-inline" autocomplete="off"'); ?>
 
 <input placeholder="Tapez le nom d'une fleur" class='input-xlarge' name="flower" type="text" data-provide="typeahead" data-source="[<?= $fleurs; ?>]">
 
