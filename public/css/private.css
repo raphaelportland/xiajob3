@@ -392,3 +392,12 @@ dd {
 	margin-bottom: 20px;
 }
 
+.social-share-item {
+	margin: 20px;
+	float: left;
+}
+
+
+div.social-permalink {
+	clear: left;
+}

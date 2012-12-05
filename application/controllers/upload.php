@@ -30,7 +30,7 @@ class Upload extends CI_Controller {
   function index($book_id) {
       
         $this->load->model('books');
-        $data['book'] = $this->books->get_book_by_id($book_id);
+        $data['book'] = $this->books->get_book($book_id);
         
         $data['view'] = 'books/add-pic';
         $this->load->view('candidat/templates/private',$data);

@@ -58,6 +58,10 @@ img.carousel_pic {
 	margin-top: 5px;
 }
 
+
+
+/* BLACK PANEL ET COMMENTAIRES */
+
 .black-panel {
 	display: block; 
 	background-color: rgba(0, 0, 0, 0.7);
@@ -107,10 +111,24 @@ a.black-panel-close:hover {
 	height: 35px;
 }
 
+
+
+
+/* PARTAGER */
+
 .social-share-item {
 	margin: 20px;
 	float: left;
 }
+
+div.social-permalink {
+	clear: left;
+}
+
+
+
+
+
 
 
 ul.book-infos {
@@ -125,9 +143,4 @@ ul.book-infos {
 
 .book-title i {
 	margin-top: 5px;
-}
-
-
-div.social-permalink {
-	clear: left;
 }

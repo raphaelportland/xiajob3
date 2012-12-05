@@ -4,7 +4,7 @@
 
 <br /><br />
 
-<?php echo form_open('book/add_flowers/'.$pic_id, 'class="form-inline"'); ?>
+<?php echo form_open('book/add_flowers/'.$pic_id, 'class="form-inline" autocomplete="off"'); ?>
 
 <input placeholder="Tapez le nom d'une fleur" class='input-xlarge' name="flower" type="text" data-provide="typeahead" data-source="[<?= $fleurs; ?>]">
 

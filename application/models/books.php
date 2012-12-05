@@ -16,43 +16,43 @@ class Books extends CI_Model {
      * Identifiant du book
      * @var int $id
      */
-    public $id;
+    //public $id;
     
     /**
      * Titre du book
      * @var string $name
      */
-    public $name;
+    //public $name;
     
     /**
      * Description du book
      * @var string $description
      */
-    public $description;
+    //public $description;
     
     /**
      * Adresse bitly du book
      * @var string $short_url
      */
-    public $short_url;
+    //public $short_url;
     
     /**
      * Occasion du book (mariage, autre)
      * @var object $occasion
      */
-    public $occasion;
+    //public $occasion;
     
     /**
      * Propriétaire du book
      * @var object $owner
      */
-    public $owner;    
+    //public $owner;    
     
     /**
      * Tableau des photos du book
      * @var array $pictures
      */
-    public $pictures;
+    //public $pictures;
     
     
     
@@ -64,16 +64,16 @@ class Books extends CI_Model {
      * Pas utilisés
      * @deprecated
      */
-    public $order;
+    //public $order;
     
     /**
      * @deprecated
      */ 
-    public $private_key;        
+    //public $private_key;        
 
 
     // la langue à utiliser, notamment pour les fleurs
-    private $lang;
+    //private $lang;
     
  
  
@@ -85,7 +85,7 @@ class Books extends CI_Model {
      * 
      * @var array $books
      */   
-    public $books;
+    //public $books;
     
     
     /**
@@ -103,11 +103,11 @@ class Books extends CI_Model {
             $this->owner = $owner;
         } 
         
-        $this->owner = new stdClass();
-        $this->books = new stdClass();
-        $this->data = new stdClass();
-        $this->temp = new stdClass();
-        $this->occasion = new stdClass();
+        //$this->owner = new stdClass();
+        //$this->books = new stdClass();
+        //$this->data = new stdClass();
+        //$this->temp = new stdClass();
+        //$this->occasion = new stdClass();
     } 
    
     
@@ -116,10 +116,10 @@ class Books extends CI_Model {
      * Getters et Setters
      */    
 
-    function set_owner($user_id) { $this->owner->id = $user_id; }    
-    function get_owner() { return $this->owner; }  
+    //function set_owner($user_id) { $this->owner->id = $user_id; }    
+    //function get_owner() { return $this->owner; }  
         
-    function set_lang($lang) { $this->lang = $lang; }
+    //function set_lang($lang) { $this->lang = $lang; }
 
     
     
@@ -138,6 +138,7 @@ class Books extends CI_Model {
         
         $latest_params = array(
         'order_by' => array('field' => 'id', 'direction' => 'desc'),
+        'with_covers' => true,
         'limit' => $limit,
         );
         
@@ -257,6 +258,7 @@ class Books extends CI_Model {
      * Ajoute les miniatures aux books chargés
      * 
      */
+     /*
     function prepare_thumbs() {
         
         // Pour les books plus récents
@@ -269,7 +271,7 @@ class Books extends CI_Model {
             $book->cover = $q->row();
         }
         
-    }    
+    } */   
  
  
 
@@ -332,6 +334,7 @@ class Books extends CI_Model {
      * @param bool
      * @return object
      */
+     /*
     function get_pic_by_id($pic_id, $with_comments = false, $with_flowers = true) {
         
         $this->pic_data = new stdClass();
@@ -355,7 +358,7 @@ class Books extends CI_Model {
             return false;
         endif;      
     }
-    
+    */
     
     
     
@@ -363,6 +366,7 @@ class Books extends CI_Model {
      * Récupère l'adresse de la miniature de l'image
      * 
      */
+     /*
     function get_pic_thumb($pic_id) {
         $q = $this->db
         ->select('th_url')
@@ -374,7 +378,7 @@ class Books extends CI_Model {
         } else {
             return false;
         }
-    }
+    }*/
     
     
     
@@ -541,6 +545,7 @@ class Books extends CI_Model {
      * @return object
      * 
      */
+     /*
     function load($book_id) {
        $q = $this->db
             ->select('*, user_book.id as book_id, occasions.id as occasion_id')
@@ -566,7 +571,7 @@ class Books extends CI_Model {
        $this->books->pictures = $book->pictures;        
        
        return $book;
-    }
+    }*/
     
     
     
@@ -581,7 +586,8 @@ class Books extends CI_Model {
      * 
      * @return object
      * 
-     */    
+     */ 
+     /*   
     function get_book_by_id($book_id, $comments = false) {
        $q = $this->db
             ->select('*, occasions.id as id_occasion, user_book.id as book_id, user_book.name as book_name')
@@ -618,19 +624,20 @@ class Books extends CI_Model {
        $this_book->pictures = $this->get_pictures($book_id, $comments);      
        
        return $this_book;
-    }
+    }*/
 
 
     /**
      * Récupère les infos de base sur le propriétaire du book
      */
+     /*
     function get_owner_by_id($user_id) {
         
         $this->load->model('generic_user');
         
         $this->owner = $this->generic_user->get_user_basic_infos();
          
-    }
+    }*/
     
     
     
@@ -639,7 +646,7 @@ class Books extends CI_Model {
     
     
 
-
+/*
     function get_owner_fullname() {
         $q = $this->db
                 ->where('user_id',$this->owner->id)
@@ -668,7 +675,7 @@ class Books extends CI_Model {
             
         //$this->books->owner_fullname = $q->result()->option->prenom;        
     }
-    
+ */   
     
     
     
@@ -678,6 +685,7 @@ class Books extends CI_Model {
     /**
      * Charge tous les books
      */
+     /*
     function all_books($comments = false) {
         $q = $this->db
                 ->where('user_id',$this->owner->id)
@@ -698,7 +706,7 @@ class Books extends CI_Model {
                 
         return $this->books->book_list;
     }
-    
+    */
     
     
     
@@ -714,7 +722,10 @@ class Books extends CI_Model {
      */
     function get_pictures($params = null) {
         
-       extract($params);
+        if(isset($params)) {
+            extract($params);           
+        }
+
        
        if(!isset($book_id)) :
            return false;
@@ -846,6 +857,7 @@ class Books extends CI_Model {
      * Renvoie le lien privé d'accès au book
      * 
      */
+     /*
     function get_private_key($book_id) {
 
         $q = $this->db
@@ -866,7 +878,7 @@ class Books extends CI_Model {
        
         return $infos;
        
-    }
+    }*/
     
     
     
@@ -901,10 +913,14 @@ class Books extends CI_Model {
        return($result);
     }
     
+    
+    
+    
     /**
      * Renvoie l'id du book contenant la photo indiquée
      * 
      */
+     /*
     function parent_book($picture_id) {
         $q = $this->db
                 ->select('user_book.id')
@@ -914,7 +930,7 @@ class Books extends CI_Model {
                 ->get();
                 
         return $q->row()->id;
-    }
+    }*/
     
     
     
@@ -945,6 +961,7 @@ class Books extends CI_Model {
     /**
      * Renvoie les url de l'image et de sa miniature
      * pour une image donnée
+     * sert notamment lors de la suppression d'une photo
      * @param int $pic_id
      * @return object;
      */
@@ -969,6 +986,7 @@ class Books extends CI_Model {
      * @param int $book_id
      * @return object
      */
+     /*
     function get_book_pictures_urls($book_id) {
         // on récupère les photos pour les effacer du disque
         $q = $this->db->select('id, pic_url, th_url')
@@ -982,7 +1000,7 @@ class Books extends CI_Model {
             return null;
         }
     }    
-    
+    */
     
     
     
@@ -1040,7 +1058,7 @@ class Books extends CI_Model {
        }
        
        // la cover
-       if($book->cover_pic != '') {
+       if($book->cover_pic != 0) {
            $q2 = $this->db->where('id', $book->cover_pic)
            ->get('book_pics');
            
@@ -1066,6 +1084,8 @@ class Books extends CI_Model {
     
     /**
      * Renvoie X id de books selon les paramètres renseignés
+     * utilisé notamment pour l'affichage de la galerie
+     * 
      * @param array $params
      * @return object
      */
@@ -1079,6 +1099,10 @@ class Books extends CI_Model {
             $this->db->limit($params['limit']);
         }
         
+        if(isset($params['with_covers'])) {
+            $this->db->where('user_book.cover_pic !=',0);
+        }
+        
         // ordre
         if(isset($params['order'])) {
             $this->db->order_by($params['order']['field'], $params['order']['direction']);
@@ -1090,9 +1114,14 @@ class Books extends CI_Model {
             return $q->result();
         } else {
             return false;
-        }
-        
+        }    
     }
+    
+    
+    
+    
+    
+    
     
     /**
      * Renvoie des books selon les paramètres

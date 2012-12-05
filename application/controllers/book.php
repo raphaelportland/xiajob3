@@ -148,7 +148,7 @@ class Book extends CI_Controller
      * 
      */
     function edit($id) {
-        
+
         $this->load->model('generic_user');        
         $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
@@ -156,10 +156,17 @@ class Book extends CI_Controller
         
         if($this->input->post('submit')) {
             $this->books->update($this->input->post());
-            redirect('book/my_books');
         }
 
-        $data['book'] = $this->books->get_book_by_id($id);        
+        $params = array(
+        'with_pictures' => true,
+        'with_flowers' => true
+        );
+        
+        $data['book'] = $this->books->get_book($id, $params);        
+        
+        //code($data['book']);
+        
         $data['view'] = 'books/edit-book';       
         $this->load->view('common/templates/main',$data);        
     }
@@ -237,7 +244,9 @@ class Book extends CI_Controller
         $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
 
         $this->load->model('books');
-        $data['book'] = $this->books->get_book_by_id($book_id); 
+        
+        $data['book'] = $this->books->get_book($book_id, array('with_pictures' => true));
+        //code($data['book']);
  
         $data['view'] = 'books/add-pic';
         $this->load->view('common/templates/main',$data);                  
@@ -256,7 +265,7 @@ class Book extends CI_Controller
             redirect('book/my_books');
         } else {
                         
-            $data['book'] = $this->books->get_book_by_id($book_id);         
+            $data['book'] = $this->books->get_book($book_id);         
                       
             $this->load->view('books/edit_book_name',$data);
         }
@@ -272,7 +281,7 @@ class Book extends CI_Controller
             redirect('book/my_books');
         } else {
                         
-            $data['book'] = $this->books->get_book_by_id($book_id);                   
+            $data['book'] = $this->books->get_book($book_id);                   
             $this->load->view('books/edit_book_desc',$data);
         }        
     }

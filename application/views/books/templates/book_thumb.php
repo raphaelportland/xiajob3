@@ -18,7 +18,7 @@
                     
                     <?php else: ?>
                         
-                    <img src='http://placehold.it/280x187&text=No+Pic' class='' />    
+                    <img src='http://placehold.it/280x187&text=Pas+encore+de+photo!' class='' />    
                     
                     <?php endif; ?>
                 </a>

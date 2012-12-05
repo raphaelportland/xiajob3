@@ -13,6 +13,7 @@
 /*global define, window, document, URL, webkitURL, FileReader */
 
 (function (factory) {
+	
     'use strict';
     if (typeof define === 'function' && define.amd) {
         // Register as an anonymous AMD module:
@@ -38,14 +39,15 @@
     var parentWidget = ($.blueimpFP || $.blueimp).fileupload;
     $.widget('blueimpUI.fileupload', parentWidget, {
 
-        options: {
+        options: {	
             // By default, files added to the widget are uploaded as soon
             // as the user clicks on the start buttons. To enable automatic
             // uploads, set the following option to true:
             autoUpload: true,
             // The following option limits the number of files that are
             // allowed to be uploaded using this widget:
-            maxNumberOfFiles: 10,
+            //maxNumberOfFiles: 10,
+            maxNumerOfFiles: $('#maxPics').val(),
             // The maximum allowed file size:
             maxFileSize: undefined,
             // The minimum allowed file size:

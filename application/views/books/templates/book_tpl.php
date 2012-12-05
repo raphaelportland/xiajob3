@@ -25,6 +25,11 @@ if($logged_in) :
 else :
     $this->load->view('books/public-head-nav', $data_head);
 endif;
+
+//code($cover_pic);
+
+
+if(isset($pictures) && $pictures != "") :
 ?>
     
     <div id="myCarousel-fullscreen" class="carousel ">
@@ -161,7 +166,12 @@ class="book-social-fav btn btn-large btn-inverse">
       <a class="carousel-control right" href="#myCarousel-fullscreen" data-slide="next">&rsaquo;</a>
     </div>   
 
-
+<?php else : // no pictures ?>  
+    <div class='hero-unit'>
+        <h1>Aucune photo</h1>
+        <p>L'artiste travaille, revenez bientôt !</p>
+    </div>
+<?php endif; ?>
 
 <div id='connect-modal' class="modal hide fade">
   <div class="modal-header">

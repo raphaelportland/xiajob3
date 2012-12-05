@@ -2,19 +2,19 @@
 
 <?php
 
-echo form_open();
+echo form_open('book/edit/'.$book->id);
 
 ?>
 
 <div class="btn-group">
     <?php echo anchor('book/my_books', "Retourner à mes books", 'class="btn"'); ?>
-    <?php echo anchor("upload/index/$book->id","<i class='icon-camera'></i> Ajouter",'class="btn"'); ?>
+    <?php echo anchor("book/add_pics/$book->id","<i class='icon-camera'></i> Ajouter",'class="btn"'); ?>
     <?php echo form_submit('submit', "Enregistrer", 'class="btn btn-primary"'); ?>
 </div>
 <br />
 <br />
 
-<?php if(isset($book->pictures->pics)): ?>
+<?php if(isset($book->pictures)): ?>
 
 <p class='lead'>Images du book</p>
 <table class='table table-hover'> 
@@ -26,10 +26,8 @@ echo form_open();
         </tr>
     </thead>
     <tbody>
-        
-<?php //code($book->pictures); ?>        
 
-<?php foreach ($book->pictures->pics as $key => $pic) : ?> 
+<?php foreach ($book->pictures as $key => $pic) : ?> 
     
    
     
@@ -71,7 +69,13 @@ $pic_desc = array(
         
         <td>
             <div class="btn-group">
-                <?php echo anchor('book/update_cover/'.$pic->book_id.'/'.$pic->id,'Choisir comme couverture', 'class="btn"'); ?>
+                <?php if($pic->id == $book->cover_pic) : ?>
+                    <button class='btn btn-success'>Couverture du book</button>
+                <?php else: ?>
+                    <?php echo anchor('book/update_cover/'.$pic->book_id.'/'.$pic->id,'Choisir comme couverture', 'class="btn"'); ?>    
+                <?php endif; ?>
+                
+                
                 <?php echo anchor('book/add_flowers/'.$pic->id,'Identifier / Modifier les fleurs','class="btn"'); ?>
                 <?php echo anchor('book/del_picture/'.$pic->id,'<i class="icon icon-white icon-trash"></i> Supprimer','class="btn btn-danger delete-pic"');?>
             </div>
