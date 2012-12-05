@@ -36,7 +36,7 @@
     
     echo anchor('book/edit_book_desc/'.$book->id,$book->description,'class="autosubmit-input-link" title="Cliquez pour modifier" data-div_id="book_desc_'.$key.'"');
     
-    echo("</div></td><td>$book->pic_count</td><td>$book->fav_count</td><td>"); ?>
+    echo("</div></td><td>".count($book->pictures)."</td><td>$book->fav_count</td><td>"); ?>
     
     <div class="btn-group">
     <?php echo anchor("upload/index/$book->id","<i class='icon-camera'></i> Ajouter",'class="btn"'); ?>
