@@ -95,7 +95,7 @@ class="book-social-fav btn btn-large btn-inverse">
 <?php else : ?>
 <i class="icon-star icon-white"></i>
 <?php endif; ?>
-</a>
+ <small><?= $fav_count; ?></small></a>
 </div>
             
             

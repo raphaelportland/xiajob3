@@ -137,16 +137,19 @@ class Books extends CI_Model {
     function get_latest($limit = null) {
         
         $latest_params = array(
-        'order_by' => array('field' => 'id', 'direction' => 'desc'),
+        'order' => array('field' => 'id', 'direction' => 'desc'),
         'with_covers' => true,
         'limit' => $limit,
         );
         
-        if($books_list = $this->get_books($latest_params)) {        
+        if($books_list = $this->get_books($latest_params)) {
+                    
             $latest_books = array();
             
             $book_params = array(
             'with_pictures' => true,
+            'with_fav_count' => true,
+            'with_owner' => true,
             );
             
             foreach ($books_list as $key => $book) {          
@@ -186,6 +189,8 @@ class Books extends CI_Model {
                                    
             $params = array(
             'with_pictures' => true,
+            'with_fav_count' => true,
+            'with_owner' => true,
             );                                   
                                    
             foreach ($result as $key => $book) {
@@ -232,6 +237,8 @@ class Books extends CI_Model {
             
             $params = array(
             'with_pictures' => true,
+            'with_fav_count' => true,
+            'with_owner' => true,            
             );
             
             foreach ($result as $key => $book) {
@@ -848,7 +855,35 @@ class Books extends CI_Model {
         'th_url' => $image->thumbnail_url,
         );
         
+        
+        $has_cover = $this->has_cover($image->book);
+        
         $this->db->insert('book_pics',$import);
+        $new_pic_id = $this->db->insert_id();
+        
+        if(!$has_cover) $this->update_cover_pic($image->book, $new_pic_id);
+    }
+    
+    
+    
+    
+    /**
+     * Teste si un book a déjà une couverture
+     * renvoie true or false
+     * @param int $book_id
+     * @return bool
+     */
+    function has_cover($book_id) {
+        $q = $this->db->select('cover_pic')
+        ->where('id',$book_id)
+        ->where('cover_pic !=',0)
+        ->get('user_book');
+        
+        if($q->num_rows() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
     
     
@@ -1032,14 +1067,30 @@ class Books extends CI_Model {
      * 
      */    
     function get_book($book_id, $params = null) {
-       $q = $this->db
+           
+        if(isset($params)) {
+            extract($params);
+        }           
+           
+           
+       $this->db
             ->select('*, occasions.id as occasion_id, user_book.id as book_id, user_book.name as book_name')
-            ->select('count(fj_book_pics.id) as pic_nb')   
+            //->select('count(fj_book_pics.id) as pic_nb')   
             ->from('user_book')
             ->join('occasions', 'occasions.id = user_book.id_occasion')
-            ->join('book_pics', 'book_pics.book_id = user_book.id')
-            ->where('user_book.id', $book_id)
-            ->get();
+            //->join('book_pics', 'book_pics.book_id = user_book.id')
+            ->where('user_book.id', $book_id);
+       
+       // le nombre de favoris
+       if(isset($with_fav_count)) {
+            $this->db->select('count(fj_user_fav.id) as fav_count');          
+            $this->db->join('user_fav', 'user_fav.book_id = user_book.id','left');
+       }
+       
+       
+       $q = $this->db->get();
+            
+                   
              
        if($q->num_rows() == 0) {
            return false;
@@ -1048,7 +1099,7 @@ class Books extends CI_Model {
        $book = $q->row();    
        
        // les informations sur le propriétaire
-       if(isset($params['with_owner'])) {
+       if(isset($with_owner)) {
            $user_params = array(
            'user_id' => $book->user_id,
            );
@@ -1068,7 +1119,7 @@ class Books extends CI_Model {
        }
        
        // les photos
-       if(isset($params['with_pictures'])) {
+       if(isset($with_pictures)) {
            $this->load->model('picture_model');
             $book->pictures = $this->picture_model->get_pics($book_id, $params);     
        }

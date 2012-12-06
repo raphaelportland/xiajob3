@@ -401,3 +401,93 @@ dd {
 div.social-permalink {
 	clear: left;
 }
+
+
+/* BOOK THUMBS 2 */
+
+
+.book-container {
+	width: 280px;
+	position: relative;
+	float: left;
+	margin-right: 20px;
+	margin-bottom: 0px;
+	background-color: white;
+	margin-top: 70px;
+	margin-bottom: 20px;
+}
+
+.book-th-shadow {
+	height: 7px;
+	margin-bottom: 20px;
+	display: none;
+}
+
+.book-container .cover {
+	width: 280px;
+	height: 210px;
+	overflow: hidden;
+	margin-top: 30px;
+	position: relative;
+	-webkit-box-shadow: 0 0px 8px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 0px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0px 8px rgba(0, 0, 0, 0.3);		
+}
+
+.book-container .cover img {
+	min-width: 280px;
+	min-height: 210px;
+}
+
+.book-th-top {
+	display: block;
+	width: 280px;
+	height: 7px;
+	overflow: hidden;
+	-webkit-box-shadow: 0 0px 8px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 0px 8px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 0px 8px rgba(0, 0, 0, 0.3);	
+}
+
+.book-th-top img {
+	min-width: 280px;
+}
+
+.book-th-name {
+	position: absolute;
+	top: 5px;
+	left: -3px;
+	background-color: white;
+	padding: 5px;	
+	width: 276px;
+	-webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+	font-size: 120%;
+	z-index: 10;
+}
+
+.book-th-name a {
+}
+
+
+.book-container .cover .book-fav-count {
+	bottom: 3px;
+	right: 3px;
+	position: absolute;
+	color: white;
+	background: rgba(0,0,0,0.2);
+	padding-left: 3px;
+	padding-right: 5px;
+}
+
+.book-container .cover .book-occasion {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+}
+
+.book-container .cover .book-occasion span {
+	font-weight: normal;
+	font-size: 14px;
+}

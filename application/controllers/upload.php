@@ -71,7 +71,7 @@ class Upload extends CI_Controller {
             $config['maintain_ratio'] = TRUE;
             //$config['width'] = 140;
             //$config['height'] = 140;         
-            $config['width'] = 290;
+            $config['width'] = 280;
             $config['height'] = 210;   
             
             $this->load->library('image_lib', $config);

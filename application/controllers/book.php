@@ -20,6 +20,9 @@ class Book extends CI_Controller
                 
         $data['books'] = $this->books->books;
         
+        //code($data['books']);
+        
+        
         $this->load->model('liste');
         $data['fleurs'] = $this->liste->flowers();
         
@@ -38,6 +41,9 @@ class Book extends CI_Controller
          
         $this->load->model('books');                    
         $data['books'] = $this->books->get_latest(); 
+        
+        //code($data['books']);
+        
         $data['view'] = 'books/latest';    
         $this->load->view('common/templates/main',$data);      
          
@@ -65,7 +71,8 @@ class Book extends CI_Controller
         'with_pictures' => true,
         'with_owner' => true,
         'with_comments' => true,
-        'with_flowers' => true,        
+        'with_flowers' => true,
+        'with_fav_count' => true,        
         );
          
         $data = $this->books->get_book($book_id, $params);
@@ -246,8 +253,7 @@ class Book extends CI_Controller
         $this->load->model('books');
         
         $data['book'] = $this->books->get_book($book_id, array('with_pictures' => true));
-        //code($data['book']);
- 
+
         $data['view'] = 'books/add-pic';
         $this->load->view('common/templates/main',$data);                  
         

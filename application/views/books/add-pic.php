@@ -1,19 +1,25 @@
 <h2>"<?= $book->name; ?>"</h2>
 <p class='lead'>Ajoutez des images à votre florBook <?php 
-if($book->pic_nb > 0) 
+
+if(isset($book->pictures) && $book->pictures != null) 
 {
-    echo "(".$book->pic_nb." photo";
+    $pic_nb = count($book->pictures);
     
-    if($book->pic_nb > 1) echo "s";
+    echo "(".$pic_nb." photo";
     
-    echo ")"; } ?></p>
+    if($pic_nb > 1) echo "s";
+    
+    echo ")"; }
+    else {
+        $pic_nb = 0;
+    } ?></p>
 
         <?php $this->load->view('books/upload_view'); ?>   
         
                  
 <?php echo anchor("book/edit/".$book->id, "Modifier votre book", 'class="btn btn-primary"'); ?>
 
-<input id="maxPics" type="hidden" name="maxpic" value="<?php echo 10-$book->pic_nb; ?>"/>
+<input id="maxPics" type="hidden" name="maxpic" value="<?php echo 10-$pic_nb; ?>"/>
 
 <br />
 <br />
