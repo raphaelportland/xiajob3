@@ -21,6 +21,9 @@ class Main extends CI_Controller
             $this->books->get_latest(4);
         
             $data['books'] = $this->books->books;
+            
+            
+            
                     
             $data['view'] = 'candidat/home';
         

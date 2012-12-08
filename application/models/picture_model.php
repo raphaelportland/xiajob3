@@ -14,6 +14,9 @@
  */
 class Picture_model extends CI_Model {
     
+    
+    
+    
     /**
      * Renvoie les photos enregistrées dans le book
      * 

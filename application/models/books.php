@@ -73,7 +73,7 @@ class Books extends CI_Model {
 
 
     // la langue à utiliser, notamment pour les fleurs
-    //private $lang;
+    private $lang;
     
  
  
@@ -119,9 +119,12 @@ class Books extends CI_Model {
     //function set_owner($user_id) { $this->owner->id = $user_id; }    
     //function get_owner() { return $this->owner; }  
         
-    //function set_lang($lang) { $this->lang = $lang; }
+    function set_lang($lang) { $this->lang = $lang; }
 
     
+   
+   
+   
     
     
      
@@ -341,7 +344,6 @@ class Books extends CI_Model {
      * @param bool
      * @return object
      */
-     /*
     function get_pic_by_id($pic_id, $with_comments = false, $with_flowers = true) {
         
         $this->pic_data = new stdClass();
@@ -363,9 +365,9 @@ class Books extends CI_Model {
             return $this->pic_data;
         else :
             return false;
-        endif;      
+        endif;
     }
-    */
+    
     
     
     
@@ -1074,7 +1076,8 @@ class Books extends CI_Model {
            
            
        $this->db
-            ->select('*, occasions.id as occasion_id, user_book.id as book_id, user_book.name as book_name')
+            ->select('*, occasions.id as occasion_id, user_book.id as book_id, user_book.name as book_name,
+            user_book.user_id as user_id')
             //->select('count(fj_book_pics.id) as pic_nb')   
             ->from('user_book')
             ->join('occasions', 'occasions.id = user_book.id_occasion')
@@ -1089,6 +1092,8 @@ class Books extends CI_Model {
        
        
        $q = $this->db->get();
+       
+       //code($q->result());
             
                    
              
@@ -1096,7 +1101,8 @@ class Books extends CI_Model {
            return false;
        }       
        
-       $book = $q->row();    
+       $book = $q->row();  
+       //code($book);  
        
        // les informations sur le propriétaire
        if(isset($with_owner)) {

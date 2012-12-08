@@ -81,6 +81,9 @@
             <?php echo anchor('profile/view/'.$owner->id, $owner->username); ?>
             <?php endif; ?>
         </div>
+        
+        
+        
 
             <!-- COVER -->
             <div class='cover'>

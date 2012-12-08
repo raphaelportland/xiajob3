@@ -182,7 +182,7 @@ class="book-social-fav btn btn-large btn-inverse">
     <p>Pour utiliser cette fonctionnalité, vous devez être connecté.</p>
   </div>
   <div class="modal-footer">
-      <?php echo anchor('fleurjob', 'Connectez-vous', "class='btn btn-primary'"); ?>
+      <?php echo anchor('main', 'Connectez-vous', "class='btn btn-primary'"); ?>
   </div>
 </div>
 

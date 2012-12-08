@@ -93,6 +93,9 @@ class Upload extends CI_Controller {
             $this->books->import_img($info);
 
 
+
+
+
            //Return JSON data
            if (IS_AJAX) {   //this is why we put this in the constants to pass only json data
                 echo json_encode(array($info));
