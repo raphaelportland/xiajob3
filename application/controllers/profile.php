@@ -31,6 +31,7 @@ class Profile extends CI_Controller
                 'user_id' => $user_id,
                 'with_covers' => true,
                 'with_occasions' => true,
+                'with_fav_count' => true,
                 ),
             );
             
