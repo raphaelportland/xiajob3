@@ -726,16 +726,23 @@ class Generic_user extends Users {
                 ->where('user_id',$this->user_id)
                 ->get('user_options');
                 
-        $options = new stdClass();                
-        foreach ($q->result() as $key => $option) {
+        $options = new stdClass();  
+        
+        if($q->num_rows() > 0) :
+                      
+            foreach ($q->result() as $key => $option) {
+                
+                // on retire les - pour faire des variables ok
+                $name = str_replace('-','',$option->option);
+                
+                $options->$name = $option->value;;
+            }
+        
+        else :
+            $options = null;
             
-            // on retire les - pour faire des variables ok
-            $name = str_replace('-','',$option->option);
-            
-            $options->$name = $option->value;;
-        }        
-             
-        $this->options = $options;
+        endif;
+        
         return($options);   
     }
     
@@ -758,26 +765,26 @@ class Generic_user extends Users {
     function update_options($source) {
 
         foreach ($source as $key => $option) {
-            
+
             $option['user_id'] = $this->user_id;
             
             // il faut d'abord récupérer les options
             $current_options = $this->all_options();
                     
-            if(isset($current_options['option'])) {                
+            if(isset($current_options->$option['option'])) :
                 $this->db
                     ->where('user_id',$this->user_id)
                     ->where('option',$option['option'])
                     ->update('user_options',$option);                             
-            } else {
+            else :
                 
                 $this->db->insert('user_options',$option);
                 
-            }
+            endif;
 
         }        
-        //$flashmessage = "Options mises à jour.";
-        //$this->session->set_flashdata('message', $flashmessage); 
+        $flashmessage = "Options mises à jour.";
+        $this->session->set_flashdata('message', $flashmessage); 
     }
     
  
