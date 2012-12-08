@@ -298,7 +298,7 @@ class Book extends CI_Controller
         $data['pic_id'] = $pic_id;
 
         $this->load->model('liste');        
-        $data['fleurs'] = $this->liste->flowers('fr');        
+        $data['fleurs'] = $this->liste->flowers('fr');
         
         $this->load->model('books');
         $this->books->set_lang('fr');

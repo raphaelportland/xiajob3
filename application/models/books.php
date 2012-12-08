@@ -424,20 +424,17 @@ class Books extends CI_Model {
      */
     function save_pic_flower($pic_id, $flower_complete_name) {
         
-        $this->temp->pic_id = $pic_id;
+        //$this->temp->pic_id = $pic_id;
         
         $flower = $this->get_flower_by_complete_name($flower_complete_name);
         
         if($flower == false) :
                     
             // la fleur n'existe pas en base, on l'ajoute à la base "crade" : user_flowers
-            $this->add_new_custom_flower($flower_complete_name);
+            $this->add_new_custom_flower($pic_id, $flower_complete_name);
             
         else :
-            
-            //code($this->temp);
-            
-            $this->add_pic_flower();
+            $this->add_pic_flower($pic_id, $flower->id);
         
         endif;
   
@@ -449,11 +446,11 @@ class Books extends CI_Model {
      * Les données de la fleur on été mises dans $this->temp->flower par get_flower_by_complete_name()
      * 
      */
-    function add_pic_flower() {
+    function add_pic_flower($pic_id, $flower_id) {
         
             $data = array(
-                'pic_id' => $this->temp->pic_id,
-                'flower_id' => $this->temp->flower->id,
+                'pic_id' => $pic_id,
+                'flower_id' => $flower_id,
             );
     
             $this->db->insert('pic_flowers',$data);          
@@ -472,8 +469,8 @@ class Books extends CI_Model {
             
             // la fleur existe
             
-            $this->temp->flower = $q->row();
-            return $this->temp->flower;
+            $flower = $q->row();
+            return $flower;
             
         } else {
 
@@ -483,18 +480,16 @@ class Books extends CI_Model {
     }
     
     
-    function add_new_custom_flower($complete_name) {
+    function add_new_custom_flower($pic_id, $complete_name) {
         
         $data = array(
         'custom_name' => $complete_name,
-        'pic_id' => $this->temp->pic_id,
+        'pic_id' => $pic_id,
         );
         
         $this->db->insert('user_flowers',$data);
     }
-    
-    
-    
+
     
     /**
      * Création d'un nouveau book
