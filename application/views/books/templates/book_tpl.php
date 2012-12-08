@@ -82,11 +82,12 @@ data-title="Partagez"
 class="book-social-share btn btn-large btn-inverse"><i class="icon-share-alt icon-white"></i></a>
 
 
+
 <a href="#" 
 rel="tooltip" 
 data-book_id="<?= $picture->book_id; ?>" 
 data-placement="top" 
-data-logged_in="<?= $logged_in; ?>"
+data-logged_in="<?php echo $log = ($logged_in) ? "true" : "false"; ?>"
 data-title="Book favori" 
 data-action="<?= site_url('social/add_fav'); ?>"
 class="book-social-fav btn btn-large btn-inverse">

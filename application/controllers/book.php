@@ -96,10 +96,9 @@ class Book extends CI_Controller
                 } else {
                     $data->viewer_is_owner = false;
                 } 
-                $data->viewer_is_logged_in = true;
+                $data->logged_in = true;
             } else {
                     $data->viewer_is_owner = false;
-                    $data->viewer_is_logged_in = false;
                     $data->logged_in = false;
             }
 
