@@ -308,7 +308,16 @@ class Candidat extends Generic_user {
         ->get();        
             
         if($q->num_rows() > 0) {
-            $competences = $q->result();            
+            $result = $q->result();  
+            
+            $competences = array();
+            
+            foreach ($result as $key => $skill) {
+                $competences[$skill->skill_id] = $skill;
+            }
+            
+            code($competences);
+                      
         } else {
             $competences = $this->setup_skills();
         }            

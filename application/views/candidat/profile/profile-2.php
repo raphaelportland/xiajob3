@@ -58,15 +58,22 @@ $informatique = array(
             
             <?php
             
-            foreach($user->resume->skills as $key => $competence) {
+            foreach($comp_list as $key => $competence) {
                 
+                //code($competence);
                 echo("<tr><th>".$competence->nom."</th>");
                 
                 
                 for ($i=1; $i < 6; $i++) {
                     
                     echo("<td>");
-                    echo form_radio($competence->skill_id, $i, test_comp($user->resume->skills[$key]->score,$i)); 
+                    
+                    if(!isset($user->resume->skills[$competence->id])) :
+                        $user->resume->skills[$competence->id] = new stdClass();
+                        $user->resume->skills[$competence->id]->score = 1;
+                    endif;
+                    
+                    echo form_radio($competence->id, $i, test_comp($user->resume->skills[$competence->id]->score, $i)); 
                     echo("</td>");
                     
                 } 

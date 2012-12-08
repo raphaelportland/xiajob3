@@ -468,7 +468,6 @@ class Books extends CI_Model {
         if($q->num_rows() > 0) {
             
             // la fleur existe
-            
             $flower = $q->row();
             return $flower;
             
@@ -489,7 +488,6 @@ class Books extends CI_Model {
         
         $this->db->insert('user_flowers',$data);
     }
-
     
     /**
      * Création d'un nouveau book

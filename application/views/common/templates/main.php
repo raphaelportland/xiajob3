@@ -21,8 +21,13 @@ if($this->session->userdata('user_id')) {
 
  
 <div class='row-fluid'> 
- 
-<?php $this->load->view($view); ?>
+<?php 
+if(isset($pass_data) && isset($data)) :
+    $this->load->view($view, $data);
+else :
+    $this->load->view($view);
+endif; 
+?>
 
 </div>
 

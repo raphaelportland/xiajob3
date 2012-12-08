@@ -74,10 +74,42 @@ class Temp extends CI_Controller
     
     function add_list_1() {
         
-        $data = array(
-        '');
+        // OCCASIONS
+        $data_occasions = array(
+        array('occasion_name' => 'Plaisir d’offrir'),
+        array('occasion_name' => '1er Mai'),
+        );
         
-        //$this->db->insert('');
+        $this->db->insert_batch('occasions',$data_occasions);
+        
+        // AWARDS
+        $data_awards = array(
+        array('name' => 'Médaillé Régional des Olympiades des Métiers'),
+        array('name' => 'Médaillé National des Olympiades des Métiers'),
+        array('name' => 'Vainqueur de la Coupe Espoir Interflora'),
+        array('name' => 'Vainqueur de la Coupe Interflora'),
+        );
+
+        $this->db->insert_batch('recompenses',$data_awards);
+        
+        // DIPLOMAS
+        $data_diplomas = array(
+        array('diplome' => 'BM (Brevet de Maîtrise)'),
+        );
+
+        $this->db->insert_batch('diplomes',$data_diplomas);        
+        
+        
+        // TYPE D'ETABLISSEMENT
+        $this->db->where('type_etab', 'Magasin Libre Service');
+        $data_etab = array(
+        'type_etab' => 'Magasin sous Enseigne'
+        );
+        
+        $this->db->update('type_etablissement', $data_etab);
+        
+        // SKILLS
+        $this->db->insert('competences', array('nom' => "Vente & Conseil Clientèle"));
         
     } 
     

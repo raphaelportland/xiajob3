@@ -65,8 +65,13 @@ class Main extends CI_Controller
         'with_favorites' => true,
         );
         
+        $this->load->model('liste');
+        $data['data'] = array();
+        $data['data']['comp_list'] = $this->liste->competences();
+        
         $data['user'] = $this->generic_user->get_user($params);;     
         $data['view'] = "candidat/dashboard";
+        $data['pass_data'] = true;
         $this->load->view("common/templates/main",$data);
     }       
 
@@ -128,7 +133,7 @@ class Main extends CI_Controller
         if($rubrique == 2) {
             
             if($this->input->post('submit')) {
-                
+                $this->load->library('form_validation'); 
                 if($this->form_validation->run() != "FALSE") :                
                     $this->load->model('candidat');                      
                     $this->candidat->update_competences($this->input->post());                   
