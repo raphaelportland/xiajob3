@@ -54,7 +54,7 @@ echo form_close(); ?>
   <button type="button" class="close" data-dismiss="alert">×</button>
   <strong>Rejoignez-nous !</strong><br /><br />
   Vous devez être connecté pour pouvoir poster un commentaire.<br /><br />
-  <?php echo anchor('fleurjob','Se connecter','class="btn btn-primary"'); ?>
+  <?php echo anchor('main','Se connecter','class="btn btn-primary"'); ?>
 </div>
 
 <?php endif; ?>

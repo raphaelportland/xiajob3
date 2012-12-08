@@ -144,3 +144,8 @@ ul.book-infos {
 .book-title i {
 	margin-top: 5px;
 }
+
+.comments-readmore {
+	margin-bottom: 20px;
+	display: block;
+}
