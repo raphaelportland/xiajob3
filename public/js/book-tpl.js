@@ -1,8 +1,18 @@
 $(document).ready(function() {
 	
-	// on ajute la hauteur des commentaires à celle de la topbar
-	$('.black-panel').css({"padding-top":$('#topbar').height() + 20});
-
+	
+function adjust() {
+	
+	// on ajuste la taille du viewport
+	$('html').css({"height":$(window).height()});
+	
+	// on ajuste la hauteur des commentaires à celle de la topbar
+	topbar_height = $('#topbar').height();
+	$('.carousel').css({"margin-top":topbar_height});
+	
+	// on ajuste la taille des photos en fonction de la taille de la fenêtre
+	$('.carousel_pic').css({"height":$(window).height() - topbar_height});	
+}
 	
 
 $('.book-social-comment').tooltip()
@@ -97,5 +107,10 @@ $('.comment-form').live("submit", function(){
 	return false;
 });
 
+$(window).resize(function(e){
+	adjust();
+});
+
+adjust();
 
 }); 

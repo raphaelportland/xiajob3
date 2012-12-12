@@ -32,7 +32,7 @@ endif;
 if(isset($pictures) && $pictures != "") :
 ?>
     
-    <div id="myCarousel-fullscreen" class="carousel ">
+    <div id="myCarousel-fullscreen" class="carousel">
       <!-- Carousel items -->
       <div class="carousel-inner">
          

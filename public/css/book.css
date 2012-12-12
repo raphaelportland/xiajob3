@@ -3,13 +3,7 @@
 html,
 body {
 	background: black;
-	height: 100%;
-}
-
-#footer {
-	margin: 40px 0 0 0;
-	padding: 10px;
-	text-align: center;
+	overflow: none;
 }
 
 #myCarousel {
@@ -20,9 +14,7 @@ body {
 
 
 img.carousel_pic {
-	mmin-width: 100%;
 	margin: 0 auto;
-	height: 100%;
 }
 
 .book-description {
@@ -63,24 +55,21 @@ img.carousel_pic {
 /* BLACK PANEL ET COMMENTAIRES */
 
 .black-panel {
-	display: block; 
-	mbackground-color: black;
+	display: block;
 	background-color: rgba(0, 0, 0, 0.7);
-	-ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B3000000,endColorstr=#B3000000);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B3000000,endColorstr=#B3000000);
-	zoom:1;	
 	position: absolute;
 	width: 250px; 
 	right: 80px;
 	top: 0px; 
 	height: 100%;
 	color: white;
-	padding : 60px 20px 20px 40px;	
+	padding : 20px 20px 20px 40px;	
 	z-index: 500;	
-}
-
-.big-top {
-	padding-top: 100px;
+	
+	/* transparence pour IE */
+	-ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B3000000,endColorstr=#B3000000);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B3000000,endColorstr=#B3000000);
+	zoom:1;		
 }
 
 a.black-panel-close {
