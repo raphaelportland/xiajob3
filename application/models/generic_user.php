@@ -574,7 +574,7 @@ class Generic_user extends Users {
         $this->load->library('tank_auth');
         
         if(!$this->tank_auth->is_logged_in()) : 
-            redirect('fleurjob');
+            redirect('main');
             die;
         else :              
             $profile = $this->profile();
