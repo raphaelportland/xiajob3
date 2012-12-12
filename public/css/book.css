@@ -64,8 +64,11 @@ img.carousel_pic {
 
 .black-panel {
 	display: block; 
-	background-color: black;
+	mbackground-color: black;
 	background-color: rgba(0, 0, 0, 0.7);
+	-ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B3000000,endColorstr=#B3000000);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#B3000000,endColorstr=#B3000000);
+	zoom:1;	
 	position: absolute;
 	width: 250px; 
 	right: 80px;
@@ -74,6 +77,10 @@ img.carousel_pic {
 	color: white;
 	padding : 60px 20px 20px 40px;	
 	z-index: 500;	
+}
+
+.big-top {
+	padding-top: 100px;
 }
 
 a.black-panel-close {

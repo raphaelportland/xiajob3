@@ -1,4 +1,9 @@
 $(document).ready(function() {
+	
+	// on ajute la hauteur des commentaires à celle de la topbar
+	$('.black-panel').css({"padding-top":$('#topbar').height() + 20});
+
+	
 
 $('.book-social-comment').tooltip()
 $('.book-social-share').tooltip()

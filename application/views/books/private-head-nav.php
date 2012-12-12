@@ -1,5 +1,5 @@
   
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div id='topbar' class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
           <div class='container-fluid'>
                 <?php echo anchor('main',' florBooks','class="brand"'); ?>
