@@ -56,6 +56,7 @@ class Social extends CI_Controller
         
         $params = array(
         'with_pictures' => true,
+        'with_fav_count' => true,
         );
         
         foreach ($favs as $key => $book) {
