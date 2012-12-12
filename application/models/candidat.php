@@ -315,8 +315,6 @@ class Candidat extends Generic_user {
             foreach ($result as $key => $skill) {
                 $competences[$skill->skill_id] = $skill;
             }
-            
-            code($competences);
                       
         } else {
             $competences = $this->setup_skills();

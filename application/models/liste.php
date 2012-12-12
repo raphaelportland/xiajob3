@@ -13,8 +13,19 @@ class Liste extends CI_Model {
      *
      */
     function competences() {      
-        $q = $this->db->get('competences');        
-        return $q->result();              
+        $q = $this->db->get('competences');      
+        
+        
+        $result = $q->result();
+        
+        $competences = array();
+        
+        foreach ($result as $key => $comp) {
+            $competences[$comp->id] = $comp; 
+        }
+        
+          
+        return $competences;              
     }
     
     
