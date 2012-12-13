@@ -131,8 +131,26 @@ class Social extends CI_Controller
 
 
     
-    function share_book() {
+    function share_book($book_id) {
         
+        $params = array();
+        
+        $this->load->model('books');
+        $data = $this->books->get_book($book_id,$params);
+        
+        // cover url
+        if(isset($data->cover->pic_url)) : 
+            $data->cover_url = $data->cover->pic_url;
+        else :
+            $data->cover_url = $data->pictures[0]->pic_url;
+        endif;                              
+        
+        $this->config->load('facebook'); 
+        $data->app_id = $this->config->item('facebook_appId');
+        
+        stop_code($data);
+        
+        $this->load->view('social/share_book',$data);
     }
     
     

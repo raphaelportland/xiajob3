@@ -146,6 +146,10 @@ class Book extends CI_Controller
         $data['view'] = "books/my_books";
         $data['books'] = $books;
         
+        $this->config->load('facebook'); 
+        $data['app_id'] = $this->config->item('facebook_appId'); 
+        
+        
         $this->load->view("common/templates/main",$data);              
     }
     

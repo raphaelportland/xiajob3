@@ -1,4 +1,7 @@
-<?php $this->load->view('common/social-share/social-share-scripts'); ?>
+<?php 
+$script_info['app_id'] = $app_id;
+
+$this->load->view('common/social-share/social-share-scripts',$script_info); ?>
 
 <h1>Mes florBooks</h1>
 <br />
@@ -52,21 +55,35 @@
                 <h3>Partager mon book</h3>
               </div>
               <div class="modal-body">
-                <!-- <p>Photo id : <?= $picture->id; ?></p> -->
                 
-                <?php
+                <?php /*
                 $social_share_data['picture_url'] = $book->short_url;
                 $social_share_data['short_url'] = $book->short_url;
                 $social_share_data['picture_description'] = $book->description;
                 $social_share_data['site_url'] = base_url().'index.php/book/view/'.$book->id;
                 $social_share_data['show_pinterest'] = false;
-                ?>
+                */ ?>
                 
-                <?php $this->load->view('common/social-share/social-share.php',$social_share_data); ?>
+                <?php //$this->load->view('common/social-share/social-share.php',$social_share_data); ?>
+                
+                
+                
+                <?php
+                
+                $social_data = array(
+                    'book_id' => $book->id,
+                    'app_id' => $app_id,
+                    'cover_url' => $book->cover->pic_url,
+                    'title' => $book->name,
+                    'short_url' => $book->short_url,
+                    'description' => $book->description,
+                );
+                
+                //code($social_data);
+                
+                $this->load->view('social/share_book_buttons', $social_data); ?>
                 
               </div>
-             <!--<div class="modal-footer">
-              </div>-->
             </div>     
     
     
