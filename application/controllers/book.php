@@ -76,6 +76,8 @@ class Book extends CI_Controller
         );
          
         $data = $this->books->get_book($book_id, $params);
+        $this->config->load('facebook'); 
+        $data->app_id = $this->config->item('facebook_appId');        
 
             $this->load->library('tank_auth');
 
