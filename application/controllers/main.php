@@ -256,14 +256,26 @@ class Main extends CI_Controller
         $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         if($this->input->post('submit')) :
-            $this->candidat->add('xp', $this->input->post());                 
+                $this->load->library('form_validation');                
+                $this->form_validation->set_rules('year_start1', 'L\'année', 'required');   
+                $this->form_validation->set_rules('year_end1', 'L\'année', 'required');
+                     
+                if($this->form_validation->run() != FALSE) :            
+                    $this->candidat->add('xp', $this->input->post());  
+                else :
+                    $flashmessage = "Les dates doivent être renseignées";
+                    $this->session->set_flashdata('error', $flashmessage);    
+                    
+                    $data = $this->input->post();
+                    code($data);
+                    $this->session->set_userdata('failed_xp_input', $data);                                    
+                endif;
+                           
         endif;
         
         redirect("main/edit_profile/1");            
     } 
-    
-    
-    
+ 
     
     
     /**
