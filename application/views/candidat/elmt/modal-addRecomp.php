@@ -1,5 +1,27 @@
 <!-- Fenêtres modales pour l'ajout de nouvelles données -->
 
+<?php
+if($this->session->userdata('failed_input')) :
+    $input = $this->session->userdata('failed_input');
+    $this->session->unset_userdata('failed_input');
+endif;
+
+
+if(isset($input['autre_recomp1'])) :
+    $default_autre_recomp = $input['autre_recomp1'];
+else:
+    $default_autre_recomp = '';
+endif;
+
+if(isset($input['recomp1'])) :
+    $default_recomp_type = $input['recomp1'];
+else :
+    $default_recomp_type = false;
+endif;
+
+
+?>
+
 <div id="addRecomp" class="modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -11,7 +33,7 @@
 $autre_recomp = array(
     'name'  => 'autre_recomp1',
     'id'    => 'autre_recomp1',
-    'value' => set_value('autre_recomp1'),
+    'value' => set_value('autre_recomp1',$default_autre_recomp),
     'placeholder' => 'Précisez',
     'maxlength' => 30,
     'size'  => 30,
@@ -32,7 +54,7 @@ $year_recomp = array(
   <div class="control-group">     
     <label class="control-label" for="recomp1">Récompense</label>
     <div class="controls">
-       <?php echo form_dropdown('recomp1', $recomp_list,'','class="input-xlarge"'); ?>  
+       <?php echo form_dropdown('recomp1', $recomp_list, $default_recomp_type,'class="input-xlarge"'); ?>  
     </div>
   </div>
   

@@ -184,8 +184,14 @@ $photographe_status = array(
 
 
 echo form_open('main/edit_profile/0','class="form"'); ?>
+ 
+<div class='well muted'>
+<strong>Information sur la confidentialité</strong><br />
+Les informations personnelles sont privées et n’apparaissent pas en public à l’exception de :<br />
+votre pseudo (ou prenom, ou racine de votre adresse email à défaut), votre statut professionnel, votre âge et votre pays d’origine.
+</div>
 
-<div class='row-fluid'>
+<div class='row-fluid'>    
     <div class='span6'>
 <?php 
 echo("<div class='control-group'>");
@@ -209,13 +215,11 @@ echo "<span class='help-block'>jj/mm/aaaa</span>";
 echo("</div>"); ?>
 
 
-
 <?php
 echo("<div class='control-group'>");
 echo form_label('N° de téléphone', 'mobile', 'class="control-label"');
 echo form_input($mobile);
 echo("</div>"); ?>    
-
 
 
 <div class='control-group'>
@@ -242,11 +246,8 @@ echo("</div>"); ?>
     Photographe
 </label>
 
-
 </div>
 
-
-    
     </div> 
     
     <div class='span6'>
@@ -273,8 +274,5 @@ echo("</div>"); ?>
 <?php echo form_close(); ?>
 </div>
 
-
-<div class='well muted'><strong>Information sur la confidentialité</strong><br />Les informations personnelles sont privées et n’apparaissent pas en public à l’exception de :<br />
-votre pseudo (ou prenom, ou racine de votre adresse email à défaut), votre statut professionnel, votre âge et votre pays d’origine.</div>
 
 

@@ -425,14 +425,14 @@ class Generic_user extends Users {
             $user = $q->row();
             
             $this->user_id = $user->id;            
-            $username = $this->get_username();
+            $username = $this->get_username($user->id);
             
             // on vérifie s'il a accepté les CGU
             if($user->optin_cgu != 1) {
                 // si ce n'est pas le cas on le redirige vers les CGU
                 $secret_session = serialize(array(
                     'user_id' => $user->id,
-                    'user_name' => $this->get_username(),
+                    'user_name' => $username,
                     'status' => '1',
                 ));
                     
@@ -443,7 +443,7 @@ class Generic_user extends Users {
             // on met l'utilisateur en session
             $this->session->set_userdata(array(
                     'user_id'   => $user->id,
-                    'username'  => $this->get_username(),
+                    'username'  => $username,
                     'status'    => '1',
             )); 
             
