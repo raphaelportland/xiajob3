@@ -1,5 +1,47 @@
 <!-- Fenêtres modales pour l'ajout de nouvelles données -->
 
+
+<?php
+if($this->session->userdata('failed_diplome_input')) :
+    $diplome_input = $this->session->userdata('failed_diplome_input');
+    $this->session->unset_userdata('failed_diplome_input');
+endif;
+
+
+if(isset($diplome_input['custom_formation'])) :
+    $default_custom_formation = $diplome_input['custom_formation'];
+else:
+    $default_custom_formation = '';
+endif;
+
+
+if(isset($diplome_input['custom_diplome'])) :
+    $default_custom_diplome = $diplome_input['custom_diplome'];
+else:
+    $default_custom_diplome = '';
+endif;
+
+
+if(isset($diplome_input['formation'])) :
+    $default_formation = $diplome_input['formation'];
+else :
+    $default_formation = false;
+endif;
+
+if(isset($diplome_input['diplome'])) :
+    $default_diplome = $diplome_input['diplome'];
+else :
+    $default_diplome = false;
+endif;
+
+
+
+
+?>
+
+
+
+
 <div id="addDiplome" class="modal hide fade">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -20,7 +62,7 @@ $year_diplome = array(
 $custom_formation = array(
     'name'  => 'custom_formation',
     'id'    => 'custom_formation',
-    'value' => set_value('custom_formation'),
+    'value' => set_value('custom_formation',$default_custom_formation),
     'placeholder' => 'Autre formation : précisez',
     'maxlength' => 150,
     'size'  => 150,
@@ -30,7 +72,7 @@ $custom_formation = array(
 $custom_diplome = array(
     'name'  => 'custom_diplome',
     'id'    => 'custom_diplome',
-    'value' => set_value('custom_diplome'),
+    'value' => set_value('custom_diplome',$default_custom_diplome),
     'placeholder' => 'Autre diplôme : précisez',
     'maxlength' => 30,
     'size'  => 30,
@@ -49,7 +91,7 @@ $custom_diplome = array(
   <div class="control-group">
     <label class="control-label" for="autre_recomp1">Ecole</label>
     <div class="controls">
-       <?php echo form_dropdown('formation', $formation_list,'','class="input-xlarge"'); ?>
+       <?php echo form_dropdown('formation', $formation_list, $default_formation, 'class="input-xlarge"'); ?>
     </div>
   </div>
 
@@ -63,7 +105,7 @@ $custom_diplome = array(
   <div class="control-group">
     <label class="control-label" for="autre_recomp1">Diplôme</label>
     <div class="controls">
-       <?php echo form_dropdown('diplome', $diplome_list,'','class="input-xlarge"'); ?>
+       <?php echo form_dropdown('diplome', $diplome_list, $default_diplome, 'class="input-xlarge"'); ?>
     </div>
   </div>
 
