@@ -413,7 +413,7 @@ class Generic_user extends Users {
      */
     function facebook_log_in($facebook_user) {
         
-        // on récupère l'id fleurjob de l'utilisateur
+        // on récupère l'id de l'utilisateur
         $q = $this->db->select('users.facebook_id, users.id, user_data.optin_cgu')
                 ->from('users')
                 ->join('user_data', 'users.id = user_data.user_id')
@@ -437,7 +437,7 @@ class Generic_user extends Users {
                 ));
                     
                 $this->session->set_userdata('secret_session',$secret_session);
-                redirect('fleurjob/cgu');
+                redirect('pages/cgu');
             }          
             
             // on met l'utilisateur en session
@@ -476,7 +476,7 @@ class Generic_user extends Users {
         $infos['user_id'],
         $this->config->item('login_record_ip', 'tank_auth'),
         $this->config->item('login_record_time', 'tank_auth'));
-        redirect('fleurjob');        
+        redirect('main');        
     }    
     
     
@@ -580,7 +580,7 @@ class Generic_user extends Users {
             $profile = $this->profile();
             $this->profile = $profile;
             
-            if(($expected_profile != null) && ($profile != $expected_profile)) : redirect('fleurjob');
+            if(($expected_profile != null) && ($profile != $expected_profile)) : redirect('main');
             die;
             endif;
         endif;

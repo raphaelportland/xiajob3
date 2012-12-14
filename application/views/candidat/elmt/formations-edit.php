@@ -28,7 +28,7 @@ $custom_diplome = array(
     'size'  => 30,
 );  
 ?>
-<?php echo form_open('fleurjob/edit/formations/'.$data->id,'class="form-horizontal"'); ?>    
+<?php echo form_open('main/edit/formations/'.$data->id,'class="form-horizontal"'); ?>    
 <div class="modal-body">
       
   

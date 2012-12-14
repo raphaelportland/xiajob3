@@ -7,9 +7,9 @@
         <meta property="og:url" content="<?= $short_url; ?>" />
 <?php 
 if(isset($cover->pic_url)) : 
-    $cover_url = $cover->pic_url;
+    $cover_url = base_url().$cover->pic_url;
 else :
-    $cover_url = $pictures[0]->pic_url;
+    $cover_url = base_url().$pictures[0]->pic_url;
 endif;                        
 ?>
         <meta property="og:image" content="<?= $cover_url; ?>" />

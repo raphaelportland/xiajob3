@@ -37,7 +37,7 @@ $custom_diplome = array(
 );  
 ?>
       
-<?php echo form_open('fleurjob/add_diplome','class="form-horizontal"'); ?>      
+<?php echo form_open('main/add_diplome','class="form-horizontal"'); ?>      
       
   <div class="control-group">     
     <label class="control-label" for="recomp1">Année du diplôme</label>

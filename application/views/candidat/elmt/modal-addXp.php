@@ -36,7 +36,7 @@ $year_end1 = array(
 
 ?>
       
-<?php echo form_open('fleurjob/add_xp','class="form-horizontal"'); ?>      
+<?php echo form_open('main/add_xp','class="form-horizontal"'); ?>      
 
       
   <div class="control-group">     

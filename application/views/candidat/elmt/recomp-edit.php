@@ -18,7 +18,7 @@ $year_recomp = array(
     'size'  => 4,     
 );
 ?>
-<?php echo form_open('fleurjob/edit/recomp/'.$data->id,'class="form-horizontal"'); ?> 
+<?php echo form_open('main/edit/recomp/'.$data->id,'class="form-horizontal"'); ?> 
   <div class="modal-body">      
      
     

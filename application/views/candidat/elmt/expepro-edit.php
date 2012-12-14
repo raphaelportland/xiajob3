@@ -28,7 +28,7 @@ $year_end1 = array(
 
 ?>
       
-<?php echo form_open('fleurjob/edit/expepro/'.$data->id,'class="form-horizontal"'); ?>      
+<?php echo form_open('main/edit/expepro/'.$data->id,'class="form-horizontal"'); ?>      
 <br />
       
   <div class="control-group">     

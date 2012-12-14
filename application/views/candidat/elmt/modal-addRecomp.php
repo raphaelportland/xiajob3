@@ -27,7 +27,7 @@ $year_recomp = array(
 );
 ?>
       
-<?php echo form_open('fleurjob/add_recomp','class="form-horizontal"'); ?>      
+<?php echo form_open('main/add_recomp','class="form-horizontal"'); ?>      
       
   <div class="control-group">     
     <label class="control-label" for="recomp1">Récompense</label>
