@@ -72,7 +72,7 @@ class Main extends CI_Controller
         $data['user'] = $this->generic_user->get_user($params);;     
         $data['view'] = "candidat/dashboard";
         $data['pass_data'] = true;
-        $this->load->view("common/templates/main",$data);
+        $this->load->view("common/templates/main-fixed",$data);
     }       
 
 

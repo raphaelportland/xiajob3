@@ -19,11 +19,17 @@ if($this->session->userdata('user_id')) {
 <?php //$this->load->view('common/search-annonces'); ?>
 
  
-<div class='row'> 
+<!--<div class='row'> -->
  
-<?php $this->load->view($view); ?>
+<?php 
+if(isset($pass_data) && isset($data)) :
+    $this->load->view($view, $data);
+else :
+    $this->load->view($view);
+endif; 
+?>
 
-</div>
+<!--</div>-->
 
 </div>
 

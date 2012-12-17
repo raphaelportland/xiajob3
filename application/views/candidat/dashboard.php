@@ -1,5 +1,5 @@
 <br />
-<p class='lead'>Mon Espace</p>
+<h2>Mon Espace</h2>
 
 
 <?php
@@ -8,23 +8,20 @@ if($user->options->profile_step != 'finished') {
 }
 ?>
 
-
-
-<div class='row-fluid'>
-    <div class='span3'>
         <!-- User -->
         <h3><?= $user->username; ?></h3>
         <?= anchor('main/edit_profile','<i class="icon icon-white icon-user"></i> Modifier mon profil','class="btn btn-primary"'); ?>
         
         <br /><br />
-        <p class='muted'>Membre depuis le <?= date("d F Y", $user->member_since); ?></p>
-    </div>
+        <p class='muted'>Membre depuis le <?= date("d F Y", $user->member_since); ?></p>   
     
-    
-    <div class='span9'>
+   
         <!-- Skills -->
         <?php echo anchor('main/edit_profile/2','<h3>Compétences</h3>'); ?>
-        <div class='span4'>
+    <div class='row'>     
+        
+
+        <div class='span6'>
             <table class='table'>
 
                     <?php for ($j=1; $j < 6; $j++) :
@@ -32,7 +29,7 @@ if($user->options->profile_step != 'finished') {
                         $competence = $user->resume->skills[$j]; 
                         $score = $competence->score;
                         
-                        echo("<tr><td><p><small>".$comp_list[$j]->nom."</small></p></td><td>");  
+                        echo("<tr><td><p>".$comp_list[$j]->nom."</p></td><td>");  
                         
                         for ($i=0; $i < 4; $i++) {
                             if($score > 1) : ?>
@@ -46,14 +43,14 @@ if($user->options->profile_step != 'finished') {
                     endfor;?>
             </table>                        
         </div>
-        <div class='span4'>
+        <div class='span6'>
             <table class='table'>
                     <?php for ($j=6; $j < 11; $j++) :
                         
                         $competence = $user->resume->skills[$j]; 
                         $score = $competence->score;
                         
-                        echo("<tr><td><p><small>".$comp_list[$j]->nom."</small></p></td><td>");  
+                        echo("<tr><td><p>".$comp_list[$j]->nom."</p></td><td>");  
                         
                         for ($i=0; $i < 4; $i++) {
                             if($score > 1) : ?>
@@ -67,13 +64,11 @@ if($user->options->profile_step != 'finished') {
                     endfor;?>
             </table>             
         </div>
+    </div>
 
-    </div>    
-</div>
-
-<div class='row-fluid'>
-    <div class='span6'>
-        <?php echo anchor('book/my_books','<h3>Mes florBooks ('.count($user->books).')</h3>'); ?>
+    <?php echo anchor('book/my_books','<h3>Mes florBooks ('.count($user->books).')</h3>'); ?>
+    <div class='row'>
+        <div class='span12'>
         <table class='table'>
             <tr><th>Nom</th><th><i class='icon icon-star'></i> (Favoris)</th></tr>
         <?php
@@ -85,11 +80,12 @@ if($user->options->profile_step != 'finished') {
         }
         ?>
         </table>
+        </div>
     </div>
-    
-    <div class='span6'>
-        <?= anchor('social/favorites','<h3>Favoris</h3>'); ?>
-
+        
+    <?= anchor('social/favorites','<h3>Favoris</h3>'); ?>        
+    <div class='row'>
+        <div class='span12'>
         <?php         
         if(!isset($user->favorites)) :
             echo "<p>Vous n'avez pas de florBooks favoris pour le moment</p>";
@@ -99,7 +95,6 @@ if($user->options->profile_step != 'finished') {
         else :
             echo "<p>Vous avez ".count($user->favorites)." floBooks favoris.</p>";
         endif;        
-        ?>   
-    </div>       
-    
-</div>
+        ?>
+        </div>        
+    </div>
