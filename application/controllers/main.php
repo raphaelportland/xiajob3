@@ -176,7 +176,7 @@ class Main extends CI_Controller
         $data['rubrique'] = $rubrique;       
         $data['view'] = "candidat/profile/profile"; // mini-template pour les différents onglets du profil
         
-        $this->load->view("common/templates/main",$data);
+        $this->load->view("common/templates/main-fixed",$data);
     }
 
 

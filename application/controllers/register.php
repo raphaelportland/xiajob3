@@ -273,7 +273,7 @@ class Register extends CI_Controller
      */
     function unregister() {
        $data['view'] = 'candidat/unregister';
-       $this->load->view('common/templates/main', $data);
+       $this->load->view('common/templates/main-fixed', $data);
     }
     
     function unregister_confirm() {        
