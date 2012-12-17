@@ -108,6 +108,44 @@ class Book extends CI_Controller
     }   
 
 
+    /**
+     * Visionneuse de photos
+     */
+    function view_pic($pic_id) {
+            
+        $this->load->model('picture_model','picture');
+        
+        $params = array(
+        'with_comments' => TRUE,
+        'with_flowers' => TRUE,
+        'with_book_info' => TRUE,
+        'with_owner' => true,
+        'with_fav_count' => true,          
+        );
+        
+        $data = $this->picture->get_pic($pic_id, $params);
+        
+
+        
+        $this->config->load('facebook'); 
+        $data->app_id = $this->config->item('facebook_appId');   
+        
+        $data->logged_in = false;
+        $this->load->library('tank_auth');
+        if($this->tank_auth->is_logged_in()) { // l'utilisateur est loggué        
+            $data->logged_in = true;
+        }        
+        
+        
+
+        $this->load->view('books/templates/pic_tpl', $data);
+        
+    }
+
+
+
+
+
     function search() {
         if($this->input->post('submit')) :
             // des données ont été reçues

@@ -10,82 +10,18 @@
  * @author Raphaël Malaizé
  */
 class Books extends CI_Model {
- 
- 
-    /**
-     * Identifiant du book
-     * @var int $id
-     */
-    //public $id;
-    
-    /**
-     * Titre du book
-     * @var string $name
-     */
-    //public $name;
-    
-    /**
-     * Description du book
-     * @var string $description
-     */
-    //public $description;
-    
-    /**
-     * Adresse bitly du book
-     * @var string $short_url
-     */
-    //public $short_url;
-    
-    /**
-     * Occasion du book (mariage, autre)
-     * @var object $occasion
-     */
-    //public $occasion;
-    
-    /**
-     * Propriétaire du book
-     * @var object $owner
-     */
-    //public $owner;    
-    
-    /**
-     * Tableau des photos du book
-     * @var array $pictures
-     */
-    //public $pictures;
-    
-    
-    
-      
-    
-    
-    
-    /**
-     * Pas utilisés
-     * @deprecated
-     */
-    //public $order;
-    
-    /**
-     * @deprecated
-     */ 
-    //public $private_key;        
-
 
     // la langue à utiliser, notamment pour les fleurs
     private $lang;
     
- 
- 
+
     /**
-     * Librairie de books, 
-     * 
-     * utilisée quand on sort une collection de books
-     * contient d'autres attributs (latest, featured...)
-     * 
-     * @var array $books
-     */   
-    //public $books;
+     * Getters et Setters
+     */     
+        
+    function set_lang($lang) { $this->lang = $lang; }
+
+    
     
     
     /**
@@ -103,29 +39,11 @@ class Books extends CI_Model {
             $this->owner = $owner;
         } 
         
-        //$this->owner = new stdClass();
-        //$this->books = new stdClass();
-        //$this->data = new stdClass();
-        //$this->temp = new stdClass();
-        //$this->occasion = new stdClass();
     } 
    
     
 
-    /**
-     * Getters et Setters
-     */    
 
-    //function set_owner($user_id) { $this->owner->id = $user_id; }    
-    //function get_owner() { return $this->owner; }  
-        
-    function set_lang($lang) { $this->lang = $lang; }
-
-    
-   
-   
-   
-    
     
      
     
@@ -217,7 +135,12 @@ class Books extends CI_Model {
     
     
     
-    
+    /**
+     * Récupère les books populaires 
+     * sur la base des favoris obtenus
+     * @param int $limit
+     * @return object
+     */
     function get_popular($limit = null) {
         
         $this->db
@@ -258,34 +181,6 @@ class Books extends CI_Model {
         
         
     }
-    
-    
-    
-    
-    
-    
-    /**
-     * Ajoute les miniatures aux books chargés
-     * 
-     */
-     /*
-    function prepare_thumbs() {
-        
-        // Pour les books plus récents
-        foreach ($this->data->latest as $key => $book) {
-            $q = $this->db
-                    ->where('book_id', $book->id)
-                    ->limit(1)
-                    ->get('book_pics');
-                    
-            $book->cover = $q->row();
-        }
-        
-    } */   
- 
- 
-
-    
     
     
     /**
@@ -367,30 +262,7 @@ class Books extends CI_Model {
             return false;
         endif;
     }
-    
-    
-    
-    
-    /**
-     * Récupère l'adresse de la miniature de l'image
-     * 
-     */
-     /*
-    function get_pic_thumb($pic_id) {
-        $q = $this->db
-        ->select('th_url')
-        ->where('id', $pic_id)
-        ->get('book_pics');
-        
-        if($q->num_rows() > 0){
-            return $q->row()->th_url;
-        } else {
-            return false;
-        }
-    }*/
-    
-    
-    
+
     
     
     /**
@@ -531,191 +403,6 @@ class Books extends CI_Model {
         return $book_id;
         
     }
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * Charge un book par son id
-     * nécessite d'être un book de l'utilisateur
-     * 
-     * @param int
-     * 
-     * @return object
-     * 
-     */
-     /*
-    function load($book_id) {
-       $q = $this->db
-            ->select('*, user_book.id as book_id, occasions.id as occasion_id')
-            ->where('user_book.id',$book_id)
-            ->where('user_id',$this->owner)
-            ->from('user_book')
-            ->join('occasions', 'occasions.id = user_book.id_occasion')
-            ->get();
-            
-       // l'objet book
-       $book = new stdClass();     
-            
-       // les données brutes
-       $book = $q->row();     
-       $this->books = $book;
-       
-       // les informations sur le propriétaire
-       $book->owner->fullname = $this->get_owner_fullname();
-       $this->books->owner_fullname = $book->owner->fullname;
-       
-       // les photos
-       $book->pictures = $this->get_pictures($book_id);
-       $this->books->pictures = $book->pictures;        
-       
-       return $book;
-    }*/
-    
-    
-    
-    
-    
-    
-    /**
-     * Charge un book par son id
-     * 
-     * @param int
-     * @param bool
-     * 
-     * @return object
-     * 
-     */ 
-     /*   
-    function get_book_by_id($book_id, $comments = false) {
-       $q = $this->db
-            ->select('*, occasions.id as id_occasion, user_book.id as book_id, user_book.name as book_name')
-            ->from('user_book')
-            ->join('occasions', 'occasions.id = user_book.id_occasion')
-            ->where('user_book.id', $book_id)
-            ->get();
-             
-       if($q->num_rows() == 0) {
-           return false;
-       }
-       
-       $this_book = new stdClass();
-       $this_book->occasion = new stdClass();
-       
-       $book = $q->row();
-       
-       $this_book->id = $book->book_id;
-   
-       $this_book->occasion->name = $book->occasion_name;
-
-       $this_book->occasion->id = $book->id_occasion;
-       
-       $this_book->name = $book->name;
-       
-       $this_book->description = $book->description;
-       
-       $this_book->short_url = $book->short_url;
-       
-       // les informations sur le propriétaire
-       $this->get_owner_by_id($book->user_id);
-       
-       // les photos
-       $this_book->pictures = $this->get_pictures($book_id, $comments);      
-       
-       return $this_book;
-    }*/
-
-
-    /**
-     * Récupère les infos de base sur le propriétaire du book
-     */
-     /*
-    function get_owner_by_id($user_id) {
-        
-        $this->load->model('generic_user');
-        
-        $this->owner = $this->generic_user->get_user_basic_infos();
-         
-    }*/
-    
-    
-    
-    
-    
-    
-    
-
-/*
-    function get_owner_fullname() {
-        $q = $this->db
-                ->where('user_id',$this->owner->id)
-                ->get('user_options');
-                
-        $options = new stdClass();                
-        foreach ($q->result() as $key => $option) {
-            
-            // on retire les éventuel "-" pour faire des variables ok
-            $name = str_replace('-','',$option->option);
-            
-            $options->$name = $option->value;;
-        } 
-        
-        $prenom = 'John';
-        $nom = 'Doe - Anonyme';
-        
-        if(isset($options->prenom)) { $prenom = $options->prenom; }
-        if(isset($options->nom)) { $nom = $options->nom; }                       
-             
-        $fullname = $prenom.' '.$nom;
-        
-        $this->owner_fullname = $fullname;
-        
-        return($fullname);             
-            
-        //$this->books->owner_fullname = $q->result()->option->prenom;        
-    }
- */   
-    
-    
-    
-    
-    
-    
-    /**
-     * Charge tous les books
-     */
-     /*
-    function all_books($comments = false) {
-        $q = $this->db
-                ->where('user_id',$this->owner->id)
-                ->get('user_book');
-                
-                
-        if($q->num_rows() > 0) :
-            
-            foreach ($q->result() as $key => $book) {
-                
-                $this->books->book_list[] = $this->get_book_by_id($book->id, $comments);
-                
-            }
-            
-        else :
-            return false;            
-        endif;                
-                
-        return $this->books->book_list;
-    }
-    */
-    
-    
-    
-    
-    
-    
-    
     
     
     /**
@@ -882,34 +569,7 @@ class Books extends CI_Model {
     }
     
     
-    
-    /**
-     * Renvoie le lien privé d'accès au book
-     * 
-     */
-     /*
-    function get_private_key($book_id) {
 
-        $q = $this->db
-                ->select('private_key')
-                ->from('user_book')
-                ->where('user_id', $this->owner)
-                ->where('id',$book_id)
-                ->get();
-                
-        $infos = new stdClass();                
-                            
-        if($q->num_rows() > 0) {
-            $infos->success = true;
-            $infos->private_link = base_url().'index.php/book/view/'.$book_id.'/'.$q->row()->private_key;
-        } else {
-            $infos->success = false;
-        }               
-       
-        return $infos;
-       
-    }*/
-    
     
     
     /**
@@ -945,22 +605,7 @@ class Books extends CI_Model {
     
     
     
-    
-    /**
-     * Renvoie l'id du book contenant la photo indiquée
-     * 
-     */
-     /*
-    function parent_book($picture_id) {
-        $q = $this->db
-                ->select('user_book.id')
-                ->from('user_book')
-                ->join('book_pics', 'book_pics.book_id = user_book.id')
-                ->where('book_pics.id',$picture_id)
-                ->get();
-                
-        return $q->row()->id;
-    }*/
+
     
     
     
@@ -1010,28 +655,7 @@ class Books extends CI_Model {
         
     }
     
-    /**
-     * Renvoie les urls des images et des miniatures
-     * pour un book donné
-     * @param int $book_id
-     * @return object
-     */
-     /*
-    function get_book_pictures_urls($book_id) {
-        // on récupère les photos pour les effacer du disque
-        $q = $this->db->select('id, pic_url, th_url')
-        ->from('book_pics')
-        ->where('book_id', $book_id)
-        ->get();
-        
-        if($q->num_rows() > 0) {
-            return $q->result();
-        } else {
-            return null;
-        }
-    }    
-    */
-    
+
     
     
     
@@ -1085,9 +709,6 @@ class Books extends CI_Model {
        
        
        $q = $this->db->get();
-       
-       //code($q->result());
-            
                    
              
        if($q->num_rows() == 0) {
@@ -1095,7 +716,6 @@ class Books extends CI_Model {
        }       
        
        $book = $q->row();  
-       //code($book);  
        
        // les informations sur le propriétaire
        if(isset($with_owner)) {

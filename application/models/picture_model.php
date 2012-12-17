@@ -56,6 +56,65 @@ class Picture_model extends CI_Model {
        return $pics;
     }
     
+    /**
+     * Récupère une photo et les paramètres associés
+     * (fleurs, commentaires...)
+     * @param int $pic_id
+     * @param array $params
+     * @return object
+     */
+    function get_pic($pic_id, $params = null) {
+        
+        if(isset($params)) {
+            extract($params);
+        }
+        
+        $data = new stdClass();
+        
+        // les infos sur la photo
+        $this->db
+        ->select('*')
+        ->from('book_pics')
+        ->where('book_pics.id', $pic_id);
+        
+        $q = $this->db->get();
+        $data->picture = $q->row();
+        
+        
+        // les infos sur le book
+        if(isset($with_book_info)) :
+            
+            $q = $this->db->where('id',$data->picture->book_id)->get('user_book');
+            $data->book = $q->row();
+            
+            // les informations sur le propriétaire
+            if(isset($with_owner)) {
+               $user_params = array(
+               'user_id' => $data->book->user_id,
+               );
+               
+               $this->load->model('generic_user');
+               $data->owner = $this->generic_user->get_user_basic_infos($user_params);
+            }  
+            
+           // on ajoute les fleurs si nécessaire
+           if(isset($with_flowers)) {
+               $this->load->model('books');
+               $data->flower_data = $this->books->get_pic_flowers($pic_id);
+           }
+           
+           // on ajoute les commentaires si nécessaire     
+           if(isset($with_comments)) {
+               $this->load->model('comments_model');
+               $data->comments = $this->comments_model->get_pic_comments($pic_id);
+           }
+            
+        endif;
+        
+        return $data;
+        
+    }
+    
         
     
 }
