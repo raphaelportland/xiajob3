@@ -87,6 +87,12 @@ class MY_Image_lib extends CI_Image_lib {
         $this->width = $this->user_width;
         $this->height = $this->user_height;
         
+        
+        // calcul du ratio pour donner la dimension dominante
+        $ratio = $this->orig_width / $this->orig_height; 
+        $this->master_dim = ($ratio > 1) ? 'width' : 'height';
+        
+        
         // we will calculate the sizes ourselves
         $this->maintain_ratio = FALSE;
         
@@ -94,6 +100,7 @@ class MY_Image_lib extends CI_Image_lib {
         // mode 1: auto-scale the image to fit 1 dimension
         // ------------------------------------------------------------------------------------------
         if ($this->user_width == 0 || $this->user_height == 0) {
+            
             // calculate missing dimension
             if ($this->user_width == 0) {
                 $this->width = ceil($this->user_height * $this->orig_width / $this->orig_height);
@@ -108,9 +115,10 @@ class MY_Image_lib extends CI_Image_lib {
         // ------------------------------------------------------------------------------------------
         // mode 2: resize and crop the image to fit both dimensions
         // ------------------------------------------------------------------------------------------
+        
         $this->width = ceil($this->user_height * $this->orig_width / $this->orig_height);
         $this->height = ceil($this->user_width * $this->orig_height / $this->orig_width);
-        
+
         if (($this->user_width != $this->width) && ($this->user_height != $this->height)) {
             if ($this->master_dim == 'height') {
                 $this->width = $this->user_width;

@@ -91,7 +91,7 @@ class Upload extends CI_Controller {
             
             
             // Miniature   
-            $config['new_image'] = $this->config->item('thumb_folder');               
+            $config['new_image'] = $this->config->item('thumb_folder');           
             $config['width'] = $this->config->item('thumb_square_size');
             $config['height'] = $this->config->item('thumb_square_size');  
 
