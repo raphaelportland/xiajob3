@@ -16,9 +16,9 @@
 |
 */
 
-$config["image_sizes"]["square"] = array(100, 100);
+$config["image_sizes"]["square"] = array(220, 220);
 $config["image_sizes"]["long"]   = array(280, 600);
-$config["image_sizes"]["wide"]   = array(600, 200);
+$config["image_sizes"]["wide"]   = array(1024, 768);
 $config["image_sizes"]["hero"]   = array(940, 320);
 
 $config["image_sizes"]["small"]  = array(280, 0);

@@ -38,74 +38,98 @@ class Upload extends CI_Controller {
 
 // Function called by the form
   public function upload_img() {
-      
-      // on charge le modèle books
-      $this->load->model('books');
-
-
-
-
+             
+    // on charge la configuration pour les tailles et les dossiers
+    $this->config->load('img_folders');      
 
         //Format the name
+        /*
         $name = $_FILES['userfile']['name'];
         $name = strtr($name, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
 
         // replace characters other than letters, numbers and . by _
-        $name = preg_replace('/([^.a-z0-9]+)/i', '_', $name);
+        $name = preg_replace('/([^.a-z0-9]+)/i', '_', $name);*/
+        
+        $name = $_FILES['userfile']['name'];
+        do {
+            $nom_unique = md5($name . microtime() . mt_rand());
+        } while( file_exists($this->config->item('original_folder').'/'.$name) == true );        
 
         //Your upload directory, see CI user guide
         $config['upload_path'] = $this->getPath_img_upload_folder(); 
         $config['allowed_types'] = 'gif|jpg|png|JPG|GIF|PNG';
         $config['max_size'] = '8000';
-        $config['file_name'] = $name;
+        $config['file_name'] = $nom_unique;
 
        //Load the upload library
         $this->load->library('upload', $config);
        if ($this->do_upload()) {
-            
+           
             // Codeigniter Upload class alters name automatically (e.g. periods are escaped with an
             //underscore) - so use the altered name for thumbnail
             $data = $this->upload->data();
+
+            // nommage unique des fichiers
             $name = $data['file_name'];  
-            
                  
             //$config['image_library'] = 'gd2';
             $config['source_image'] = $this->getPath_img_upload_folder() . $name;
 
-            //Resize
-            $config['new_image'] = $this->getPath_img_upload_folder();            
-            $config['maintain_ratio'] = TRUE;
-            //$config['create_thumb'] = FALSE;             
-            $config['width'] = 800;
-            $config['height'] = 600;  
             
+            
+            // Image taille normale   
+            $config['new_image'] = $this->config->item('img_folder');               
+            $config['maintain_ratio'] = true;
+            $config['create_thumb'] = false;
+            $config['width'] = $this->config->item('img_width');
+            $config['height'] = $this->config->item('img_height');  
+
             $this->load->library('image_lib', $config);
-            $this->image_lib->resize();
+            $this->image_lib->resize();            
+            
             
             
             
             // Miniature   
-            $config['new_image'] = $this->getPath_img_thumb_upload_folder();               
-            $config['width'] = 220;
-            $config['height'] = 220;  
+            $config['new_image'] = $this->config->item('thumb_folder');               
+            $config['width'] = $this->config->item('thumb_square_size');
+            $config['height'] = $this->config->item('thumb_square_size');  
 
-            $this->load->library('image_lib', $config);
+            $this->image_lib->initialize($config); 
             $this->image_lib->fit();
+            
+            
+            
+            
+            
+            // Suppression de l'original (selon paramètre de la config)
+            if(!$this->config->item('keep_original_image')) {
+                $original = $this->config->item('original_folder').'/'.$name;
+                if(file_exists($original)) unlink($original);
+            }
+            
+       
+       
             
             //Get info 
             $info = new stdClass();
-            
             $info->name = $name;
             $info->size = $data['file_size'];
             $info->type = $data['file_type'];
-            $info->url = $this->getPath_img_upload_folder() . $name;
+            $info->url = $this->config->item('img_folder') . $name;
             $info->thumbnail_url = $this->getPath_img_thumb_upload_folder() . $name; //I set this to original file since I did not create thumbs.  change to thumbnail directory if you do = $upload_path_url .'/thumbs' .$name
             $info->delete_url = $this->getDelete_img_url() . $name;
             $info->delete_type = 'POST';
             $info->book = $this->input->post('book_id');
-            
+      
+      
+      
+      
+      
+            // on charge le modèle books pour enregistrer l'image en BDD
+            // l'enregistrement en base utilise : $info->name, $info->url, $info->thumbnail_url, $info->book            
+            $this->load->model('books');
             $this->books->import_img($info);
-
 
 
 

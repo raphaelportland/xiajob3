@@ -112,6 +112,13 @@ class Temp extends CI_Controller
         $this->db->insert('competences', array('nom' => "Vente & Conseil Clientèle"));
         
     } 
+
+
+    function test_loads() {
+        $this->config->load('img_folders');
+        code($this->config->item('img_folder'));
+        code($img_folder);
+    }
     
     
 } 

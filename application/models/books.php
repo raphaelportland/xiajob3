@@ -537,13 +537,11 @@ class Books extends CI_Model {
         'th_url' => $image->thumbnail_url,
         );
         
-        
-        $has_cover = $this->has_cover($image->book);
-        
         $this->db->insert('book_pics',$import);
         $new_pic_id = $this->db->insert_id();
         
-        if(!$has_cover) $this->update_cover_pic($image->book, $new_pic_id);
+        // si le book n'a pas de couverture, on utilise l'image qui vient d'être chargée
+        if(!$this->has_cover($image->book)) $this->update_cover_pic($image->book, $new_pic_id);
     }
     
     
