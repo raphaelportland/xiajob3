@@ -1,53 +1,53 @@
-    <!-- The file upload form used as target for the file upload widget -->
-    <form id="fileupload" action="<?php echo base_url(); ?>index.php/upload/upload_img" method="POST" enctype="multipart/form-data">  
-        <?php //stop_code($book); ?>
-        
-        
-        <?php echo form_hidden('book_id',$book->id)?>
-        
-        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-        <div class="row-fluid fileupload-buttonbar">
+<!-- The file upload form used as target for the file upload widget -->
+<form id="fileupload" action="<?php echo base_url(); ?>index.php/upload/upload_img" method="POST" enctype="multipart/form-data">   
 
-                <!-- The fileinput-button span is used to style the file input field as button -->
-                
-                <?php if(count($book->pictures) < 10) : ?>
-                
-<div class='alert alert-info'>
-    <strong>Attention</strong>
-    Pour des books de qualité, merci de vous limiter à 10 photos maximum par book.
-</div><div class="span7">
+    <?php 
+    // L'ID DU BOOK POUR LE TRAITEMENT
+    echo form_hidden('book_id',$book->id)?>
+        
+    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="row-fluid fileupload-buttonbar">
+
+
+
+
        
-                <span class="btn btn-success fileinput-button">
-                    <i class="icon-plus icon-white"></i>
-                    <span>Choisir des photos...</span>
-                    <input type="file" name="userfile" multiple>
-                </span>
-                
-                <?php else : ?>
+    <?php 
+    // TESTE LE NOMBRE DE PHOTO POUR AFFICHER L'ALERTE CORRESPONDANTE
+    // ET ACTIVER OU NON LE BOUTON AJOUT
+    
+    if(($book->pic_nb) < 10) : ?>
+    
+        <div class='alert alert-info'>
+            <strong>Attention</strong>
+            Pour des books de qualité, merci de vous limiter à 10 photos maximum par book.
+        </div><div class="span7">
+       
+        <span class="btn btn-success fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span>Choisir des photos...</span>
+            <input type="file" name="userfile" multiple>
+        </span>
+    
+    <?php else : ?>
                     
-<div class='alert alert-danger'>
-    <strong>Trop d'images ! </strong>
-    Vous devez d'abord supprimer certaines photos pour pouvoir en rajouter : <?php echo anchor('book/edit/'.$book->id, 'Modifier votre book'); ?>
-</div><div class="span7">                    
+        <div class='alert alert-danger'>
+            <strong>Trop d'images ! </strong>
+            Vous devez d'abord supprimer certaines photos pour pouvoir en rajouter : <?php echo anchor('book/edit/'.$book->id, 'Modifier votre book'); ?>
+        </div><div class="span7">                    
                     
-                <span class="btn btn-success disabled">
-                    <i class="icon-plus icon-white"></i>
-                    <span>Choisir des photos...</span>
-                </span>
+        <span class="btn btn-success disabled">
+            <i class="icon-plus icon-white"></i>
+            <span>Choisir des photos...</span>
+        </span>
                 
-                <?php endif; ?>
-                <!--
-                <button type="submit" class="btn start btn-primary">
-                    <i class="icon-upload icon-white"></i>
-                    <span>Charger toutes les photos</span>
-                </button>
-                -->
-                <!--
-                <button type="reset" class="btn btn-warning cancel">
-                    <i class="icon-ban-circle icon-white"></i>
-                    <span>Annuler</span>
-                </button>
-                -->
+    <?php endif; ?>
+    
+    
+    
+    
+    
+    
                 <button type="button" class="btn btn-danger delete">
                     <i class="icon-trash icon-white"></i>
                     <span>Supprimer</span>
@@ -89,20 +89,6 @@
             <i class="icon-download"></i>
             <span>Download</span>
         </a>
-        <!--
-        <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
-            <i class="icon-play icon-white"></i>
-            <span>Slideshow</span>
-        </a>
-        <a class="btn btn-info modal-prev">
-            <i class="icon-arrow-left icon-white"></i>
-            <span>Previous</span>
-        </a>
-        <a class="btn btn-primary modal-next">
-            <span>Next</span>
-            <i class="icon-arrow-right icon-white"></i>
-        </a>
-        -->
     </div>
 </div>
 
@@ -180,8 +166,6 @@
     </tr>
 {% } %}
 </script>
-<!--
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> -->
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="<?= base_url(); ?>public/js/fileupload/vendor/jquery.ui.widget.js"></script>
 

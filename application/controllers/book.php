@@ -298,7 +298,7 @@ class Book extends CI_Controller
         $data['book'] = $this->books->get_book($book_id, array('with_pictures' => true));
 
         $data['view'] = 'books/add-pic';
-        $this->load->view('common/templates/main',$data);                  
+        $this->load->view('common/templates/main-fixed',$data);                  
         
     }
         
@@ -380,5 +380,53 @@ class Book extends CI_Controller
         $this->books->update_cover_pic($book_id, $pic_id);
         redirect('book/edit/'.$book_id);
     }
+    
+    
+    
+    
+    function show($book_id) {
+        $this->load->model('books');     
+        
+        $params = array(
+        'with_pictures' => true,
+        'with_owner' => true,
+        'with_comments' => true,
+        'with_flowers' => true,
+        'with_fav_count' => true,        
+        );
+         
+        $data = $this->books->get_book($book_id, $params);
+        $this->config->load('facebook'); 
+        $data->app_id = $this->config->item('facebook_appId');        
+
+            $this->load->library('tank_auth');
+
+            if($this->tank_auth->is_logged_in()) { // l'utilisateur est loggué
+            
+                $this->load->model('social_model'); 
+                $infos_fav = array(
+                'user_id' => $this->session->userdata('user_id'),
+                'book_id' => $book_id,
+                );
+                $data->is_fav = $this->social_model->is_fav($infos_fav);    
+                $data->logged_in = true;        
+
+            
+                $this->load->model('generic_user');
+                if($this->generic_user->is_book_owner($book_id)) { // l'utilisateur est le propriétaire du book
+                    $data->viewer_is_owner = true;                
+                } else {
+                    $data->viewer_is_owner = false;
+                } 
+                $data->logged_in = true;
+            } else {
+                    $data->viewer_is_owner = false;
+                    $data->logged_in = false;
+            }
+
+            //$this->load->view('books/templates/book_tpl',$data);        
+            $this->load->view('books/templates/new_book_tpl',$data);
+    }
+    
     
 }

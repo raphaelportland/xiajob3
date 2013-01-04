@@ -740,7 +740,15 @@ class Books extends CI_Model {
        // les photos
        if(isset($with_pictures)) {
            $this->load->model('picture_model');
-            $book->pictures = $this->picture_model->get_pics($book_id, $params);     
+            $book->pictures = $this->picture_model->get_pics($book_id, $params);  
+            
+            // nombre de photos
+            if(isset($book->pictures) && $book->pictures != null) {
+                $book->pic_nb = count($book->pictures);
+            } else {
+                $book->pic_nb = 0;
+            }     
+               
        }
        
        $book->id = $book->book_id;

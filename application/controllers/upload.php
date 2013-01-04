@@ -39,7 +39,12 @@ class Upload extends CI_Controller {
 // Function called by the form
   public function upload_img() {
       
+      // on charge le modèle books
       $this->load->model('books');
+
+
+
+
 
         //Format the name
         $name = $_FILES['userfile']['name'];
@@ -61,23 +66,32 @@ class Upload extends CI_Controller {
             // Codeigniter Upload class alters name automatically (e.g. periods are escaped with an
             //underscore) - so use the altered name for thumbnail
             $data = $this->upload->data();
-            $name = $data['file_name'];
-
-            //If you want to resize 
-            $config['new_image'] = $this->getPath_img_thumb_upload_folder();
-            $config['image_library'] = 'gd2';
+            $name = $data['file_name'];  
+            
+                 
+            //$config['image_library'] = 'gd2';
             $config['source_image'] = $this->getPath_img_upload_folder() . $name;
-            $config['create_thumb'] = FALSE;
+
+            //Resize
+            $config['new_image'] = $this->getPath_img_upload_folder();            
             $config['maintain_ratio'] = TRUE;
-            //$config['width'] = 140;
-            //$config['height'] = 140;         
-            $config['width'] = 280;
-            $config['height'] = 210;   
+            //$config['create_thumb'] = FALSE;             
+            $config['width'] = 800;
+            $config['height'] = 600;  
             
             $this->load->library('image_lib', $config);
-
             $this->image_lib->resize();
+            
+            
+            
+            // Miniature   
+            $config['new_image'] = $this->getPath_img_thumb_upload_folder();               
+            $config['width'] = 220;
+            $config['height'] = 220;  
 
+            $this->load->library('image_lib', $config);
+            $this->image_lib->fit();
+            
             //Get info 
             $info = new stdClass();
             
