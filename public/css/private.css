@@ -179,14 +179,14 @@ form .help-block {
 	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	width: 280px;
+	width: 220px;
 	background-color: white;
 	position: relative;
 	padding: 5px 6px;
 	float: left;
 	margin-right: 20px;
 	margin-bottom: 20px;
-	height: 360px;
+	height: 220px;
 }
 
 .book-thumb {
@@ -406,7 +406,7 @@ div.social-permalink {
 
 
 .book-container {
-	width: 280px;
+	width: 220px;
 	position: relative;
 	float: left;
 	margin-right: 20px;
@@ -421,8 +421,8 @@ div.social-permalink {
 }
 
 .book-container .cover {
-	width: 280px;
-	height: 210px;
+	width: 220px;
+	height: 183px;
 	overflow: hidden;
 	margin-top: 30px;
 	position: relative;
@@ -432,13 +432,13 @@ div.social-permalink {
 }
 
 .book-container .cover img {
-	min-width: 280px;
-	min-height: 210px;
+	min-width: 220px;
+	min-height: 183px;
 }
 
 .book-th-top {
 	display: block;
-	width: 280px;
+	width: 220px;
 	height: 7px;
 	overflow: hidden;
 	-webkit-box-shadow: 0 0px 8px rgba(0, 0, 0, 0.3);
@@ -447,7 +447,7 @@ div.social-permalink {
 }
 
 .book-th-top img {
-	min-width: 280px;
+	min-width: 220px;
 }
 
 .book-th-name {
@@ -456,7 +456,7 @@ div.social-permalink {
 	left: -3px;
 	background-color: white;
 	padding: 5px;	
-	width: 276px;
+	width: 216px;
 	-webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 5px 5px rgba(0,0,0,0.2);
 	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
@@ -487,4 +487,39 @@ div.social-permalink {
 .book-container .cover .book-occasion span {
 	font-weight: normal;
 	font-size: 14px;
+}
+
+/* NOUVELLE PAGE BOOK */
+.main-book-page-cover {
+	float: left;
+}
+
+
+.miniatures {
+	margin-top: 30px;
+}
+
+.miniatures .pic-thumb {
+	margin-right: 5px;
+	margin-bottom: 5px;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+	font-family: 'Yesteryear';
+}
+
+h1 {
+	font-size: 50px;
+	line-height: 60px;
+}
+
+h2 {
+	font-size: 40px;
+	line-height: 50px;
+}
+
+h3 {
+	font-size: 35px;
+	line-height: 40px;
 }

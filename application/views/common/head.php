@@ -9,6 +9,11 @@
         <link rel="stylesheet" href="<?= base_url(); ?>public/css/jquery.fileupload-ui.css" type="text/css" media="all"/>
         <link rel="stylesheet" href="<?= base_url(); ?>public/css/icon-color.css" type="text/css" media="all"/>
         <link rel="stylesheet" href="<?= base_url(); ?>public/css/private.css" type="text/css" media="all"/>
+
+
+<link href='http://fonts.googleapis.com/css?family=Yesteryear|Grand+Hotel&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+
         
      
         <title>florBooks</title>

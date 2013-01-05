@@ -1,5 +1,5 @@
 <br />
-<h2>Mon Espace</h2>
+<h1>Mon Espace</h1>
 
 
 <?php

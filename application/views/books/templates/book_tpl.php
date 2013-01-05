@@ -8,7 +8,6 @@
 
  
 <?php $this->load->view('books/head'); ?>
-
 <?php $this->load->view('common/social-share/social-share-scripts'); ?>
 
 

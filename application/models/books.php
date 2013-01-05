@@ -704,8 +704,7 @@ class Books extends CI_Model {
             $this->db->select('count(fj_user_fav.id) as fav_count');          
             $this->db->join('user_fav', 'user_fav.book_id = user_book.id','left');
        }
-       
-       
+        
        $q = $this->db->get();
                    
              
@@ -714,6 +713,16 @@ class Books extends CI_Model {
        }       
        
        $book = $q->row();  
+       
+       
+       // est-ce que ce book est favori de l'utilisateur ?
+       if(isset($with_is_your_fav)) {
+           $this->load->model('social_model');
+           $info['book_id'] = $book_id;
+           $info['user_id'] = $this->session->userdata('user_id');
+           $book->is_your_fav = $this->social_model->is_fav($info);
+       }       
+       
        
        // les informations sur le propriétaire
        if(isset($with_owner)) {

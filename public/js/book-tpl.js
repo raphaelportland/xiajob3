@@ -17,7 +17,7 @@ function adjust() {
 
 $('.book-social-comment').tooltip()
 $('.book-social-share').tooltip()
-$('.book-social-fav').tooltip()
+//$('.book-social-fav').tooltip()
 
 $('.book-social-share').click(function(){
 	
@@ -30,7 +30,7 @@ $('.book-social-share').click(function(){
 });
 
 
-$('.book-social-fav').click(function(){
+/*$('.book-social-fav').click(function(){
 	
 	if($(this).attr('data-logged_in') == 'false') {	
 		// l'utilisateur n'est pas connecté		
@@ -66,7 +66,7 @@ $('.book-social-fav').click(function(){
 		
 	}
 	
-});
+});*/
 
  
 

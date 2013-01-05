@@ -7,7 +7,7 @@
  */
 class Social extends CI_Controller
 {
-    function add_fav() {
+    function add_fav($book_id = null) {
         
         if($this->input->post('book_id')) {
 
@@ -35,14 +35,18 @@ class Social extends CI_Controller
             echo($msg);  
             
         } else {
-            echo 'error';
+            if(isset($book_id)) {
+                $data['book_id'] = $book_id;
+                $data['user_id'] = $this->session->userdata('user_id');
+                $this->load->model('social_model');
+                $result = $this->social_model->add_fav($data);    
+                
+                redirect('book/show/'.$book_id);
+                            
+            }
         }
         
     }
-    
-    
-    
-    
 
     function favorites() {
         
@@ -72,7 +76,7 @@ class Social extends CI_Controller
     
     
     
-    function del_fav($book_id) {
+    function del_fav($book_id, $origin = null) {
         $this->load->model('social_model');
         
         $data['book_id'] = $book_id;
@@ -80,7 +84,15 @@ class Social extends CI_Controller
         
         $this->social_model->del_fav($data);
         
-        redirect('social/favorites');
+        if(isset($origin)) {
+            switch($origin) {
+                case 'book' :
+                    redirect('book/show/'.$book_id);
+                    break;
+            }
+        } else {
+            redirect('social/favorites');
+        }
     }
     
     

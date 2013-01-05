@@ -108,39 +108,7 @@ class Book extends CI_Controller
     }   
 
 
-    /**
-     * Visionneuse de photos
-     */
-    function view_pic($pic_id) {
-            
-        $this->load->model('picture_model','picture');
-        
-        $params = array(
-        'with_comments' => TRUE,
-        'with_flowers' => TRUE,
-        'with_book_info' => TRUE,
-        'with_owner' => true,
-        'with_fav_count' => true,          
-        );
-        
-        $data = $this->picture->get_pic($pic_id, $params);
-        
 
-        
-        $this->config->load('facebook'); 
-        $data->app_id = $this->config->item('facebook_appId');   
-        
-        $data->logged_in = false;
-        $this->load->library('tank_auth');
-        if($this->tank_auth->is_logged_in()) { // l'utilisateur est loggué        
-            $data->logged_in = true;
-        }        
-        
-        
-
-        $this->load->view('books/templates/pic_tpl', $data);
-        
-    }
 
 
 
@@ -384,7 +352,7 @@ class Book extends CI_Controller
     
     
     
-    function show($book_id) {
+    function show($book_id, $type = 'classic', $pic_id = null) {
         $this->load->model('books');     
         
         $params = array(
@@ -392,7 +360,8 @@ class Book extends CI_Controller
         'with_owner' => true,
         'with_comments' => true,
         'with_flowers' => true,
-        'with_fav_count' => true,        
+        'with_fav_count' => true,
+        'with_is_your_fav' => true,        
         );
          
         $data = $this->books->get_book($book_id, $params);
@@ -424,8 +393,24 @@ class Book extends CI_Controller
                     $data->logged_in = false;
             }
 
-            //$this->load->view('books/templates/book_tpl',$data);        
-            $this->load->view('books/templates/new_book_tpl',$data);
+            switch($type) {
+                case 'classic' :
+                $data->view = 'books/templates/new_book_tpl';
+                $this->load->view('common/templates/main-fixed', $data); 
+                break;
+                
+                case 'picture' :
+                    if(!isset($pic_id)) redirect('book/show/'.$book_id);
+                    $data->pic_to_display = $pic_id;
+                    $data->view = 'books/templates/new_book_pic_tpl';
+                    $this->load->view('common/templates/viewer',$data);  
+                    
+                case 'diaporama' :
+                    $data->pic_to_display = $data->cover->id;
+                    $data->view = 'books/templates/new_book_pic_tpl';
+                    $this->load->view('common/templates/viewer',$data);                                     
+            }
+
     }
     
     
