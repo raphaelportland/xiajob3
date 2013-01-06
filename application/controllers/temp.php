@@ -133,14 +133,18 @@ class Temp extends CI_Controller
      * remet des ordres en fonction des index
      */
     function fix_book_pics_orders() {
+    
+        echo('<h1>mise à jour des ordres </h1>');
         
         $q = $this->db
                 ->select('id')
-                ->get('user_books');
+                ->get('user_book');
                 
         $result = $q->result();
         
         foreach ($result as $key => $book) { // pour chaque book
+        
+            echo('<h3>Book '.$book->id.'<br>');
             
             $q2 = $this->db
                     ->select('id, order')
@@ -153,10 +157,12 @@ class Temp extends CI_Controller
             $i = 1; // on met le compteur d'ordre à 1
             foreach ($result2 as $key2 => $picture) { // on regarde photo par photo
                 if($picture->order == '0') { // si la photo n'a pas d'ordre on lui en donne un
+                
+                  echo($picture->id.' en cours ordre '.$i.'<br>');
                     $infos = array(
                         'order' => $i,
                     );
-                    $this->db->->where('id', $picture->id)->update('book_pics', $infos);
+                    $this->db->where('id', $picture->id)->update('book_pics', $infos);
                     $i++; // on incrémente l'ordre
                 }
             }
