@@ -385,9 +385,7 @@ class Books extends CI_Model {
         
         $book_id = $this->db->insert_id(); 
         
-        //$book_url = base_url().'index.php/book/view/'.$book_id.'/'.$book_private_key;
-        
-        $book_url = base_url().'index.php/book/view/'.$book_id;
+        $book_url = base_url().'index.php/book/show/'.$book_id;
         
         $this->load->library('bitly');
         $short_url = $this->bitly->shorten($book_url); 

@@ -142,7 +142,9 @@ class Social extends CI_Controller
     }
 
 
-    
+    /**
+     * Informations pour le partage facebook
+     */
     function share_book($book_id) {
         
         $params = array();
@@ -161,6 +163,58 @@ class Social extends CI_Controller
         $data->app_id = $this->config->item('facebook_appId');
         
         $this->load->view('social/share_book',$data);
+    }
+
+    /**
+     * Page dédiée au partage facebook
+     */
+    function share_pic($pic_id) {
+        $this->load->model('picture_model', 'picture');
+        $this->picture->get_pic($pic_id);
+        $data = new stdClass();
+        
+        // données sur l'image
+        $data->picture = $this->picture->get_pic($pic_id)->picture; 
+        
+        // url bitly      
+        $data->pic_url = $this->picture->get_pic_view_url($data->picture->book_id, $pic_id);
+        
+        // appId Facebook
+        $this->config->load('facebook'); 
+        $data->app_id = $this->config->item('facebook_appId');        
+        
+        $this->load->view('social/share_pic',$data);
+    }
+    
+    
+    /**
+     * Affiche la vue de partage en fonction du type d'élément
+     * 
+     */
+    function share($type, $id) {
+        
+        switch($type) {
+            case 'book' :
+                $this->load->model('books');
+                $data = new stdClass();
+                $data->book = $this->books->get_book($id);
+                $data->view = 'social/share_book_options';
+                $this->load->view('common/templates/main-fixed', $data);
+                break;
+                
+            case 'picture' :
+                $this->load->model('picture_model', 'picture');
+                $data = new stdClass();
+                $data->picture = $this->picture->get_pic($id)->picture;
+                $data->pic_url = $this->picture->get_pic_view_url($data->picture->book_id, $id);
+                $data->view = 'social/share_pic_options';
+                $this->load->view('common/templates/main-fixed', $data);
+                break;
+        }
+        
+        
+        
+        
     }
 
 

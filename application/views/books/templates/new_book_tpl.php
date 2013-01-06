@@ -34,7 +34,7 @@
         echo anchor('social/add_fav/'.$id,'<i class="icon icon-star"></i> Ajouter aux favoris','class="btn"');
         endif; ?>
              
-        <?= anchor('social/share_book/'.$id, '<i class="icon icon-share-alt"></i> Partager ce book', 'class="btn"'); ?> 
+        <?= anchor('social/share/book/'.$id, '<i class="icon icon-share-alt"></i> Partager ce book', 'class="btn"'); ?> 
         <?= anchor('book/show/'.$id.'/diaporama', '<i class="icon icon-resize-full"></i> Voir en grand', 'class="btn"'); ?>
     </div>
     

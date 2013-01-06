@@ -115,6 +115,15 @@ class Picture_model extends CI_Model {
         return $data;
         
     }
+
+    // renvoie l'url raccourcie de visionnage de la photo
+    function get_pic_view_url($book_id, $pic_id) {
+        // url avec bitly
+        $this->load->library('bitly');            
+        $pic_url = $this->bitly->shorten(site_url('book/show/'.$book_id.'/picture/'.$pic_id)); 
+             
+        return $pic_url;
+    }
     
         
     

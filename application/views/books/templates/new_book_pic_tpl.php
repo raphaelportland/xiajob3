@@ -34,12 +34,15 @@
             <?php echo anchor('','<i class="icon-comment icon-white"></i> <small>'.$comments_nb.'</small>',$comment_link); ?>
                 
             <!-- lien pour partager la photo -->                                               
-            <a href="#" 
+            <!--<a href="#" 
             rel="tooltip" 
             data-pic_id="<?= $picture->id; ?>" 
             data-placement="top" 
             data-title="Partagez cette photo" 
-            class="book-social-share btn btn-large btn-inverse"><i class="icon-share-alt icon-white"></i></a>
+            class="book-social-share btn btn-large btn-inverse"><i class="icon-share-alt icon-white"></i></a>-->
+            <?= anchor('social/share/picture/'.$picture->id,'<i class="icon-share-alt icon-white"></i>','rel="tooltip" 
+            data-placement="top" 
+            data-title="Partagez cette photo" class="btn btn-large btn-inverse book-social-share"'); ?>
             
             <!-- Bouton de retour au book -->            
             <?= anchor('book/show/'.$id,'<i class="icon icon-resize-small icon-white"></i> fermer','class="btn btn-inverse btn-large"'); ?>
@@ -98,7 +101,7 @@
         if($picture->pic_name != '' && $picture->pic_comment != '') : ?>
             <div class="carousel-caption">
               <h3><?= $picture->pic_name; ?></h3>
-              <p class='lead'><?= $picture->pic_comment; ?></p>
+              <p><?= $picture->pic_comment; ?></p>
             </div>
             <?php endif; ?>       
         </div>

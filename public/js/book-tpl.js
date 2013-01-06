@@ -19,7 +19,8 @@ $('.book-social-comment').tooltip()
 $('.book-social-share').tooltip()
 //$('.book-social-fav').tooltip()
 
-$('.book-social-share').click(function(){
+/* ancienne fonction popup du partage
+ $('.book-social-share').click(function(){
 	
 	pic_id = $(this).attr('data-pic_id');
 	
@@ -27,7 +28,7 @@ $('.book-social-share').click(function(){
 	
 	return false; 
 	
-});
+});*/
 
 
 /*$('.book-social-fav').click(function(){

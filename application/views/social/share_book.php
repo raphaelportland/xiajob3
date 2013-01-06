@@ -8,6 +8,6 @@
         <meta property="og:description" content="<?= $description; ?>"/>
         <meta property="og:site_name" content="florBooks" />           
     </head>
-    <body>        
+    <body>      
     </body>
 </html>

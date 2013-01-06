@@ -392,8 +392,12 @@ dd {
 	margin-bottom: 20px;
 }
 
+.share {
+	margin-top: 40px;
+}
+
 .social-share-item {
-	margin: 20px;
+	margin-bottom : 20px;
 }
 
 
