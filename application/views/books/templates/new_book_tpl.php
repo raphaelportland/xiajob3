@@ -1,5 +1,9 @@
 <?php //$this->load->view('books/new_head'); ?>
 
+
+
+
+
 <div class='container'>
 
     <!--<img src='<?= base_url().$cover->th_url; ?>' class='img-polaroid' /> COVER-->
@@ -30,7 +34,7 @@
         echo anchor('social/add_fav/'.$id,'<i class="icon icon-star"></i> Ajouter aux favoris','class="btn"');
         endif; ?>
              
-        <?= anchor('', '<i class="icon icon-share-alt"></i> Partager ce book', 'class="btn"'); ?> 
+        <?= anchor('social/share_book/'.$id, '<i class="icon icon-share-alt"></i> Partager ce book', 'class="btn"'); ?> 
         <?= anchor('book/show/'.$id.'/diaporama', '<i class="icon icon-resize-full"></i> Voir en grand', 'class="btn"'); ?>
     </div>
     

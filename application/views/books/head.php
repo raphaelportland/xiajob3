@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html lang='fr'>
     <head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta property="fb:app_id" content="<?= $app_id; ?>"/>
-        <meta property="og:title" content="<?= $name; ?>" />
-        <meta property="og:url" content="<?= $short_url; ?>" />
-<?php 
-if(isset($cover->pic_url)) : 
-    $cover_url = base_url().$cover->pic_url;
-else :
-    $cover_url = base_url().$pictures[0]->pic_url;
-endif;                        
-?>
-        <meta property="og:image" content="<?= $cover_url; ?>" />
-        <meta property="og:site_name" content="florBooks" />          
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />         
         <link rel="stylesheet" href="<?= base_url(); ?>public/bootstrap/css/bootstrap.min.css" type="text/css" media="all" />
         
         <link rel="stylesheet" href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css">       
@@ -21,6 +9,10 @@ endif;
         
         <link rel="stylesheet" href="<?= base_url(); ?>public/css/book.css" type="text/css" media="all"/>
         <link rel="stylesheet" href="<?= base_url(); ?>public/css/icon-color.css" type="text/css" media="all"/>
+        
+<link href='http://fonts.googleapis.com/css?family=Yesteryear|Grand+Hotel&subset=latin-ext' rel='stylesheet' type='text/css'>
+
+        
      
         <title><?= $name; ?> florBooks</title>
         

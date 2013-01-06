@@ -160,10 +160,10 @@ class Social extends CI_Controller
         $this->config->load('facebook'); 
         $data->app_id = $this->config->item('facebook_appId');
         
-        stop_code($data);
-        
         $this->load->view('social/share_book',$data);
     }
+
+
     
     
 }

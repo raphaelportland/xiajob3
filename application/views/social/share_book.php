@@ -5,9 +5,9 @@
         <meta property="og:title" content="<?= $name; ?>" />
         <meta property="og:url" content="<?= $short_url; ?>" />
         <meta property="og:image" content="<?= base_url().$cover_url; ?>" />   
-        <meta property="og:description" content="<?= $description; ?>"/>     
+        <meta property="og:description" content="<?= $description; ?>"/>
+        <meta property="og:site_name" content="florBooks" />           
     </head>
-    <body>
-        
+    <body>        
     </body>
 </html>

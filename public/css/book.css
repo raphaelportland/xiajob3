@@ -24,9 +24,12 @@ img.carousel_pic {
 }
 
 .carousel-caption {
-	width: 40%;
+	mwidth: 40%;
 	margin-bottom: 20px;
 	margin-left: 20px;
+	right: auto;
+	bottom: auto;
+	top: 0px;
 }
 
 .book-social {
@@ -145,4 +148,33 @@ ul.book-infos {
 .comments-readmore {
 	margin-bottom: 20px;
 	display: block;
+}
+
+h1, h2, h3, .brand {
+	font-weight: normal;
+	font-family: 'Yesteryear';
+}
+
+h1 {
+	font-size: 50px;
+	line-height: 60px;
+}
+
+h2 {
+	font-size: 40px;
+	line-height: 50px;
+}
+
+h3 {
+	font-size: 35px;
+	line-height: 40px;
+	color: white;
+}
+
+.carousel-caption p.lead {
+	color: #333;
+}
+
+.navbar .brand {
+	font-size: 25px;
 }

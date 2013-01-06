@@ -97,8 +97,8 @@
         <?php // si la photo a un nom ou une description
         if($picture->pic_name != '' && $picture->pic_comment != '') : ?>
             <div class="carousel-caption">
-              <h4><?= $picture->pic_name; ?></h4>
-              <p><?= $picture->pic_comment; ?></p>
+              <h3><?= $picture->pic_name; ?></h3>
+              <p class='lead'><?= $picture->pic_comment; ?></p>
             </div>
             <?php endif; ?>       
         </div>

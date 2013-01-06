@@ -504,7 +504,7 @@ div.social-permalink {
 	margin-bottom: 5px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, .brand {
 	font-weight: normal;
 	font-family: 'Yesteryear';
 }
@@ -522,4 +522,8 @@ h2 {
 h3 {
 	font-size: 35px;
 	line-height: 40px;
+}
+
+.navbar .brand {
+	font-size: 25px;
 }
