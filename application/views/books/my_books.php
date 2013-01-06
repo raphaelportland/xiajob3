@@ -41,18 +41,18 @@ $this->load->view('common/social-share/social-share-scripts',$script_info); ?>
     echo("</div></td><td>".count($book->pictures)."</td><td>$book->fav_count</td><td>"); ?>
     
     <div class="btn-group">
-    <?php echo anchor("book/add_pics/$book->id","<i class='icon-camera'></i> Ajouter",'class="btn"'); ?>
-    <?php echo anchor("book/edit/$book->id","<i class='icon-pencil'></i> Modifier",'class="btn "'); ?>
+    <?php //echo anchor("book/add_pics/$book->id","<i class='icon-camera'></i> Ajouter des photos",'class="btn"'); ?>
+    <?php echo anchor("book/edit/$book->id","<i class='icon-edit'></i> Modifier",'class="btn "'); ?>
     <?php echo anchor("book/show/$book->id","<i class='icon-eye-open'></i> Voir",'class="btn "'); ?>
     <?php //echo anchor("social/share/book/$book->id","<i class='icon icon-share-alt'></i> Partager",'data-book_id="'.$book->id.'" class="btn private-link"'); ?>    
-    <?php echo anchor("book/del_book/$book->id","<i class='icon-trash icon-white'></i> Supprimer",'class="btn btn-danger confirm"'); ?>   
+    <?php echo anchor("book/del_book/$book->id","<i class='icon-trash icon-white'></i>",'class="btn btn-danger confirm"'); ?>   
     </div>
     </td></tr>
 
             <div id='share-modal-<?= $book->id; ?>' class="modal hide fade">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Partager mon book</h3>
+                <h3>Partager mon florBook</h3>
               </div>
               <div class="modal-body">
                 
@@ -93,7 +93,7 @@ $this->load->view('common/social-share/social-share-scripts',$script_info); ?>
     </tbody>
 </table>
 
-<?php echo anchor("book/create_book","Ajouter un book",'class="btn btn-success"'); ?>
+<?php echo anchor("book/create_book","Ajouter un florBook",'class="btn btn-success"'); ?>
 
 <br /><br />
 

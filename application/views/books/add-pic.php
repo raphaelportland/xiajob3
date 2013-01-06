@@ -1,4 +1,4 @@
-<h2>"<?= $book->name; ?>"</h2>
+<h1>" <?= $book->name; ?> "</h1>
 <p class='lead'>Ajoutez des images à votre florBook 
     
 <?php

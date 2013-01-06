@@ -1,4 +1,4 @@
-<h2>Créer un nouveau Book</h2>
+<h1>Créer un nouveau florBook</h1>
 
 <?php
 

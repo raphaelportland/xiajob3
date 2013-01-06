@@ -246,7 +246,7 @@ class Book extends CI_Controller
         //stop_code($data);
                 
         $data['view'] = 'books/create-book';
-        $this->load->view('common/templates/main',$data);        
+        $this->load->view('common/templates/main-fixed',$data);        
         
     }
     

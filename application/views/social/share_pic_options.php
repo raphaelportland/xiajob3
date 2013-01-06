@@ -20,8 +20,8 @@
     <!-- facebook like -->
     <div class="social-share-item social-facebook-like">
         <p class=''><strong>Sur facebook</strong></p>        
-        <fb:like href="<?= site_url('social/share_pic/'.$picture->id); ?>" show_faces="true" send="true" width="450"
-        action="like" colorscheme="light"></fb:like>            
+        <fb:like href="<?= site_url('book/show/'.$picture->book_id.'/picture/'.$picture->id); ?>" show_faces="true" send="true" width="450"
+        action="like" colorscheme="light"></fb:like>       
     </div>
     
     <!-- pinterest -->

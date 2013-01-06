@@ -6,7 +6,7 @@
  
 ?>
     
-<h2>Exploration des books</h2> 
+<h1>Exploration des books</h1> 
 
 <?php if(isset($books->featured)) : ?>
 <div class='row-fluid'>

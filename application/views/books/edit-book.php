@@ -1,4 +1,4 @@
-<h1>Modifier mon Book</h1>
+<h1>Modifier mon florBook</h1>
 
 <?php
 
@@ -16,7 +16,7 @@ echo form_open('book/edit/'.$book->id);
 
 <?php if(isset($book->pictures)): ?>
 
-<p class='lead'>Images du book</p>
+<p class='lead'>Images du florBook</p>
 <table class='table table-hover'> 
     <thead>
         <tr>
