@@ -154,10 +154,10 @@ class Social extends CI_Controller
         
         // cover url
         if(isset($data->cover->pic_url)) : 
-            $data->cover_url = $data->cover->pic_url;
+            $data->cover_url = $data->cover->th_url;
         else :
-            $data->cover_url = $data->pictures[0]->pic_url;
-        endif;                              
+            $data->cover_url = $data->pictures[0]->th_url;
+        endif;
         
         $this->config->load('facebook'); 
         $data->app_id = $this->config->item('facebook_appId');

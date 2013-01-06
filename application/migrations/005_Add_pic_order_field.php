@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 /**
- * Met en place la liste définitive des fleurs
+ * Ajoute une colonne ordre aux images
  * 
  */  
 class Migration_Add_pic_order_field extends CI_Migration {

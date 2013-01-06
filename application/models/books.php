@@ -537,10 +537,16 @@ class Books extends CI_Model {
         'pic_url' => $image->url,
         'th_url' => $image->thumbnail_url,
         'order' => $order+1,
+        'view_url' => '',
         );
         
         $this->db->insert('book_pics',$import);
         $new_pic_id = $this->db->insert_id();
+        
+        // on ajoute l'adresse bitly de la visionneuse de l'image
+        $this->load->model('picture_model');
+        $view_url = $this->picture_model->get_pic_view_url($image->book, $new_pic_id);
+        $this->db->where('id',$new_pic_id)->update('book_pics', array('view_url' => $view_url));
         
         // si le book n'a pas de couverture, on utilise l'image qui vient d'être chargée
         if(!$this->has_cover($image->book)) $this->update_cover_pic($image->book, $new_pic_id);

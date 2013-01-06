@@ -3,14 +3,12 @@
     <!-- Carousel items -->
     <div class="carousel-inner">
          
-    <?php // début de la boucle d'affichage des photos
-    foreach ($pictures as $key => $picture) :
+        <?php // on affiche la photo
         
-        // on affiche que la photo qui nous importe
-        if($pic_to_display == $picture->id) :
+
     
-            if(isset($picture->comments->nb)) {  // à vérifier
-                $comments_nb = $picture->comments->nb;
+            if(isset($comments->nb)) {  // à vérifier
+                $comments_nb = $comments->nb;
             } else {
                 $comments_nb = 0;
             } ?>
@@ -45,7 +43,7 @@
             data-title="Partagez cette photo" class="btn btn-large btn-inverse book-social-share"'); ?>
             
             <!-- Bouton de retour au book -->            
-            <?= anchor('book/show/'.$id,'<i class="icon icon-resize-small icon-white"></i> fermer','class="btn btn-inverse btn-large"'); ?>
+            <?= anchor('book/show/'.$picture->book_id,'<i class="icon icon-resize-small icon-white"></i> fermer','class="btn btn-inverse btn-large"'); ?>
         </div>
             
         <!-- panneau d'affichage des commentaires -->
@@ -55,7 +53,7 @@
             <div id='commentaires<?= $picture->id; ?>'>                                     
                 <?php 
                 $com_data['pic_id'] = $picture->id;
-                $com_data['comments'] = $picture->comments->comments;
+                $com_data['comments'] = $comments->comments;
                 $com_data['max_comments_to_display'] = 3;
                 $com_data['nb'] = $comments_nb;
                 $this->load->view('comments/pic_comments_mini',$com_data); ?>                    
@@ -67,31 +65,12 @@
         <!-- affichage des fleurs -->            
         <div class='picture_flowers'>
         <?php
-            //code($picture);
-            $flower_data['added_flowers'] = $picture->flower_data;
+            $flower_data['added_flowers'] = $flower_data;
             $flower_data['pic_id'] = $picture->id;
             $flower_data['forbidden_edit'] = true;
             $this->load->view('books/added_flowers',$flower_data); 
         ?>
-        </div> 
-            
-            
-        <div id='share-modal-<?= $picture->id; ?>' class="modal hide fade">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Partager cette photo</h3>
-            </div>
-            <div class="modal-body">
-                <?php
-                $social_share_data['picture_url'] = base_url().$picture->pic_url; 
-                $social_share_data['picture_description'] = $picture->pic_name;
-                $social_share_data['site_url'] = base_url().'index.php/book/view/'.$picture->book_id;
-                ?>
-            
-                <?php $this->load->view('common/social-share/social-share.php',$social_share_data); ?>
-            
-            </div>
-        </div>            
+        </div>         
  
         <!-- La photo ! -->
         <img class='carousel_pic' src="<?= base_url().$picture->pic_url; ?>" alt="">
@@ -108,14 +87,11 @@
         
         <?php $order = $picture->order; ?>
         
-    <?php endif; ?>
-    
-    <?php endforeach; ?>
     </div>
     
     <!-- Navigation entre les photos -->
-    <a class="carousel-control left" href="<?= site_url('book/previous_pic/'.$id.'/'.$order); ?>">&lsaquo;</a>
-    <a class="carousel-control right" href="<?= site_url('book/next_pic/'.$id.'/'.$order); ?>">&rsaquo;</a>    
+    <a class="carousel-control left" href="<?= site_url('book/previous_pic/'.$picture->book_id.'/'.$picture->order); ?>">&lsaquo;</a>
+    <a class="carousel-control right" href="<?= site_url('book/next_pic/'.$picture->book_id.'/'.$picture->order); ?>">&rsaquo;</a>    
 </div>   
 
 

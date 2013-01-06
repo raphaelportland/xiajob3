@@ -5,7 +5,7 @@
  */
 ?>
  
-<?php $this->load->view('books/head'); ?>
+<?php $this->load->view('pictures/pic-meta-head'); ?>
 <?php //$this->load->view('common/social-share/social-share-scripts'); ?>
 
 <?php // affichage du menu

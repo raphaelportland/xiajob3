@@ -353,66 +353,104 @@ class Book extends CI_Controller
     
     
     function show($book_id, $type = 'classic', $pic_id = null, $option = null) {
-        $this->load->model('books');     
-        
-        $params = array(
-        'with_pictures' => true,
-        'with_owner' => true,
-        'with_comments' => true,
-        'with_flowers' => true,
-        'with_fav_count' => true,
-        'with_is_your_fav' => true,        
-        );
-         
-        $data = $this->books->get_book($book_id, $params);
-        $this->config->load('facebook'); 
-        $data->app_id = $this->config->item('facebook_appId');        
-
-            $this->load->library('tank_auth');
-
-            if($this->tank_auth->is_logged_in()) { // l'utilisateur est loggué
-            
-                $this->load->model('social_model'); 
-                $infos_fav = array(
-                'user_id' => $this->session->userdata('user_id'),
-                'book_id' => $book_id,
-                );
-                $data->is_fav = $this->social_model->is_fav($infos_fav);    
-                $data->logged_in = true;        
-
-            
-                $this->load->model('generic_user');
-                if($this->generic_user->is_book_owner($book_id)) { // l'utilisateur est le propriétaire du book
-                    $data->viewer_is_owner = true;                
-                } else {
-                    $data->viewer_is_owner = false;
-                } 
-                $data->logged_in = true;
-            } else {
-                    $data->viewer_is_owner = false;
-                    $data->logged_in = false;
-            }
 
             switch($type) {
-                case 'classic' :
+                case 'classic' : // le book complet avec toutes les miniatures
+                    
+                    $this->load->model('books');
+                    $params = array(
+                    'with_pictures' => true,
+                    'with_owner' => true,
+                    'with_comments' => true,
+                    'with_flowers' => true,
+                    'with_fav_count' => true,
+                    'with_is_your_fav' => true,        
+                    );                     
+                    $data = $this->books->get_book($book_id, $params);                    
+                    
+                    // appId Facebook
+                    $this->config->load('facebook'); 
+                    $data->app_id = $this->config->item('facebook_appId');                    
+                    
+                    // on regarde si l'utilisateur est loggué
+                    $this->load->library('tank_auth');
+        
+                    if($this->tank_auth->is_logged_in()) { // l'utilisateur est loggué
+                        $data->logged_in = true; 
+                    
+                        // dans ce cas on regarde si le book est dans les favoris de l'utilisateur                
+                        $this->load->model('social_model'); 
+                        $infos_fav = array(
+                        'user_id' => $this->session->userdata('user_id'),
+                        'book_id' => $book_id,
+                        );
+                        $data->is_fav = $this->social_model->is_fav($infos_fav);
+                    
+                        // on regarde aussi si l'utilisateur est le propriétaire
+                        $this->load->model('generic_user');
+                        if($this->generic_user->is_book_owner($book_id)) { // l'utilisateur est le propriétaire du book
+                            $data->viewer_is_owner = true;                
+                        } else {
+                            $data->viewer_is_owner = false;
+                        } 
+
+                    } else { // si l'utilisateur n'est pas loggué, il n'est pas non plus considéré comme le propriétaire
+                            $data->viewer_is_owner = false;
+                            $data->logged_in = false;
+                    }                    
+                    
+                    // on charge le template                                        
                     $data->view = 'books/templates/new_book_tpl';
-                    $this->load->view('common/templates/main-fixed', $data); 
+                    $this->load->view('common/templates/book-viewer', $data); 
                     break;
                 
                 case 'picture' :
-                    if(!isset($pic_id)) redirect('book/show/'.$book_id);
-                    $data->pic_to_display = $pic_id;
+                    // On charge les infos de la photo à afficher
+                    $this->load->model('picture_model','picture');
+                    $params = array(
+                        'with_comments' => true,
+                        'with_flowers' => true,
+                    );
+                    $data = $this->picture->get_pic($pic_id, $params);
+                    
+                    // adresse de la visionneuse
+                    $data->pic_url = $this->picture->get_pic_view_url($book_id, $pic_id);
+                    
+                    // appId Facebook
+                    $this->config->load('facebook'); 
+                    $data->app_id = $this->config->item('facebook_appId');
+                    
+                    //code($data);
+                    
+                    // on charge le template
                     $data->view = 'books/templates/new_book_pic_tpl';
                     $this->load->view('common/templates/viewer',$data);
                     break;  
                     
                 case 'diaporama' :
+                    // appId Facebook
+                    $this->config->load('facebook'); 
+                    $data->app_id = $this->config->item('facebook_appId');                      
+                    
+                    // la photo a afficher : la couverture
                     $data->pic_to_display = $data->cover->id;
+                    
+                    // on charge le template
                     $data->view = 'books/templates/new_book_pic_tpl';
                     $this->load->view('common/templates/viewer',$data);
                     break;                                     
-            }
+            }        
+        
+        
+        
+        
+           
 
+
+            
+            // appId Facebook
+            $this->config->load('facebook'); 
+            $data->app_id = $this->config->item('facebook_appId');
     }
 
     // renvoie sur la page de la photo suivante du book

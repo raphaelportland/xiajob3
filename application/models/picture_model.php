@@ -98,19 +98,19 @@ class Picture_model extends CI_Model {
                $data->owner = $this->generic_user->get_user_basic_infos($user_params);
             }  
             
-           // on ajoute les fleurs si nécessaire
-           if(isset($with_flowers)) {
-               $this->load->model('books');
-               $data->flower_data = $this->books->get_pic_flowers($pic_id);
-           }
-           
-           // on ajoute les commentaires si nécessaire     
-           if(isset($with_comments)) {
-               $this->load->model('comments_model');
-               $data->comments = $this->comments_model->get_pic_comments($pic_id);
-           }
-            
         endif;
+        
+       // on ajoute les fleurs si nécessaire
+       if(isset($with_flowers)) {
+           $this->load->model('books');
+           $data->flower_data = $this->books->get_pic_flowers($pic_id);
+       }
+       
+       // on ajoute les commentaires si nécessaire     
+       if(isset($with_comments)) {
+           $this->load->model('comments_model');
+           $data->comments = $this->comments_model->get_pic_comments($pic_id);
+       }
         
         return $data;
         

@@ -4,7 +4,7 @@
         <meta property="fb:app_id" content="<?= $app_id; ?>"/>
         <meta property="og:title" content="<?= $picture->pic_name; ?>" />
         <meta property="og:url" content="<?= $pic_url; ?>" />
-        <meta property="og:image" content="<?= base_url().$picture->pic_url; ?>" />   
+        <meta property="og:image" content="<?= base_url().$picture->th_url; ?>" />   
         <meta property="og:description" content="<?= $picture->pic_comment; ?>"/>
         <meta property="og:site_name" content="florBooks" />           
     </head>

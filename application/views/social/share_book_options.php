@@ -20,7 +20,7 @@
     <div class="social-share-item social-facebook-like">
         <p class=''><strong>Sur facebook</strong></p>     
     
-<fb:like href="<?= site_url('social/share_book/'.$book->id); ?>" show_faces="true"  send="true" width="450"
+<fb:like href="<?= site_url('book/show/'.$book->id); ?>" show_faces="true"  send="true" width="450"
   action="like" colorscheme="light"></fb:like>            
     </div>
  
