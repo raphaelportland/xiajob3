@@ -127,5 +127,43 @@ class Temp extends CI_Controller
         $result = $this->books->get_max_pic_order($book_id);
         code($result);
     }
+ 
+    /**
+     * Pour tous les books dont les photos ont un ordre 0
+     * remet des ordres en fonction des index
+     */
+    function fix_book_pics_orders() {
+        
+        $q = $this->db
+                ->select('id')
+                ->get('user_books');
+                
+        $result = $q->result();
+        
+        foreach ($result as $key => $book) { // pour chaque book
+            
+            $q2 = $this->db
+                    ->select('id, order')
+                    ->from('book_pics')
+                    ->where('book_id', $book->id)
+                    ->get();
+            
+            $result2 = $q2->result();
+            
+            $i = 1; // on met le compteur d'ordre à 1
+            foreach ($result2 as $key2 => $picture) { // on regarde photo par photo
+                if($picture->order == '0') { // si la photo n'a pas d'ordre on lui en donne un
+                    $infos = array(
+                        'order' => $i,
+                    );
+                    $this->db->->where('id', $picture->id)->update('book_pics', $infos);
+                    $i++; // on incrémente l'ordre
+                }
+            }
+        }
+        
+        echo ("Ordre ajouté à toutes les photos");
+    } 
+ 
     
 } 
