@@ -17,7 +17,7 @@ if($user->options->profile_step != 'finished') {
     
    
         <!-- Skills -->
-        <?php echo anchor('main/edit_profile/2','<h3>Compétences</h3>'); ?>
+        <p class='lead'>Compétences <?php echo anchor('main/edit_profile/2','Mettre à jour', 'class="btn"'); ?></p>
     <div class='row'>     
         
 
@@ -66,7 +66,7 @@ if($user->options->profile_step != 'finished') {
         </div>
     </div>
 
-    <?php echo anchor('book/my_books','<h3>Mes florBooks ('.count($user->books).')</h3>'); ?>
+    <p class="lead">Mes florBooks <small>(<?= count($user->books); ?>)</small> <?php echo anchor('book/my_books','Modifier', 'class="btn"'); ?></p>    
     <div class='row'>
         <div class='span12'>
         <table class='table'>
@@ -74,7 +74,7 @@ if($user->options->profile_step != 'finished') {
         <?php
         foreach ($user->books as $key => $book) {
           
-            echo "<tr><td>".anchor('book/view/'.$book->id, $book->name)."</td>";
+            echo "<tr><td>".anchor('book/show/'.$book->id, $book->name)."</td>";
             echo "<td>$book->fav_count</td></tr>";  
             
         }
@@ -82,8 +82,8 @@ if($user->options->profile_step != 'finished') {
         </table>
         </div>
     </div>
-        
-    <?= anchor('social/favorites','<h3>Favoris</h3>'); ?>        
+    
+    <p class='lead'>Mes favoris <?= anchor('social/favorites','Voir / Modifier', 'class="btn"'); ?></p>    
     <div class='row'>
         <div class='span12'>
         <?php         

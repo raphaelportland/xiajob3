@@ -352,7 +352,7 @@ class Book extends CI_Controller
     
     
     
-    function show($book_id, $type = 'classic', $pic_id = null) {
+    function show($book_id, $type = 'classic', $pic_id = null, $option = null) {
         $this->load->model('books');     
         
         $params = array(
@@ -395,22 +395,38 @@ class Book extends CI_Controller
 
             switch($type) {
                 case 'classic' :
-                $data->view = 'books/templates/new_book_tpl';
-                $this->load->view('common/templates/main-fixed', $data); 
-                break;
+                    $data->view = 'books/templates/new_book_tpl';
+                    $this->load->view('common/templates/main-fixed', $data); 
+                    break;
                 
                 case 'picture' :
                     if(!isset($pic_id)) redirect('book/show/'.$book_id);
                     $data->pic_to_display = $pic_id;
                     $data->view = 'books/templates/new_book_pic_tpl';
-                    $this->load->view('common/templates/viewer',$data);  
+                    $this->load->view('common/templates/viewer',$data);
+                    break;  
                     
                 case 'diaporama' :
                     $data->pic_to_display = $data->cover->id;
                     $data->view = 'books/templates/new_book_pic_tpl';
-                    $this->load->view('common/templates/viewer',$data);                                     
+                    $this->load->view('common/templates/viewer',$data);
+                    break;                                     
             }
 
+    }
+
+    // renvoie sur la page de la photo suivante du book
+    function next_pic($book_id, $pic_order) {
+        $this->load->model('books');
+        $next_pic = $this->books->get_next_pic($book_id, $pic_order);
+        redirect('book/show/'.$book_id.'/picture/'.$next_pic);
+    }
+    
+    // renvoie sur la page de la photo précédente
+    function previous_pic($book_id, $pic_order) {
+        $this->load->model('books');
+        $previous_pic = $this->books->get_previous_pic($book_id, $pic_order);
+        redirect('book/show/'.$book_id.'/picture/'.$previous_pic);
     }
     
     

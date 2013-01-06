@@ -43,7 +43,7 @@ $this->load->view('common/social-share/social-share-scripts',$script_info); ?>
     <div class="btn-group">
     <?php echo anchor("book/add_pics/$book->id","<i class='icon-camera'></i> Ajouter",'class="btn"'); ?>
     <?php echo anchor("book/edit/$book->id","<i class='icon-pencil'></i> Modifier",'class="btn "'); ?>
-    <?php echo anchor("book/view/$book->id","<i class='icon-eye-open'></i> Voir",'class="btn "'); ?>
+    <?php echo anchor("book/show/$book->id","<i class='icon-eye-open'></i> Voir",'class="btn "'); ?>
     <?php echo anchor("social/share_book/$book->id","<i class='icon icon-share-alt'></i> Partager",'data-book_id="'.$book->id.'" class="btn private-link"'); ?>    
     <?php echo anchor("book/del_book/$book->id","<i class='icon-trash icon-white'></i> Supprimer",'class="btn btn-danger confirm"'); ?>   
     </div>

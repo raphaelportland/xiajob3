@@ -29,6 +29,7 @@ class Picture_model extends CI_Model {
     function get_pics($book_id, $params = null) {
        $q = $this->db    
             ->where('book_id',$book_id)
+            ->order_by('order','asc')
             ->get('book_pics');
             
        

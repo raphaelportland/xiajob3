@@ -5,15 +5,17 @@
          
     <?php // début de la boucle d'affichage des photos
     foreach ($pictures as $key => $picture) :
-        if(isset($picture->comments->nb)) {  // à vérifier
-            $comments_nb = $picture->comments->nb;
-        } else {
-            $comments_nb = 0;
-        } ?>        
         
-        <div class="item <?php // on active la bonne photo
-        if(isset($pic_to_display) && $pic_to_display == $picture->id) echo "active";
-        if(!isset($pic_to_display) && $key == 0) echo "active"; ?>">
+        // on affiche que la photo qui nous importe
+        if($pic_to_display == $picture->id) :
+    
+            if(isset($picture->comments->nb)) {  // à vérifier
+                $comments_nb = $picture->comments->nb;
+            } else {
+                $comments_nb = 0;
+            } ?>
+        
+        <div class="item active">
                     
         <div class="btn-group book-social">
                            
@@ -100,14 +102,17 @@
             </div>
             <?php endif; ?>       
         </div>
+        
+        <?php $order = $picture->order; ?>
+        
+    <?php endif; ?>
     
     <?php endforeach; ?>
     </div>
     
-    
-    <!-- Carousel nav -->
-    <a class="carousel-control left" href="#myCarousel-fullscreen" data-slide="prev">&lsaquo;</a>
-    <a class="carousel-control right" href="#myCarousel-fullscreen" data-slide="next">&rsaquo;</a>
+    <!-- Navigation entre les photos -->
+    <a class="carousel-control left" href="<?= site_url('book/previous_pic/'.$id.'/'.$order); ?>">&lsaquo;</a>
+    <a class="carousel-control right" href="<?= site_url('book/next_pic/'.$id.'/'.$order); ?>">&rsaquo;</a>    
 </div>   
 
 

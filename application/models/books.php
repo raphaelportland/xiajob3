@@ -530,11 +530,15 @@ class Books extends CI_Model {
      */
     function import_img($image) {
         
+        // on récupère l'ordre d'image le plus grand du book
+        $order = $this->get_max_pic_order($image->book);
+        
         $import = array(
         'pic' => $image->name,
         'book_id' => $image->book,
         'pic_url' => $image->url,
         'th_url' => $image->thumbnail_url,
+        'order' => $order+1,
         );
         
         $this->db->insert('book_pics',$import);
@@ -543,6 +547,29 @@ class Books extends CI_Model {
         // si le book n'a pas de couverture, on utilise l'image qui vient d'être chargée
         if(!$this->has_cover($image->book)) $this->update_cover_pic($image->book, $new_pic_id);
     }
+    
+    
+    // renvoie la plus grande valeur d'ordre des photos du book
+    function get_max_pic_order($book_id) {
+
+        $q = $this->db
+            ->select('order')
+            ->from('book_pics')
+            ->where('book_id',$book_id)
+            ->order_by('order','desc')
+            ->limit(1)
+            ->get();
+            
+        if($q->num_rows() == 1) {
+            return $q->row()->order;
+        } else {
+            return 1;
+        }
+        
+    }
+    
+    
+    
     
     
     
@@ -911,9 +938,69 @@ class Books extends CI_Model {
         
     }
 
-    
-    
-    
 
-    
+
+    /**
+     * Renvoie l'id de la prochaine photo, 
+     * ou de la première si on est arrivés à la dernière photo
+     * 
+     */
+    function get_next_pic($book_id, $pic_order) {
+        
+        $q = $this->db
+                ->select('id')
+                ->from('book_pics')
+                ->where('book_id',$book_id)
+                ->where('order', $pic_order + 1)
+                ->get();
+                
+        if($q->num_rows() == 1 ) {
+            return $q->row()->id;
+        } else { // on a atteint la dernière photo on retourne à la première
+            
+            $q = $this->db
+                    ->select('id')
+                    ->from('book_pics')
+                    ->where('book_id',$book_id)
+                    ->where('order',1)
+                    ->get();
+                    
+            return $q->row()->id;           
+        }
+        
+    }
+
+    /**
+     * Renvoie l'id de la photo précédente
+     * ou de la dernière si on est arrivé à la première
+     * 
+     */
+    function get_previous_pic($book_id, $pic_order) {
+        
+        $q = $this->db
+                ->select('id')
+                ->from('book_pics')
+                ->where('book_id',$book_id)
+                ->where('order', $pic_order - 1)
+                ->get();
+                
+        if($q->num_rows() == 1 ) {
+            return $q->row()->id;
+        } else { // on a atteint la première photo on retourne à la dernière
+            
+            $q = $this->db
+                    ->select('id')
+                    ->from('book_pics')
+                    ->where('book_id',$book_id)
+                    ->order_by('order', 'desc')
+                    ->limit(1)
+                    ->get();
+                    
+            return $q->row()->id;           
+        }
+        
+    }
+
+
+   
 }

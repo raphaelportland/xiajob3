@@ -16,7 +16,7 @@
                 <?php endif; ?>
         </div>
         <div class='book-th-name'>
-            <strong><?php echo anchor('book/view/'.$id, $name); ?></strong><br />
+            <strong><?php echo anchor('book/show/'.$id, $name); ?></strong><br />
             <?php if(isset($owner)) : ?>            
              par 
             <?php echo anchor('profile/view/'.$owner->id, $owner->username); ?>
@@ -28,7 +28,7 @@
 
             <!-- COVER -->
             <div class='cover'>
-                <a class='' href='<?= site_url('book/view/'.$id); ?>'> 
+                <a class='' href='<?= site_url('book/show/'.$id); ?>'> 
                     
                 <div class='book-fav-count'>
                     <i class='icon icon-white icon-star'></i> <?= $fav_count; ?>

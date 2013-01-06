@@ -1,4 +1,4 @@
-<h2>Mon profil</h2>
+<h1>Mon profil</h1>
 
 <?php $this->load->view('candidat/profile/profile_submenu'); ?>
 

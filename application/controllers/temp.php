@@ -121,4 +121,11 @@ class Temp extends CI_Controller
     }
     
     
+    function get_max_pic_order($book_id) {
+        echo('test de get_max_pic_order (books) pour le book '.$book_id);
+        $this->load->model('books');
+        $result = $this->books->get_max_pic_order($book_id);
+        code($result);
+    }
+    
 } 
