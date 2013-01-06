@@ -76,7 +76,7 @@ $('.autosubmit-input-link').click(function(){
 	});
 
   
-	$('.private-link').click(function(){
+	/*$('.private-link').click(function(){
 	
 		book_id = $(this).attr('data-book_id');
 		
@@ -84,7 +84,7 @@ $('.autosubmit-input-link').click(function(){
 		
 		return false; 
 		
-	});	
+	});*/	
 	  
 
 }); 

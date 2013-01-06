@@ -1,4 +1,4 @@
-<h2>Modifier votre Book</h2>
+<h1>Modifier mon Book</h1>
 
 <?php
 
@@ -7,8 +7,8 @@ echo form_open('book/edit/'.$book->id);
 ?>
 
 <div class="btn-group">
-    <?php echo anchor('book/my_books', "Retourner à mes books", 'class="btn"'); ?>
-    <?php echo anchor("book/add_pics/$book->id","<i class='icon-camera'></i> Ajouter",'class="btn"'); ?>
+    <?php echo anchor('book/my_books', "<i class='icon icon-chevron-left'></i> Retourner à mes books", 'class="btn"'); ?>
+    <?php echo anchor("book/add_pics/$book->id","<i class='icon icon-camera'></i> Ajouter des photos",'class="btn"'); ?>
     <?php echo form_submit('submit', "Enregistrer", 'class="btn btn-primary"'); ?>
 </div>
 <br />
@@ -70,14 +70,14 @@ $pic_desc = array(
         <td>
             <div class="btn-group">
                 <?php if($pic->id == $book->cover_pic) : ?>
-                    <button class='btn btn-success'>Couverture du book</button>
+                    <button class='btn btn-success'><i class='icon icon-book icon-white'></i> Couverture</button>
                 <?php else: ?>
-                    <?php echo anchor('book/update_cover/'.$pic->book_id.'/'.$pic->id,'Choisir comme couverture', 'class="btn"'); ?>    
+                    <?php echo anchor('book/update_cover/'.$pic->book_id.'/'.$pic->id,'<i class="icon icon-book"></i> Couverture ?', 'class="btn"'); ?>    
                 <?php endif; ?>
                 
                 
-                <?php echo anchor('book/add_flowers/'.$pic->id,'Identifier / Modifier les fleurs','class="btn"'); ?>
-                <?php echo anchor('book/del_picture/'.$pic->id,'<i class="icon icon-white icon-trash"></i> Supprimer','class="btn btn-danger delete-pic"');?>
+                <?php echo anchor('book/add_flowers/'.$pic->id,'<i class="icon icon-asterisk"></i> Identifier des fleurs','class="btn"'); ?>
+                <?php echo anchor('book/del_picture/'.$pic->id,'<i class="icon icon-white icon-trash"></i>','class="btn btn-danger delete-pic"');?>
             </div>
         </td>       
     </tr>   
@@ -87,7 +87,7 @@ $pic_desc = array(
     </tbody>  
 </table>
 
-<?php echo anchor('book/my_books', "Retourner à mes books", 'class="btn"'); ?>
+<?php echo anchor('book/my_books', "<i class='icon icon-chevron-left'></i> Retourner à mes books", 'class="btn"'); ?>
 
 <?php echo form_submit('submit', 'Enregistrer', 'class="btn btn-primary"'); ?>
 

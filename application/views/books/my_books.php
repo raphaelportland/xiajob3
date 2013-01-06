@@ -44,7 +44,7 @@ $this->load->view('common/social-share/social-share-scripts',$script_info); ?>
     <?php echo anchor("book/add_pics/$book->id","<i class='icon-camera'></i> Ajouter",'class="btn"'); ?>
     <?php echo anchor("book/edit/$book->id","<i class='icon-pencil'></i> Modifier",'class="btn "'); ?>
     <?php echo anchor("book/show/$book->id","<i class='icon-eye-open'></i> Voir",'class="btn "'); ?>
-    <?php echo anchor("social/share_book/$book->id","<i class='icon icon-share-alt'></i> Partager",'data-book_id="'.$book->id.'" class="btn private-link"'); ?>    
+    <?php //echo anchor("social/share/book/$book->id","<i class='icon icon-share-alt'></i> Partager",'data-book_id="'.$book->id.'" class="btn private-link"'); ?>    
     <?php echo anchor("book/del_book/$book->id","<i class='icon-trash icon-white'></i> Supprimer",'class="btn btn-danger confirm"'); ?>   
     </div>
     </td></tr>
@@ -97,7 +97,7 @@ $this->load->view('common/social-share/social-share-scripts',$script_info); ?>
 
 <br /><br />
 
-<h3>Mes florBooks (<?= count($books); ?>)</h3>
+<p class='lead'>Aperçu de mes florBooks (<?= count($books); ?>)</p>
 <?php foreach ($books as $key => $book) {
     $this->load->view('books/templates/book_thumb',$book);
 }?>
