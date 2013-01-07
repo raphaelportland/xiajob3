@@ -598,6 +598,34 @@ class Books extends CI_Model {
     }
     
     
+    
+    
+    /**
+     * Renvoie la couverture du book
+     * 
+     */
+    function get_cover($book_id, $params = null) {
+        
+        $q = $this->db
+        ->select('cover_pic')
+        ->from('user_book')
+        ->where('id', $book_id)
+        ->get();
+        
+        if($q->num_rows() == 1) {
+            $this->load->model('picture_model', 'picture');            
+            $picture = $this->picture->get_pic($q->row()->cover_pic, $params);
+            return $picture;
+        } else {
+            return false;
+        }
+        
+    }
+    
+    
+    
+    
+    
 
     
     

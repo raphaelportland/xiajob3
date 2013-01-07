@@ -428,12 +428,19 @@ class Book extends CI_Controller
                     break;  
                     
                 case 'diaporama' :
+                    // On charge les infos de la couverture
+                    $this->load->model('books');
+                    $params = array(
+                        'with_comments' => true,
+                        'with_flowers' => true,
+                    );
+                    $data = $this->books->get_cover($book_id, $params);
+                    
+                    // adresse de la visionneuse
+                    $data->pic_url = $this->picture->get_pic_view_url($book_id, $pic_id);                    
                     // appId Facebook
                     $this->config->load('facebook'); 
-                    $data->app_id = $this->config->item('facebook_appId');                      
-                    
-                    // la photo a afficher : la couverture
-                    $data->pic_to_display = $data->cover->id;
+                    $data->app_id = $this->config->item('facebook_appId'); 
                     
                     // on charge le template
                     $data->view = 'books/templates/new_book_pic_tpl';
