@@ -13,7 +13,7 @@ $this->load->view('common/social-share/social-share-scripts',$script_info); ?>
 <table class='table table-hover'>
     <thead>
         <tr>
-            <th>Nom</th>
+            <th colspan='2'>Nom</th>
             <th>Description</th>
             <th>photos</th>
             <th>favoris</th>
@@ -93,7 +93,7 @@ $this->load->view('common/social-share/social-share-scripts',$script_info); ?>
     </tbody>
 </table>
 
-<?php echo anchor("book/create_book","Ajouter un florBook",'class="btn btn-success"'); ?>
+<?php echo anchor("book/create_book","<i class='icon-plus icon-white'></i> Ajouter un florBook",'class="btn btn-success"'); ?>
 
 <br /><br />
 

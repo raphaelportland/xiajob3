@@ -138,7 +138,7 @@ class Books extends CI_Model {
      */
     function get_featured_book_list() {
         
-        $q = $this->db->get('featured_books');
+        $q = $this->db->order_by('id', 'desc')->get('featured_books');
         
         if($q->num_rows() > 0) {
             

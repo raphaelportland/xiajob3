@@ -11,7 +11,7 @@
 
 <center>
     <img src="<?= base_url().'public/img/timbre.jpg'; ?>" />   
-    <h2>Laissez-nous un message !</h2>    
+    <h1>Laissez-nous un message !</h1>    
 </center>
 
 <p>Des idées, l’envie de participer, un mot gentil ou même une frustration à évacuer… n’hésitez pas.<br /> 
@@ -48,7 +48,7 @@ $message = array(
 
 ?>
 
-<h3>Pourquoi vous nous contactez ?</h3>
+<p class='lead'>Pourquoi vous nous contactez ?</p>
 
 <div class="control-group">
     <label class="radio">
@@ -82,7 +82,7 @@ $message = array(
 Nous avons chacun une activité à coté et vos encouragements ne sont pas de trop ;)</p>
 
 
-<h3>Votre message</h3>
+<p class='lead'>Votre message</p>
 
 <div class="control-group">
 <?php echo form_label('Sujet', 'subject'); ?>

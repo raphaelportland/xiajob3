@@ -16,20 +16,14 @@ if($this->session->userdata('user_id')) {
 ?>
     
 <div class="container">         
-<?php //$this->load->view('common/search-annonces'); ?>
-
  
-<!--<div class='row'> -->
- 
-<?php 
-if(isset($pass_data) && isset($data)) :
-    $this->load->view($view, $data);
-else :
-    $this->load->view($view);
-endif; 
-?>
-
-<!--</div>-->
+    <?php 
+    if(isset($pass_data) && isset($data)) :
+        $this->load->view($view, $data);
+    else :
+        $this->load->view($view);
+    endif; 
+    ?>
 
 </div>
 

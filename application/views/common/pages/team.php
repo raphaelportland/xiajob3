@@ -1,11 +1,11 @@
 <center>
     
-    <h2>Sympa...</h2>
+    <h1>Sympa...</h1>
     
-    <img src='<?= base_url().'public/img/gnomecool.jpg'; ?>' /> 
+    <img class='img-polaroid' src='<?= base_url().'public/img/gnomecool.jpg'; ?>' /> 
     
     <h2>et Cool !</h2>
     
-    <p>N'hésitez pas à nous contacter ==> <?php echo anchor('social/contact','ici'); ?></p>
+    <p>N'hésitez pas à nous contacter &rarr; <?php echo anchor('social/contact','ici'); ?></p>
     
 </center>

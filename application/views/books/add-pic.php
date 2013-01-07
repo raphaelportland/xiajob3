@@ -19,7 +19,7 @@
         <?php $this->load->view('books/upload/upload_view'); ?>   
         
                  
-<?php echo anchor("book/edit/".$book->id, "Modifier votre book", 'class="btn btn-primary"'); ?>
+<?php echo anchor("book/edit/".$book->id, "Modifier votre book", 'class="btn btn-pink"'); ?>
 
 <input id="maxPics" type="hidden" name="maxpic" value="<?php echo 10-$book->pic_nb; ?>"/>
 

@@ -1,6 +1,6 @@
 <center>
     <br />
-    <img src='<?= base_url()."public/img/gnomeparticipe.jpg"; ?>' />
+    <img class='img-polaroid' src='<?= base_url()."public/img/gnomeparticipe.jpg"; ?>' />
     <h1>Envie de participer ?</h1>
 </center>
 

@@ -228,11 +228,23 @@ class Book extends CI_Controller
         $this->generic_user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.
         
         
-        if($this->input->post()) {           
-            $this->load->model('books');
-            $new_book_id = $this->books->create($this->input->post());
-            
-            redirect('book/add_pics/'.$new_book_id);                
+        if($this->input->post()) {
+                        
+            $this->load->library('form_validation');  
+            $this->form_validation->set_rules('book_name', 'Le nom de votre florBook est nécessaire !', 'required');  
+            $this->form_validation->set_rules('description', 'Veuillez entrer une description', 'required');  
+             
+            $this->form_validation->set_message('required', '%s');
+            $this->form_validation->set_error_delimiters('<div class="alert alert-danger"><strong>Attention : </strong> ', '</div>');
+                  
+            if($this->form_validation->run() != FALSE) :            
+                       
+                $this->load->model('books');
+                $new_book_id = $this->books->create($this->input->post());
+                
+                redirect('book/add_pics/'.$new_book_id);
+                 
+            endif;                
         }  
         
         $this->load->model('liste');

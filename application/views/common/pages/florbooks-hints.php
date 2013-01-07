@@ -1,8 +1,7 @@
-<h1>REGLES D’OR</h1>
-<h2>POUR CRÉER SON FLORBOOK !</h2>
+<h1>Règles d'Or pour créer son florBook !</h1>
 
 <blockquote>
-  <p>LA PHILOSOPHIE DE FLEURJOB PARTAGER LA PASSION DES CRÉATIONS FLORALES ET DE RÉVÉLER LES TALENTS. C’EST AUSSI UN SITE SEMI-PROFESSIONNEL, QUELQUES CONSEILS POUR BIEN RÉUSSIR VOTRE BOOK :</p>
+  <p>La philosophie de florBooks : partager la passion des créations florales et révéler les talents.<br />C'est aussi un site semi-professionnel, aussi voilà quelques conseils pour bien réussir votre book :</p>
 </blockquote>
 
 <dl class="">
@@ -25,7 +24,7 @@
 
 <div class='alert alert-info'><strong>Attention ! </strong><br />LES PHOTOS QUI NE RESPECTENT PAS LES RÈGLES OU L’ESPRIT DU SITE SERONT SUPPRIMÉES.</div>
 
-<h2>CONSEIL POUR LES PHOTOS DE COMPOSITIONS & BOUQUETS</h2>
+<h2>Conseil pour les photos de compositions & bouquets</h2>
 
 <dl>
     <dt>1. LA MISE EN SCÈNE</dt>
