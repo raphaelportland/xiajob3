@@ -446,18 +446,7 @@ class Book extends CI_Controller
                     $data->view = 'books/templates/new_book_pic_tpl';
                     $this->load->view('common/templates/viewer',$data);
                     break;                                     
-            }        
-        
-        
-        
-        
-           
-
-
-            
-            // appId Facebook
-            $this->config->load('facebook'); 
-            $data->app_id = $this->config->item('facebook_appId');
+            }
     }
 
     // renvoie sur la page de la photo suivante du book
