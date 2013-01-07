@@ -27,7 +27,7 @@
     <!-- pinterest -->
     <div class='social-share-item social-pinterest'> 
         <p class=''><strong>Sur Pinterest</strong></p>   
-        <a href="http://pinterest.com/pin/create/button/?url=<?= $pic_url; ?>&media=<?= base_url().$picture->pic_url; ?>&description=<?= $picture->pic_comment; ?>" count-layout="horizontal" class="pin-it-button btn">
+        <a href="http://pinterest.com/pin/create/button/?url=<?= site_url('book/show/'.$picture->book_id.'/picture/'.$picture->id); ?>&media=<?= base_url().$picture->pic_url; ?>&description=<?= 'Une belle création '.$picture->pic_name; ?>" count-layout="horizontal" class="pin-it-button btn">
             <img border="0" src="<?= base_url().'public/img/pinterest-btn.png'; ?>" title="Pin It" />
         </a>          
     </div>    
