@@ -1,7 +1,8 @@
     <div id='topbar' class="navbar navbar-fixed-top">
       <div class="navbar-inner">
           <div class='container-fluid'>
-                <?php echo anchor('main',' florBooks','class="brand"'); ?>
+                <?php //echo anchor('main',' florBooks','class="brand"'); ?>
+                <img class="nav pull-left" src='<?= base_url(); ?>/public/img/logo.png' />
                 <img class="nav pull-left" src='<?= base_url(); ?>/public/img/beta.png' />
                 <ul class="nav pull-left">    
                     <li><a>FR</a></li>                           
