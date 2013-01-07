@@ -2,8 +2,8 @@
             <div class='container'>
             <div class='row'>
                 <div class='span4'>
-                    <strong>FLOR... QUI ?</strong>
-                    <br /><br />
+                    <h3>flor... qui ?</h3>
+                    
                     <ul class="unstyled">
                          <li><?php echo anchor('pages/meet_the_gnomes','Qui sommes nous ?'); ?></li>
                          <li><?php echo anchor('pages/pitch','florBooks en quelques mots'); ?></li>
@@ -16,8 +16,8 @@
                 </div>
             
                 <div class='span4'>
-                    <strong>ENNUYEUX</strong>  
-                    <p class='small'>(Mais necessaire)</p> 
+                    <h3>Ennuyeux...</h3> 
+                    <p class='small'>...mais necessaire !</p> 
                     <ul class="unstyled">
                         <li><?php echo anchor('pages/cgu', 'Conditions générales'); ?></li>
                         <li><?php echo anchor('social/contact','Signalez un abus'); ?></li>
@@ -28,9 +28,9 @@
                 </div>
                 
                 <div class='span4'>
-                    <strong><i class='icon icon-white icon-warning-sign'></i> PHASE BETA <i class='icon icon-white icon-warning-sign'></i></strong><br />
+                    <h3>Phase Beta <img src='<?= base_url(); ?>/public/img/beta.png' /></h3>
                     <br />  
-                    <p>Cela veut dire que le site n'est pas encore finalisé.</p>
+                    <p>Cela veut dire que le site n'est <strong>pas encore finalisé</strong>.</p>
                     <p>On travaille dur pour tout améliorer ! <br />
                     Vous avez vu un défaut ? <?php echo anchor('social/contact', 'dites-le nous ici !'); ?></p>          
                 </div>
