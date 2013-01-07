@@ -87,7 +87,7 @@ class Pic_search extends CI_Controller
             
             $data['pictures'] = $pictures;
             $data['view'] = 'common/search_result';
-            $this->load->view('common/templates/main', $data);
+            $this->load->view('common/templates/main-fixed', $data);
         }
         
         

@@ -1021,6 +1021,37 @@ class Generic_user extends Users {
         
     }
     
+    
+    
+    /**
+     * Teste si l'utilisateur est administrateur
+     * 2013/01/07
+     * 
+     * @return bool
+     */
+    function is_admin() {
+        
+        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggué 
+        
+            return false;
+        
+        } else {        
+        
+            $user_id = $this->session->userdata('user_id');
+            
+            $q = $this->db->where('user_id', $user_id)
+            ->where('option', 'is_admin')
+            ->where('value', 1)
+            ->get('user_options');
+            
+            if($q->num_rows() == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+    
 
     
 }

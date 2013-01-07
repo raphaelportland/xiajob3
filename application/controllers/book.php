@@ -27,7 +27,7 @@ class Book extends CI_Controller
         $data['fleurs'] = $this->liste->flowers();
         
         $data['view'] = 'books/gallery';      
-        $this->load->view('common/templates/main',$data);
+        $this->load->view('common/templates/main-fixed',$data);
        
     }
     
@@ -45,7 +45,7 @@ class Book extends CI_Controller
         //code($data['books']);
         
         $data['view'] = 'books/latest';    
-        $this->load->view('common/templates/main',$data);      
+        $this->load->view('common/templates/main-fixed',$data);      
          
      }
      
@@ -54,7 +54,7 @@ class Book extends CI_Controller
         $this->load->model('books');
         $data['books'] = $this->books->get_popular();
         $data['view'] = 'books/popular';    
-        $this->load->view('common/templates/main',$data);    
+        $this->load->view('common/templates/main-fixed',$data);    
      }
     
 
@@ -106,10 +106,6 @@ class Book extends CI_Controller
 
             $this->load->view('books/templates/book_tpl',$data);
     }   
-
-
-
-
 
 
 
@@ -324,7 +320,7 @@ class Book extends CI_Controller
         $data['pic'] = $this->books->get_pic_by_id($pic_id);
         
         $data['view'] = 'books/add-flowers';
-        $this->load->view('common/templates/main',$data);
+        $this->load->view('common/templates/main-fixed',$data);
         
     }
     
@@ -348,6 +344,9 @@ class Book extends CI_Controller
         $this->books->update_cover_pic($book_id, $pic_id);
         redirect('book/edit/'.$book_id);
     }
+    
+    
+    
     
     
     

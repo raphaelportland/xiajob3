@@ -247,37 +247,28 @@ form .help-block {
 .featured-mini-book-thumb {
 	position: absolute;
 	top: 70px;
-	left: 100px;
-	background-color: white;
-	width: 290px;
-	padding: 5px;
-	height: 210px;
+	left: 150px;
 	display: block;
 	-webkit-box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);
 	-moz-box-shadow: 8px 8px 15px rgba(0,0,0,0.5);
 	box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.5);	
 }
 
-.featured_th_crop {
-	width: 290px;
-	height: 210px;
-	overflow: hidden;		
-}
 
 .featured-book-content {
 	background-color: rgba(0, 0, 0, 0.7);
 	position: absolute;
-	width: 380px;
+	width: 300px;
 	right: 0px;
 	top: 0px;
 	height: 320px;
 	color: white;
-	padding : 20px 100px 20px 40px;	
+	padding : 20px 50px 20px 40px;	
 }
 
 .featured-visit-btn {
 	position: absolute;
-	left: 40px;
+	right: 40px;
 	bottom: 40px;
 }
 
@@ -459,4 +450,60 @@ a {
 
 a:hover {
 	color: #b62f40;
+}
+
+
+
+/* BOUTON ROSE */
+
+.btn-pink {
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #D84B6D;
+  *background-color: #D84B6D;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#D84B6D), to(#8D0A2F));
+  background-image: -webkit-linear-gradient(top, #D84B6D, #8D0A2F);
+  background-image: -o-linear-gradient(top, #D84B6D, #8D0A2F);
+  background-image: linear-gradient(to bottom, #D84B6D, #8D0A2F);
+  background-image: -moz-linear-gradient(top, #D84B6D, #8D0A2F);
+  background-repeat: repeat-x;
+  border-color: #8D0A2F #8D0A2F #8D0A2F #D84B6D;
+  border-bottom: 0px;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#D84B6Dcc', endColorstr='#8D0A2Fcc', GradientType=0);
+  filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+
+.btn-pink:hover,
+.btn-pink:active,
+.btn-pink.active,
+.btn-pink.disabled,
+.btn-pink[disabled] {
+  color: #ffffff;
+  background-color: #8D0A2F;
+  *background-color: #620620;
+}
+
+.btn-pink:active,
+.btn-pink.active {
+  background-color: #620620 \9;
+}
+
+
+
+
+
+div.section {
+	margin-top: 30px;
+}
+
+
+span.title-btn h2 {
+	display: inline;
+	mmargin-right: 10px;
+}
+
+span.title-btn {
+	display: block;
+	margin-bottom: 15px;
 }

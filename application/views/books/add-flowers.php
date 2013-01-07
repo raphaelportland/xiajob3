@@ -1,4 +1,4 @@
-<h2>Identifiez des fleurs sur votre photo</h2>
+<h1>Identifiez des fleurs</h1>
 
 <img src="<?= base_url().$pic->th_url; ?>" class='img img-polaroid' />
 
@@ -18,4 +18,4 @@ $flower_data['added_flowers'] = $pic->flowers;
 $this->load->view('books/added_flowers',$flower_data); ?>
 
 <br /><br />
-<?php echo anchor('book/edit/'.$pic->book_id,'Retour à la modification du book','class="btn"'); ?>
+<?php echo anchor('book/edit/'.$pic->book_id,'<i class="icon icon-chevron-left"></i> Retour à la modification du florBook','class="btn"'); ?>

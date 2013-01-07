@@ -5,16 +5,13 @@
  */
  
 ?>
-    
-<h1>Exploration des books</h1> 
+
+<div class='row'>    
+<h1>Explorer les florBooks</h1>
+</div>
 
 <?php if(isset($books->featured)) : ?>
-<div class='row-fluid'>
-
-    
-        <p class='lead'>A découvrir sur FlorBook !</p>
-        
-        
+<div class='row'>
     <div id="myCarousel-featured" class="carousel slide" data-interval="10000">
       <!-- Carousel items -->
       <div class="carousel-inner">
@@ -40,38 +37,37 @@
 </div>
 <?php endif; ?>
 
-
+<div class='row'>
 <?php // partie recherche de photos
-$this->load->view('books/pic_search'); 
+// $this->load->view('books/pic_search'); 
 ?>
+<div class='alert alert-info'>
+    <strong>Recherche par fleur</strong>
+    Bientôt disponible !
+</div>
+</div>
 
 
 <?php if(isset($books->popular)) : // les books populaires ?>
-<div class='row-fluid'>
-        <p class='lead'>Les books les plus populaires <?php echo anchor('book/popular','Voir tous les books populaires','class="btn"'); ?>    </p>
+<div class='row'>
+    <span class='title-btn'><h2>les plus populaires</h2> <?php echo anchor('book/popular','<i class="icon-chevron-right"></i> Voir tout'); ?></span>
  
-        <?php foreach ($books->popular as $key => $book) : ?>      
-            
-            <?php //code($book); ?> 
-            
-            <?php $this->load->view('books/templates/book_thumb',$book); ?>
-            
-        <?php endforeach; ?> 
-     
-       
+        <?php foreach ($books->popular as $key => $book) : ?>
+        
+        <?php $this->load->view('books/templates/book_thumb',$book); ?>
+        
+    <?php endforeach; ?>      
 </div>
 
 <?php endif; ?>
 
 
-<div class='row-fluid'>
-        <p class='lead'>Les books les plus récents <?php echo anchor('book/latest','Voir tous les books récents','class="btn"'); ?></p>
+<div class='row section'>
+    <span class='title-btn'><h2>les plus récents</h2> <?php echo anchor('book/latest','<i class="icon-chevron-right"></i> Voir tout'); ?></span>
  
         <?php foreach ($books->latest as $key => $book) : // les books récents?>       
-            
-            <?php $this->load->view('books/templates/book_thumb',$book); ?>
-            
-        <?php endforeach; ?> 
-     
-           
+        
+        <?php $this->load->view('books/templates/book_thumb',$book); ?>
+        
+    <?php endforeach; ?>      
 </div>

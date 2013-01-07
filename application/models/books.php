@@ -132,6 +132,35 @@ class Books extends CI_Model {
         }        
        
     }
+
+    /**
+     * Renvoie la liste des ids stockés dans la table featured_books
+     */
+    function get_featured_book_list() {
+        
+        $q = $this->db->get('featured_books');
+        
+        if($q->num_rows() > 0) {
+            
+            $data = array();
+            
+            $params = array(
+                'with_owner' => true,
+            );
+            
+            foreach ($q->result() as $key => $featured_book) {
+                
+                $data[$featured_book->book_id] = $this->get_book($featured_book->book_id, $params);
+                
+            }
+            
+            return $data;
+            
+        } else {
+            return false;
+        }
+        
+    }
     
     
     
@@ -474,6 +503,7 @@ class Books extends CI_Model {
                 // on supprime les associations de fleurs
                 $this->db->delete('pic_flowers', array('pic_id' => $pic->id));
                 $this->db->delete('user_flowers', array('pic_id' => $pic->id));   
+
                 
             }
         endif;     
@@ -482,7 +512,11 @@ class Books extends CI_Model {
         $this->db->delete('book_pics', array('book_id' => $id));  
         
         // on supprime le book de la base de données   
-        $this->db->delete('user_book', array('id' => $id));     
+        $this->db->delete('user_book', array('id' => $id));   
+        
+                
+        // on supprime les favoris liés à ce book
+        $this->db->delete('user_fav', array('book_id' => $id));          
     }
     
     

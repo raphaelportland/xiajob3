@@ -1,7 +1,7 @@
 <div class='book-container'>
 
     <!-- Le lien qui emballe la cover -->
-    <a href='<?= site_url('book/show'.$id); ?>'>
+    <a href='<?= site_url('book/show/'.$id); ?>'>
         <div class='cover'>
 
             <!-- le nombre de favoris -->
