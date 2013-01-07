@@ -16,9 +16,9 @@ $this->load->view('candidat/elmt/private-head-nav');
         <ul class="nav nav-tabs nav-stacked">
             
             <!-- Menu d'administration -->
-            <li><?= anchor('','<i class="icon icon-lock"></i> Ajouter un administrateur'); ?></li>
-            <li><?= anchor('','<i class="icon icon-user"></i> Aperçu des utilisateurs'); ?></li>
-            <li><?= anchor('','<i class="icon icon-book"></i> Aperçu des florBooks'); ?></li>
+            <li><?= anchor('','<i class="icon icon-lock"></i> Ajouter un administrateur', 'class="muted"'); ?></li>
+            <li><?= anchor('','<i class="icon icon-user"></i> Aperçu des utilisateurs', 'class="muted"'); ?></li>
+            <li><?= anchor('','<i class="icon icon-book"></i> Aperçu des florBooks', 'class="muted"'); ?></li>
             <li><?= anchor('admin/featured_book','<i class="icon icon-bookmark"></i> Mettre un book à la une'); ?></li>
         </ul>    
     </div>  
