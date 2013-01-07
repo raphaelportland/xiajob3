@@ -33,10 +33,10 @@
             else :
                 echo "Anonymous"; 
             endif;
-        endif; ?>
-        <br />
-        <small><?php if(isset($user->address->country)) : echo $user->address->country; else : echo "(France)"; endif; ?> </small>
-        <span class="badge badge-success badge-large"><?php if(isset($user->options->status)) : echo $user->options->status; else : echo "statut non défini"; endif; ?></span></h1>
+        endif; ?></h1>
+        <p class='lead'>
+        <?php if(isset($user->address->country)) : echo $user->address->country; else : echo "(France)"; endif; ?> 
+        <span class="badge badge-success badge-large"><?php if(isset($user->options->status)) : echo $user->options->status; else : echo "statut non défini"; endif; ?></span></p>
             
         
         <!--
@@ -82,18 +82,10 @@
     
     <?php if($user->books): ?>
     <div class='row-fluid'>
-        <h2>Mes books</h2>
+        <h2>Mes florBooks</h2>
         
         <?php foreach ($user->books as $key => $book) {
-            
-            //code($book);
-            //@$book->occasion = $occasions[$book->id_occasion];
-            
-            //code($book);
-                     
             $this->load->view('books/templates/book_thumb',$book);
-            
-            
         } ?>
 
     </div>
@@ -103,7 +95,6 @@
     <div class='row-fluid'>
         <h2>Compétences</h2>
         
-    
     <table class='table'>
         
 
@@ -113,7 +104,7 @@
             
                 $score = $competence->score;
                 
-                echo("<tr><td><p class='lead'>".$competence->nom."</p></td><td>");  
+                echo("<tr><td><p>".$competence->nom."</p></td><td>");  
                 
                 for ($i=0; $i < 4; $i++) {   
 
