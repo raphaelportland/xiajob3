@@ -93,38 +93,8 @@
     
 <?php if(isset($user->resume->skills)) : ?>
     <div class='row-fluid'>
-        <h2>Compétences</h2>
-        
-    <table class='table'>
-        
-
-            <?php 
-            
-            foreach($user->resume->skills as $key => $competence) :
-            
-                $score = $competence->score;
-                
-                echo("<tr><td><p>".$competence->nom."</p></td><td>");  
-                
-                for ($i=0; $i < 4; $i++) {   
-
-                    if($score > 1) : ?>
-                        
-                        <i class='star star-on'></i>
-                        
-                    <?php $score = $score - 1;
-                    
-                    else : ?>
-                        
-                        <i class='star star-off'></i>    
-                                           
-                    <?php endif;
-                }
-                
-                echo("</td></tr>");
-
-            endforeach; ?>
-    </table>
+        <h2>Compétences</h2>       
+        <?php $this->load->view('candidat/elmt/skills-2columns'); ?>
         
     </div>
 <?php endif; ?>   

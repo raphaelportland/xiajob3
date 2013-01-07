@@ -18,53 +18,9 @@ if($user->options->profile_step != 'finished') {
    
         <!-- Skills -->
         <p class='lead'>Compétences <?php echo anchor('main/edit_profile/2','Mettre à jour', 'class="btn"'); ?></p>
-    <div class='row'>     
-        
+        <?php $this->load->view('candidat/elmt/skills-2columns'); ?>
+    
 
-        <div class='span6'>
-            <table class='table'>
-
-                    <?php for ($j=1; $j < 6; $j++) :
-                        
-                        $competence = $user->resume->skills[$j]; 
-                        $score = $competence->score;
-                        
-                        echo("<tr><td><p>".$comp_list[$j]->nom."</p></td><td>");  
-                        
-                        for ($i=0; $i < 4; $i++) {
-                            if($score > 1) : ?>
-                                <i class='star star-on'></i>
-                            <?php $score = $score - 1;
-                            else : ?>
-                                <i class='star star-off'></i>                
-                            <?php endif;
-                        }
-                        echo("</td></tr>");
-                    endfor;?>
-            </table>                        
-        </div>
-        <div class='span6'>
-            <table class='table'>
-                    <?php for ($j=6; $j < 11; $j++) :
-                        
-                        $competence = $user->resume->skills[$j]; 
-                        $score = $competence->score;
-                        
-                        echo("<tr><td><p>".$comp_list[$j]->nom."</p></td><td>");  
-                        
-                        for ($i=0; $i < 4; $i++) {
-                            if($score > 1) : ?>
-                                <i class='star star-on'></i>
-                            <?php $score = $score - 1;
-                            else : ?>
-                                <i class='star star-off'></i>                
-                            <?php endif;
-                        }
-                        echo("</td></tr>");
-                    endfor;?>
-            </table>             
-        </div>
-    </div>
 
     <p class="lead">Mes florBooks <small>(<?= count($user->books); ?>)</small> <?php echo anchor('book/my_books','Modifier', 'class="btn"'); ?></p>    
     <div class='row'>

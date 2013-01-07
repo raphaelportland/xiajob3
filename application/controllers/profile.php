@@ -26,6 +26,7 @@ class Profile extends CI_Controller
             'with_xppro' => true,
             'with_options' => true,
             'with_address' => true,
+            'with_description' => true,
             'with_books' => true,
             'books_params' => array(
                 'user_id' => $user_id,

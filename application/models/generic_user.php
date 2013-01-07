@@ -147,7 +147,7 @@ class Generic_user extends Users {
                 
                 $user->books = $this->book_model->get_library($books_params);
                 
-                
+              
                 
                // $user->books = $this->get_all_user_books($user_id);
             endif;     
@@ -182,6 +182,19 @@ class Generic_user extends Users {
                     $user->address = null;
                     
                 endif;
+                
+                
+                // description
+                if($with_description) {
+                    $q = $this->db->where('user_id', $user->id)->get('user_description');
+                    if($q->num_rows() == 1 && $q->row()->description != '') {
+                        $user->description = $q->row()->description;
+                    } else {
+                        $user->description = 'aucune description';
+                    }
+                }
+                
+                
             endif;
                 
             // resume : dans la classe Candidat
