@@ -525,3 +525,10 @@ span.title-btn {
 	float: right;
 	padding-right: 10px;
 }
+
+
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover {
+  color: #ffffff;
+  background-color: #D84B6D;
+}

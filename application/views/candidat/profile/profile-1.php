@@ -22,20 +22,19 @@
 foreach ($user->resume->awards as $key => $recompense) {   
     echo("<tr><td>$recompense->name</td><td>$recompense->autre_recomp</td><td>$recompense->year_recomp</td>
     <td>"); ?>
-    <div class="btn-group">
-    <?php //echo anchor("main/edit_recomp/$recompense->user_recomp_id",'Modifier', 'class="btn btn-mini"');
-    echo anchor("main/edit/recomp/$recompense->user_recomp_id", 'Modifier', 'role="button" class="btn btn-mini edit"');
-    echo anchor("main/del/recomp/$recompense->user_recomp_id",'Supprimer', 'class="btn btn-mini btn-danger confirm"');
-?>  </div>  
+
+    <?= anchor("main/edit/recomp/$recompense->user_recomp_id", '<i class="icon-edit"></i> Modifier', 'role="button" class="btn edit"'); ?>&nbsp;
+    <?= anchor("main/del/recomp/$recompense->user_recomp_id",'<i class="icon-trash icon-white"></i>', 'class="btn btn-danger confirm"');
+?>   
     <?php echo("</td></tr>");
 }
 ?>     
     </tbody>  
 </table>
-<?php echo anchor('#addRecomp','Ajouter un prix', 'role="button" class="btn" data-toggle="modal"'); ?>
+<?php echo anchor('#addRecomp','<i class="icon-plus icon-white"></i> Ajouter un prix', 'role="button" class="btn btn-pink" data-toggle="modal"'); ?>
 
-<br />
-<br />
+<br /><br />
+<br /><br />
 
 <p class='lead'>Formations et diplômes</p>
 
@@ -66,22 +65,20 @@ foreach ($user->resume->diplomas as $key => $diplome) {
     }    
     
     echo("<td>"); ?>
-    <div class="btn-group">
+
             
-    <?php 
-    echo anchor("main/edit/formations/$diplome->user_form_id", 'Modifier', 'role="button" class="btn btn-mini edit"');
-    echo anchor("main/del/formations/$diplome->user_form_id",'Supprimer', 'class="btn btn-mini btn-danger confirm"'); ?>
-    </div>
+    <?= anchor("main/edit/formations/$diplome->user_form_id", '<i class="icon-edit"></i> Modifier', 'role="button" class="btn edit"'); ?>&nbsp;
+    <?= anchor("main/del/formations/$diplome->user_form_id",'<i class="icon-trash icon-white"></i>', 'class="btn btn-danger confirm"'); ?>
     <?php echo("</td></tr>");
 }
 ?>     
     </tbody>  
 </table>
-<?php echo anchor('#addDiplome','Ajouter un diplôme', 'role="button" class="btn" data-toggle="modal"'); ?>
+<?php echo anchor('#addDiplome','<i class="icon-plus icon-white"></i> Ajouter un diplôme', 'role="button" class="btn btn-pink" data-toggle="modal"'); ?>
 
 
-<br />
-<br />
+<br /><br />
+<br /><br />
 
 <p class='lead'>Expériences pro</p>
 
@@ -102,15 +99,15 @@ foreach ($user->resume->xppro as $key => $xp) {
     echo("<td>$xp->etablissement</td><td>$xp->type_name</td><td>$xp->poste_name</td>");  
     
     echo("<td>"); ?>
-    <div class="btn-group">
-        
-    <?php echo anchor("main/edit/expepro/$xp->user_xp_id",'Modifier', 'class="btn btn-mini edit"');
+
+      
+    <?= anchor("main/edit/expepro/$xp->user_xp_id",'<i class="icon-edit"></i> Modifier', 'class="btn edit"');?>&nbsp;
     
-    echo anchor("main/del/expepro/$xp->user_xp_id",'Supprimer', 'class="btn btn-mini btn-danger confirm"'); ?>
-    </div>
+    <?= anchor("main/del/expepro/$xp->user_xp_id",'<i class="icon-trash icon-white"></i>', 'class="btn btn-danger confirm"'); ?>
+
     <?php echo("</td></tr>");
 }
 ?>     
     </tbody>  
 </table>
-<?php echo anchor('#addXp','Ajouter une expérience', 'role="button" class="btn" data-toggle="modal"'); ?>
+<?php echo anchor('#addXp','<i class="icon-plus icon-white"></i> Ajouter une expérience', 'role="button" class="btn btn-pink" data-toggle="modal"'); ?>

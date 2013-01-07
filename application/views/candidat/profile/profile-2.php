@@ -45,7 +45,7 @@ $informatique = array(
     <table class='table'>
         <thead>
             <tr>
-                <th>#</th>
+                <th colspan="2"></th>
                 <th>Aucune</th>
                 <th>Débutant</th>
                 <th>Intermédiaire</th>
@@ -57,11 +57,11 @@ $informatique = array(
         <tbody>
             
             <?php
-            
             foreach($comp_list as $key => $competence) {
                 
-                //code($competence);
-                echo("<tr><th>".$competence->nom."</th>");
+                echo("<tr>
+                <td><img src='".base_url().'public/img/skills/'.$competence->picto."' /></td>
+                <th>".$competence->nom."</th>");
                 
                 
                 for ($i=1; $i < 6; $i++) {
@@ -153,7 +153,7 @@ $informatique = array(
 
 
 
-<?php echo form_submit("submit","Mettre à jour mes informations", "class='btn btn-primary btn-large pull-right'");?>
+<?php echo form_submit("submit","Mettre à jour mes informations", "class='btn btn-pink pull-right'");?>
 <?php echo form_close(); ?>
 
 

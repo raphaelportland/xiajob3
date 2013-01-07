@@ -9,6 +9,11 @@ class Social extends CI_Controller
 {
     function add_fav($book_id = null) {
         
+        if(!$this->session->userdata('user_id')) {
+            redirect('auth/login');
+        }
+        
+        
         if($this->input->post('book_id')) {
 
             $data['book_id'] = $this->input->post('book_id');
@@ -77,6 +82,7 @@ class Social extends CI_Controller
     
     
     function del_fav($book_id, $origin = null) {
+        
         $this->load->model('social_model');
         
         $data['book_id'] = $book_id;

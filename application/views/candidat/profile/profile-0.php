@@ -270,7 +270,7 @@ echo("</div>"); ?>
 <?php echo form_hidden('country', 'France'); ?>
 
 <div class='row-fluid'>
-<?php echo form_submit("register","Mettre à jour mes informations", "class='btn btn-primary btn-large pull-right'");?>
+<?php echo form_submit("register","Mettre à jour mes informations", "class='btn btn-pink pull-right'");?>
 <?php echo form_close(); ?>
 </div>
 
