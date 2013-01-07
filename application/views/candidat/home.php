@@ -16,7 +16,7 @@
  
     
     <!-- Le formulaire de login -->
-    <div class='span4 home-login'>
+    <div class='home-login'>
         <center>
             <br />
             <h2>J'ai un compte !</h2>

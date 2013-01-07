@@ -510,8 +510,8 @@ span.title-btn {
 
 
 .first-row {
-	background-color: #280611;
 	height: 360px;
+	background: #280611 url('../img/test-first-row-bkg.png') top right no-repeat;
 }
 
 .home-login h2 {
@@ -520,4 +520,8 @@ span.title-btn {
 
 .home-login {
 	color: white;
+	height: 360px;
+	width: 300px;
+	float: right;
+	padding-right: 10px;
 }
