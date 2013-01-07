@@ -18,16 +18,12 @@ class Main extends CI_Controller
         if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggué      
         
             $this->load->model('books');
-            $this->books->get_latest(4);
+            $data['books'] = $this->books->get_popular(4);
         
-            $data['books'] = $this->books->books;
-            
-            
-            
-                    
+            //$data['books'] = $this->books->books;     
             $data['view'] = 'candidat/home';
         
-            $this->load->view('common/templates/main',$data);
+            $this->load->view('common/templates/main-fixed',$data);
                             
         } else { // s'il est loggué
             $this->load->model('generic_user');

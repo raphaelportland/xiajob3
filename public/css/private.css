@@ -507,3 +507,17 @@ span.title-btn {
 	display: block;
 	margin-bottom: 15px;
 }
+
+
+.first-row {
+	background-color: #280611;
+	height: 360px;
+}
+
+.home-login h2 {
+	color: white;
+}
+
+.home-login {
+	color: white;
+}

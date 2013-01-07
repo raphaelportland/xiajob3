@@ -40,7 +40,7 @@ $captcha = array(
 
 <?php echo form_open('auth/login','class="form-horizontal"'); //echo form_open($this->uri->uri_string()); ?>
 
-<legend>Connectez-vous</legend>
+<h1>Connectez-vous</h1>
 
 <div class="control-group">
     <?php echo form_label($login_label, $login['id'],$label_attributes); ?>

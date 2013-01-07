@@ -29,6 +29,7 @@ $this->load->view('common/social-share/social-share-scripts',$script_info); ?>
     //code($book);
        
     echo("<tr>
+    <th></th>
     <th><div id='book_name_$key'>");
     if(!$book->name) $book->name = 'cliquez ici pour ajouter un nom';
     if(!$book->description) $book->description = 'cliquez ici pour ajouter une description';
