@@ -169,14 +169,8 @@ class Temp extends CI_Controller
         }
         
         echo ("Ordre ajouté à toutes les photos");
-    } 
-
-
-    function del_book($id) {
-        $this->load->model('books');
-        $this->books->delete($id);
-        echo('Book '.$id.' supprimé.');
     }
+    
  
     
 } 

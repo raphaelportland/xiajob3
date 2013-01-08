@@ -1,9 +1,11 @@
 /* CSS SPECIFIQUE */
 
 body {
-	mbackground: url('../img/text-herb.jpg') top left;
 	padding-top: 40px;
-	height: 100%;
+	height: 100%; 
+}
+
+.container {
 }
 
 .fj_container {

@@ -115,8 +115,11 @@ class Books extends CI_Model {
             );                                   
                                    
             foreach ($result as $key => $book) {
-                          
-                $books[$key] = $this->get_book($book->book_id, $params);  
+                
+                $info = $this->get_book($book->book_id, $params);
+                if($info->id != '') { // on ne garde que les books non vide
+                    $books[$key] = $info;
+                }
             }
             
             //code($books);

@@ -19,10 +19,7 @@ class Book extends CI_Controller
         $this->books->get_popular(8);
                 
         $data['books'] = $this->books->books;
-        
-        //code($data['books']);
-        
-        
+
         $this->load->model('liste');
         $data['fleurs'] = $this->liste->flowers();
         
