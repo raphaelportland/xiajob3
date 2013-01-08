@@ -28,6 +28,48 @@ class Admin_model extends CI_Model {
         $this->db->insert('featured_books', array('book_id' => $book_id));
     }
     
+    /**
+     * Renvoie la liste des administrateurs avec les infos
+     */
+    function get_admin_list() {
+        
+        $q = $this->db->select('user_id')
+        ->where('option','is_admin')->where('value',1)
+        ->group_by('user_id')
+        ->get('user_options');
+        
+        if($q->num_rows() > 0) {
+            
+            $this->load->model('generic_user');
+            $admin_list = array();
+            
+            $params = array();
+            
+            foreach ($q->result() as $key => $user) {
+                $params['user_id'] = $user->user_id;
+                $admin_list[$user->user_id] = $this->generic_user->get_user($params);
+            }
+            //code($admin_list);
+            return $admin_list;
+        } else {
+            return false;
+        }                
+    }
+    
+    /**
+     * Ajoute un administrateur
+     */
+    function add_admin($id) {
+        $this->db->insert('user_options', array('user_id' => $id, 'option' => 'is_admin', 'value' => 1));        
+    }
+    
+    
+    /**
+     * Supprime un administrateur
+     */
+    function del_admin($id) {
+        $this->db->where('user_id', $id)->where('option','is_admin')->where('value',1)->delete('user_options');
+    }
     
     
 }

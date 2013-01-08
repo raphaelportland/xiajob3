@@ -12,8 +12,7 @@ class Admin extends CI_Controller
      * 
      */
     function index() {
-        $this->load->model('generic_user', 'user');
-            
+        $this->load->model('generic_user', 'user');            
         if($this->user->is_admin()) { // il est bien administrateur
                 
             // affichage du panneau d'administration
@@ -37,7 +36,6 @@ class Admin extends CI_Controller
     function featured_book() {
        
         $this->load->model('generic_user', 'user');
-            
         if($this->user->is_admin()) { // il est bien administrateur
         
             // chargement des books à la une
@@ -62,15 +60,17 @@ class Admin extends CI_Controller
      * Ajoute le book dans la table des books mis en avant
      */
     function add_featured_book() {
-
-         if($this->input->post('submit')) {            
-             
-             $this->load->model('admin_model');
-             $this->admin_model->add_featured_book($this->input->post('new_book_id'));
-             
-             redirect('admin/featured_book');
-             
-         }
+        $this->load->model('generic_user', 'user');
+        if($this->user->is_admin()) { // il est bien administrateur 
+             if($this->input->post('submit')) {            
+                 
+                 $this->load->model('admin_model');
+                 $this->admin_model->add_featured_book($this->input->post('new_book_id'));
+                 
+                 redirect('admin/featured_book');
+                 
+             }
+        }
     }
 
 
@@ -79,14 +79,66 @@ class Admin extends CI_Controller
      * 
      */
     function delete_featured_book($book_id) {
-       
-       $this->load->model('admin_model');
-       $this->admin_model->delete_featured_book($book_id);
-       
-       redirect('admin/featured_book');
+        $this->load->model('generic_user', 'user');
+        if($this->user->is_admin()) { // il est bien administrateur       
+            $this->load->model('admin_model');
+            $this->admin_model->delete_featured_book($book_id);       
+            redirect('admin/featured_book');
+        }
         
     }
-
     
+    
+    
+    /**
+     * Page de gestion des administrateurs
+     * 
+     */
+    function manage_admins() {
+        $this->load->model('generic_user', 'user');
+        if($this->user->is_admin()) { // il est bien administrateur   
+        
+            // chargement des données des admin
+            $this->load->model('admin_model');
+            $data['admin_list'] = $this->admin_model->get_admin_list();
+            
+            // affichage du panneau d'administration
+            $data['rubrique'] = 'Gestion des administrateurs';
+            $data['view'] = 'admin/admin-management';
+            $this->load->view('admin/admin-template', $data);        
+        }        
+    }
+
+
+    /**
+     * Ajoute un administrateur
+     */
+    function add_admin() {
+        $this->load->model('generic_user', 'user');
+        if($this->user->is_admin()) { // il est bien administrateur 
+             if($this->input->post('submit')) {            
+                 
+                 $this->load->model('admin_model');
+                 $this->admin_model->add_admin($this->input->post('new_admin'));
+                 
+                 redirect('admin/manage_admins');
+                 
+             }
+        }        
+    }
+
+    /**
+     * Supprime l'administrateur
+     * 
+     */
+    function del_admin($user_id) {
+        $this->load->model('generic_user', 'user');
+        if($this->user->is_admin()) { // il est bien administrateur       
+            $this->load->model('admin_model');
+            $this->admin_model->del_admin($user_id);       
+            redirect('admin/manage_admins');
+        }
+        
+    }    
 }
     

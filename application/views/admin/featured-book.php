@@ -31,7 +31,7 @@ echo form_close();
             <tr><td colspan='2'>
                 <div class='alert'><strong>Book id : <?= $key; ?></strong><br />
                 Ce book n'existe plus.</div></td>
-                <td><?= anchor('admin/delete_featured_book/'.$key, '<i class="icon icon-white icon-trash"></i>', 'class="btn btn-danger"'); ?></td>
+                <td><?= anchor('admin/delete_featured_book/'.$key, '<i class="icon icon-white icon-trash"></i>', 'class="btn btn-danger confirm"'); ?></td>
             </tr>
             
         <?php else : ?>
@@ -43,7 +43,7 @@ echo form_close();
             <?= $book->description; ?><br /><br />
             user id : <?= $book->owner->id; ?><br />
             <?= anchor('profile/view/'.$book->owner->id, $book->owner->username.' - '.$book->owner->full_name); ?></td>
-            <td><?= anchor('admin/delete_featured_book/'.$key, '<i class="icon icon-white icon-trash"></i>', 'class="btn btn-danger"'); ?></td>
+            <td><?= anchor('admin/delete_featured_book/'.$key, '<i class="icon icon-white icon-trash"></i>', 'class="btn btn-danger confirm"'); ?></td>
         </tr>
         
         <?php endif; ?>
