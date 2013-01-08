@@ -122,11 +122,8 @@ class Books extends CI_Model {
                 }
             }
             
-            //code($books);
-            
             $this->books->featured = $books;
-            
-            //code($books);
+
             return $this->books->featured;  
  
             
