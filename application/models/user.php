@@ -2,7 +2,7 @@
 
 require_once(APPPATH. 'models/tank_auth/users.php');
 
-class Generic_user extends Users {
+class User extends Users {
 
     /**
      * L'id de l'utilisateur dans la table users
@@ -427,9 +427,9 @@ class Generic_user extends Users {
     function facebook_log_in($facebook_user) {
         
         // on récupère l'id de l'utilisateur
-        $q = $this->db->select('users.facebook_id, users.id, user_data.optin_cgu')
+        $q = $this->db->select('users.facebook_id, users.id, opt_in.optin_cgu')
                 ->from('users')
-                ->join('user_data', 'users.id = user_data.user_id')
+                ->join('opt_in', 'opt_in.user_id = users.id')
                 ->where('facebook_id',$facebook_user['id'])
                 ->get();
         
@@ -479,7 +479,7 @@ class Generic_user extends Users {
         $infos = unserialize($secret_session);
         
         // on met à jour la variable optin_cgu
-        $this->db->where('user_id', $infos['user_id'])->update('user_data', array('optin_cgu' => 1));        
+        $this->db->where('user_id', $infos['user_id'])->update('opt_in', array('optin_cgu' => 1));        
         
         // on met l'utilisateur en session pour de bon
         $this->session->set_userdata($infos);
@@ -491,6 +491,21 @@ class Generic_user extends Users {
         $this->config->item('login_record_time', 'tank_auth'));
         redirect('main');        
     }    
+    
+    
+    /**
+     * Enregistre l'optin pour l'utilisateur indiqué
+     */
+    function register_optin($user_id, $optin) {
+        
+        $data = array(
+            'user_id' => $user_id,
+            $optin => 1,
+        );
+        
+        $this->db->insert('opt_in', $data);
+        
+    }
     
     
     
@@ -554,7 +569,7 @@ class Generic_user extends Users {
         
         $this->db->insert('user_data', $user_data);
         
-    }    
+    }
     
     
     

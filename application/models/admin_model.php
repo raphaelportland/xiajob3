@@ -40,14 +40,14 @@ class Admin_model extends CI_Model {
         
         if($q->num_rows() > 0) {
             
-            $this->load->model('generic_user');
+            $this->load->model('user');
             $admin_list = array();
             
             $params = array();
             
             foreach ($q->result() as $key => $user) {
                 $params['user_id'] = $user->user_id;
-                $admin_list[$user->user_id] = $this->generic_user->get_user($params);
+                $admin_list[$user->user_id] = $this->user->get_user($params);
             }
             //code($admin_list);
             return $admin_list;

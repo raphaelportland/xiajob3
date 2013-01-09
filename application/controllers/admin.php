@@ -12,7 +12,7 @@ class Admin extends CI_Controller
      * 
      */
     function index() {
-        $this->load->model('generic_user', 'user');            
+        $this->load->model('user');            
         if($this->user->is_admin()) { // il est bien administrateur
                 
             // affichage du panneau d'administration
@@ -35,7 +35,7 @@ class Admin extends CI_Controller
      */
     function featured_book() {
        
-        $this->load->model('generic_user', 'user');
+        $this->load->model('user');
         if($this->user->is_admin()) { // il est bien administrateur
         
             // chargement des books à la une
@@ -60,7 +60,7 @@ class Admin extends CI_Controller
      * Ajoute le book dans la table des books mis en avant
      */
     function add_featured_book() {
-        $this->load->model('generic_user', 'user');
+        $this->load->model('user');
         if($this->user->is_admin()) { // il est bien administrateur 
              if($this->input->post('submit')) {            
                  
@@ -79,7 +79,7 @@ class Admin extends CI_Controller
      * 
      */
     function delete_featured_book($book_id) {
-        $this->load->model('generic_user', 'user');
+        $this->load->model('user');
         if($this->user->is_admin()) { // il est bien administrateur       
             $this->load->model('admin_model');
             $this->admin_model->delete_featured_book($book_id);       
@@ -95,7 +95,7 @@ class Admin extends CI_Controller
      * 
      */
     function manage_admins() {
-        $this->load->model('generic_user', 'user');
+        $this->load->model('user');
         if($this->user->is_admin()) { // il est bien administrateur   
         
             // chargement des données des admin
@@ -114,7 +114,7 @@ class Admin extends CI_Controller
      * Ajoute un administrateur
      */
     function add_admin() {
-        $this->load->model('generic_user', 'user');
+        $this->load->model('user');
         if($this->user->is_admin()) { // il est bien administrateur 
              if($this->input->post('submit')) {            
                  
@@ -132,7 +132,7 @@ class Admin extends CI_Controller
      * 
      */
     function del_admin($user_id) {
-        $this->load->model('generic_user', 'user');
+        $this->load->model('user');
         if($this->user->is_admin()) { // il est bien administrateur       
             $this->load->model('admin_model');
             $this->admin_model->del_admin($user_id);       

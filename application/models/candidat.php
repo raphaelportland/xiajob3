@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-require_once(APPPATH. 'models/generic_user.php');
+require_once(APPPATH. 'models/user.php');
 
 /**
  * Classe Candidat 
@@ -12,7 +12,7 @@ require_once(APPPATH. 'models/generic_user.php');
  * @subpackage models
  * @author Raphaël Malaizé
  */
-class Candidat extends Generic_user {
+class Candidat extends User {
     
     /**
      * CV
@@ -52,7 +52,7 @@ class Candidat extends Generic_user {
        $params = array(
        'user_id' => $user_id,
        );
-       $this->get_user($params);    // generic_user   
+       $this->get_user($params);    // user   
        $this->get_awards();       
        $this->get_diplomas();       
        $this->get_xppro();      

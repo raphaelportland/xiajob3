@@ -4,7 +4,7 @@
 
 <?php
 if($user->options->profile_step != 'finished') {
-    $this->load->view('candidat/elmt/please_finish_your_profile');
+   // $this->load->view('candidat/elmt/please_finish_your_profile');
 }
 ?>
 

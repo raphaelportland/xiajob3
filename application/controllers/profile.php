@@ -14,10 +14,10 @@ class Profile extends CI_Controller
     
     function view($user_id) {
         
-        $this->load->model('generic_user');
-        $this->generic_user->set_id($user_id);
+        $this->load->model('user');
+        $this->user->set_id($user_id);
         
-        if($this->generic_user->profile() == 'candidat') :
+        if($this->user->profile() == 'candidat') :
             
             $params = array(
             'with_resume' => true,
@@ -36,24 +36,8 @@ class Profile extends CI_Controller
                 ),
             );
             
-            $data['user'] = $this->generic_user->get_user($params);
+            $data['user'] = $this->user->get_user($params);
             
-            
-            /* 
-            $this->load->model('candidat');
-            $data = $this->candidat->get_candidat($user_id);
-            
-            $this->load->model('liste');
-            $data->comp_list = $this->liste->competences();  
-            $data->comp_rating = $this->liste->comp_rating(); 
-
-            
-            $this->load->model('books');
-            $this->books->set_owner($user_id);
-            $data->books = $this->books->all_books();       
-            $data->occasions = $this->liste->occasions();  
-             *
-             */
                     
         else :
             

@@ -71,11 +71,11 @@ class Auth extends CI_Controller
 						
 						
         			// on récupère son profil et on l'envoie sur sa page d'accueil privée
-                    $this->load->model('generic_user');
+                    $this->load->model('user');
                     $user_id = $this->tank_auth->get_user_id();
-                    $this->generic_user->set_id($user_id);
-                    $profile = $this->generic_user->profile();
-                    $this->generic_user->get_username();
+                    $this->user->set_id($user_id);
+                    $profile = $this->user->profile();
+                    $this->user->get_username();
                     
                     if($profile == 'candidat') : redirect('main/welcome'); 
                     else : redirect('recruteur/welcome');
@@ -126,23 +126,16 @@ class Auth extends CI_Controller
 	}
 
 	/**
-	 * Register user on the site
+	 * Création du compte
 	 *
-     * @param string $profile on passe le profil (candidat ou recruteur)
 	 * @return void
 	 */
-	function register($profile)
+	function register()
 	{
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 
 		    $user_id = $this->tank_auth->get_user_id();
-				
-		    $this->load->model('generic_user');
-            $this->generic_user->set_id($user_id);
-            $profile_step = $this->generic_user->current_register_step();
-		
-            redirect('register/'.$profile);		
-
+        
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
 			redirect('/auth/send_again/');
 
@@ -151,7 +144,7 @@ class Auth extends CI_Controller
 
 		} else {
 		    
-            // l'utilisateur n'est pas encore enregistré
+            // l'utilisateur n'est pas encore enregistré          
             
 			$use_username = $this->config->item('use_username', 'tank_auth');
 			if ($use_username) {
@@ -191,31 +184,34 @@ class Auth extends CI_Controller
 						$this->form_validation->set_value('email'),
 						$this->form_validation->set_value('password'),
 						$email_activation))) {									// success
-
-						
-					// l'utilisateur est créé
-					// florbooks doit enregistrer en base 
-					// - le profil
-					// - l'étape de remplissage de son profil (1 pour juste la création du compte)
-					// - le statut (étudiant / pro)
-					// - l'optin pour les CGU
 					
-					$this->load->model('generic_user');
-                    $this->generic_user->set_id($data['user_id']);
+					
+            
+                    if($this->input->post('submit_pro')) {
+                        $data['profile'] = 'pro';
+                    }
                     
-                    
-                    $options = array(
-                        'profile_step' => 1,
-                    );   
+                    if($this->input->post('submit_perso')) {
+                        $data['profile'] = 'perso';
+                    }
+					
+                    // on enregistre dans la table user_options
                     
                     $user_data['profile'] = $profile;
                     $user_data['user_id'] = $data['user_id'];
-                    $user_data['optin_cgu'] = $this->input->post('optin_cgu');
                     
-                    //stop_code($user_data);
                     
-                    $this->generic_user->register_options($options);
-                    $this->generic_user->register_userdata($user_data);
+                    /* CGU
+                     * La case bloque l'enregistrement du formulaire
+                     * De plus on vérifie ici aussi que sa valeur est bien '1' (coché)
+                     * avant de l'enregistrer en base de données */
+                    $optin_cgu = $this->input->post('optin_cgu');
+                    if($optin_cgu == 1) {
+                        $this->user->register_optin($user_data['user_id'], 'optin_cgu');
+                    }
+                    
+                    $this->user->register_options($options);
+                    $this->user->register_userdata($user_data);
 																		
 					// montage des messages pour l'utilisateur :	
 						
@@ -260,18 +256,16 @@ class Auth extends CI_Controller
 			$data['use_username'] = $use_username;
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
-            $data['profile'] = $profile;
+            //$data['profile'] = $profile;
 			
-			$data['view'] = 'registration-form';
+			//$data['view'] = 'registration-form';
             $data['step'] = 1;
             
-            // le template qui s'applique dépend du profil
-            if($profile == 'candidat') :
-                $tpl = 'candidat/templates/registration';
-            else : $tpl = 'recruteur/templates/registration';
-            endif;
             
-			$this->load->view($tpl, $data);
+            $data['view'] = 'registration/registration-form';
+
+			//$this->load->view($tpl, $data);
+			$this->load->view('common/templates/main-fixed', $data);
 
 		}
 	}
@@ -328,16 +322,16 @@ class Auth extends CI_Controller
 		if ($this->tank_auth->activate_user($user_id, $new_email_key)) {		// success
        
             $this->load->model('tank_auth/users');
-            $this->load->model('generic_user');
-            $this->generic_user->set_id($user_id);
+            $this->load->model('user');
+            $this->user->set_id($user_id);
             
             // on passe à l'étape 2
-            $this->generic_user->upgrade_register_step();
+            $this->user->upgrade_register_step();
         
             // on récupère les infos sur l'utilisateur
             $user = $this->users->get_user_by_id($user_id, true);  
                   
-            $profile = $this->generic_user->profile();   
+            $profile = $this->user->profile();   
             
             if($this->tank_auth->login($user->email, $password, true, false, true)) {
 

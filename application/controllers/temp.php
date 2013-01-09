@@ -21,9 +21,9 @@ class Temp extends CI_Controller
     
     // A SUPPRIMER AVANT LE LANCEMENT :
     function d($user_id) {
-        $this->load->model('generic_user');
-        $this->generic_user->set_id($user_id);
-        $this->generic_user->delete_user();
+        $this->load->model('user');
+        $this->user->set_id($user_id);
+        $this->user->delete_user();
         
         echo($user_id . " deleted.");
     }   
@@ -48,9 +48,9 @@ class Temp extends CI_Controller
     
     
     function get_user($user_id) {        
-        code($user_id . ' Generic_user');        
-        $this->load->model('generic_user');
-        $data = $this->generic_user->get_user($user_id);      
+        code($user_id . ' user');        
+        $this->load->model('user');
+        $data = $this->user->get_user($user_id);      
         code($data);
     }
     

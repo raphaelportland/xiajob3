@@ -26,8 +26,8 @@ class Main extends CI_Controller
             $this->load->view('common/templates/main-fixed',$data);
                             
         } else { // s'il est loggué
-            $this->load->model('generic_user');
-            $profile = $this->generic_user->profile();
+            $this->load->model('user');
+            $profile = $this->user->profile();
          
             if($profile == 'candidat') : redirect('main/welcome');
             else : redirect('recruteur/welcome');
@@ -45,8 +45,8 @@ class Main extends CI_Controller
      * 
      */
     function welcome() {
-        $this->load->model('generic_user');
-        $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas. 
+        $this->load->model('user');
+        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas. 
         
         $params = array(
         'with_options' => true,
@@ -65,7 +65,7 @@ class Main extends CI_Controller
         $data['data'] = array();
         $data['data']['comp_list'] = $this->liste->competences();
         
-        $data['user'] = $this->generic_user->get_user($params);;     
+        $data['user'] = $this->user->get_user($params);;     
         $data['view'] = "candidat/dashboard";
         $data['pass_data'] = true;
         $this->load->view("common/templates/main-fixed",$data);
@@ -164,10 +164,10 @@ class Main extends CI_Controller
             
         }
         
-        $this->load->model('generic_user');        
-        $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->load->model('user');        
+        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
-        $data['user'] = $this->generic_user->get_user($params);
+        $data['user'] = $this->user->get_user($params);
         
         $data['rubrique'] = $rubrique;       
         $data['view'] = "candidat/profile/profile"; // mini-template pour les différents onglets du profil
@@ -326,7 +326,7 @@ class Main extends CI_Controller
             $this->load->view('candidat/elmt/'.$type.'-edit',$data);            
         } else {        
             $data['view'] = 'candidat/elmt/'.$type.'-edit';        
-            $this->load->view('common/templates/main',$data);            
+            $this->load->view('common/templates/main-fixed',$data);            
         }
     } 
 
@@ -337,27 +337,18 @@ class Main extends CI_Controller
      * 
      */
     function cgu() {
-        /*
-        $test_session = serialize(array(
-            'user_id'   => '113',
-            'username'  => 'Test3',
-            'status'    => '1',
-        ));  
-        
-        $this->session->set_userdata('secret_session', $test_session);     */ 
-        
         $secret_session = $this->session->userdata('secret_session');
         
         $data['infos'] = unserialize($secret_session);        
         $data['view'] = 'common/accept-cgu-form';
-        $this->load->view('common/templates/main', $data);
+        $this->load->view('common/templates/main-fixed', $data);
         
     }
     
     
     function valid_cgu() {
-        $this->load->model('generic_user');        
-        $this->generic_user->valid_cgu();
+        $this->load->model('user');        
+        $this->user->valid_cgu();
       
         
     }

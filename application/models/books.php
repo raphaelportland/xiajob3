@@ -823,8 +823,8 @@ class Books extends CI_Model {
            'user_id' => $book->user_id,
            );
            
-           $this->load->model('generic_user');
-           $book->owner = $this->generic_user->get_user_basic_infos($user_params);
+           $this->load->model('user');
+           $book->owner = $this->user->get_user_basic_infos($user_params);
        }
        
        // la cover

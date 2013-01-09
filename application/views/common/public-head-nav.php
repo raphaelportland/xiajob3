@@ -9,11 +9,11 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Books <b class="caret"></b></a>                        
                         <ul class="dropdown-menu">
                             <li><?php echo anchor("book",'<i class="icon icon-eye-open"></i> Explorer'); ?></li>
-                            <li><?php echo anchor("auth/register/candidat",'<i class="icon icon-camera"></i> Mes florBooks','class=""'); ?></li>
+                            <li><?php echo anchor("auth/register",'<i class="icon icon-camera"></i> Mes florBooks','class=""'); ?></li>
                             <li><?php echo anchor("pages/hints",'<i class="icon icon-question-sign"></i> Conseils','class=""'); ?></li>                          
                         </ul>
                      </li>
-                    <li><?php echo anchor('auth/register/candidat','Inscription'); ?></li>
+                    <li><?php echo anchor('auth/register','Inscription'); ?></li>
                 </ul>
                     
                 

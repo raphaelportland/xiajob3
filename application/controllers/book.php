@@ -53,58 +53,6 @@ class Book extends CI_Controller
         $data['view'] = 'books/popular';    
         $this->load->view('common/templates/main-fixed',$data);    
      }
-    
-
-    /**
-     * Vue extérieure d'un book (publique)
-     * 
-     * @param int
-     */
-    function view($book_id) {
-                
-        $this->load->model('books');     
-        
-        $params = array(
-        'with_pictures' => true,
-        'with_owner' => true,
-        'with_comments' => true,
-        'with_flowers' => true,
-        'with_fav_count' => true,        
-        );
-         
-        $data = $this->books->get_book($book_id, $params);
-        $this->config->load('facebook'); 
-        $data->app_id = $this->config->item('facebook_appId');        
-
-            $this->load->library('tank_auth');
-
-            if($this->tank_auth->is_logged_in()) { // l'utilisateur est loggué
-            
-                $this->load->model('social_model'); 
-                $infos_fav = array(
-                'user_id' => $this->session->userdata('user_id'),
-                'book_id' => $book_id,
-                );
-                $data->is_fav = $this->social_model->is_fav($infos_fav);    
-                $data->logged_in = true;        
-
-            
-                $this->load->model('generic_user');
-                if($this->generic_user->is_book_owner($book_id)) { // l'utilisateur est le propriétaire du book
-                    $data->viewer_is_owner = true;                
-                } else {
-                    $data->viewer_is_owner = false;
-                } 
-                $data->logged_in = true;
-            } else {
-                    $data->viewer_is_owner = false;
-                    $data->logged_in = false;
-            }
-
-            $this->load->view('books/templates/book_tpl',$data);
-    }   
-
-
 
 
     function search() {
@@ -160,8 +108,8 @@ class Book extends CI_Controller
      */
     function edit($id) {
 
-        $this->load->model('generic_user');        
-        $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->load->model('user');        
+        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         $this->load->model('books');
         
@@ -189,9 +137,9 @@ class Book extends CI_Controller
      */
     function del_picture($picture_id) {
        // on teste si l'utilisateur est loggué, puis qu'il est bien le propriétaire de la photo
-       $this->load->model('generic_user');
-       $this->generic_user->login_test();   
-       if($this->generic_user->is_pic_owner($picture_id)) {
+       $this->load->model('user');
+       $this->user->login_test();   
+       if($this->user->is_pic_owner($picture_id)) {
            $this->load->model('books');
            $return_book = $this->books->delete_pic($picture_id);
            redirect('book/edit/'.$return_book);
@@ -204,11 +152,11 @@ class Book extends CI_Controller
      * Suppression d'un book
      */
     function del_book($id) {
-        $this->load->model('generic_user');        
-        $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->load->model('user');        
+        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         // vérifie que l'utilisateur est bien le propriétaire
-        if($this->generic_user->is_book_owner($id)) {           
+        if($this->user->is_book_owner($id)) {           
             $this->load->model('books');
             $this->books->delete($id);         
         }
@@ -221,8 +169,8 @@ class Book extends CI_Controller
      * 
      */
     function create_book() {
-        $this->load->model('generic_user');        
-        $this->generic_user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.
+        $this->load->model('user');        
+        $this->user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.
         
         
         if($this->input->post()) {
@@ -246,7 +194,7 @@ class Book extends CI_Controller
         
         $this->load->model('liste');
         $data['occasions_list'] = $this->liste->occasions();
-        $data['user_id'] = $this->generic_user->user_id;
+        $data['user_id'] = $this->user->user_id;
         
         //stop_code($data);
                 
@@ -263,8 +211,8 @@ class Book extends CI_Controller
      * 
      */
     function add_pics($book_id) {
-        $this->load->model('generic_user');        
-        $this->generic_user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->load->model('user');        
+        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
 
         $this->load->model('books');
         
@@ -395,8 +343,8 @@ class Book extends CI_Controller
                         $data->is_fav = $this->social_model->is_fav($infos_fav);
                     
                         // on regarde aussi si l'utilisateur est le propriétaire
-                        $this->load->model('generic_user');
-                        if($this->generic_user->is_book_owner($book_id)) { // l'utilisateur est le propriétaire du book
+                        $this->load->model('user');
+                        if($this->user->is_book_owner($book_id)) { // l'utilisateur est le propriétaire du book
                             $data->viewer_is_owner = true;                
                         } else {
                             $data->viewer_is_owner = false;

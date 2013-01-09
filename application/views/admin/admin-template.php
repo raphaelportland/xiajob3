@@ -1,7 +1,7 @@
 <?php 
 
 $this->load->view('common/head'); 
-$this->load->view('candidat/elmt/private-head-nav');   
+$this->load->view('common/private-head-nav');   
 
 ?>
 <div class="container">  

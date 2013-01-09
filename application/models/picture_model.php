@@ -94,8 +94,8 @@ class Picture_model extends CI_Model {
                'user_id' => $data->book->user_id,
                );
                
-               $this->load->model('generic_user');
-               $data->owner = $this->generic_user->get_user_basic_infos($user_params);
+               $this->load->model('user');
+               $data->owner = $this->user->get_user_basic_infos($user_params);
             }  
             
         endif;

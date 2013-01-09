@@ -84,8 +84,8 @@ class Tank_auth
 					} else {
 					    
                         if($user->username == '') {
-                            $this->ci->load->model('generic_user');
-                            $user->username = $this->ci->generic_user->get_username($user->id);
+                            $this->ci->load->model('user');
+                            $user->username = $this->ci->user->get_username($user->id);
                         }
                         
                         

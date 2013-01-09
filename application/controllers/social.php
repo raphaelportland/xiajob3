@@ -76,7 +76,7 @@ class Social extends CI_Controller
         $data['books'] = $books;
         $data['view'] = 'candidat/favorites';
         
-        $this->load->view('common/templates/main', $data);
+        $this->load->view('common/templates/main-fixed', $data);
     }
     
     
@@ -107,8 +107,8 @@ class Social extends CI_Controller
      */
     function contact() {
         
-        $this->load->model('generic_user');
-        $data['user'] = $this->generic_user->get_user();
+        $this->load->model('user');
+        $data['user'] = $this->user->get_user();
         
         $this->load->library('form_validation');
         

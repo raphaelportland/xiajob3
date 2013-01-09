@@ -10,9 +10,9 @@
 
 <?php // affichage du menu
 if($this->session->userdata('user_id')) {
-    $this->load->view('candidat/elmt/private-head-nav');    
+    $this->load->view('common/private-head-nav');    
 } else {
-    $this->load->view('candidat/elmt/public-head-nav');     
+    $this->load->view('common/public-head-nav');     
 } 
 ?>
 

@@ -309,6 +309,11 @@ form .help-block {
 	margin-bottom: 30px;
 }
 
+.cgu-box h1 {
+	font-family: arial;
+	font-size: 20px;
+}
+
 
 #big-footer {
 	padding-top: 40px;

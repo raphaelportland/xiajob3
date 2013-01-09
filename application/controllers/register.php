@@ -11,22 +11,13 @@ class Register extends CI_Controller
     
     function index() {
         
-        // on vérifie que l'utilisateur est loggué
-        $this->load->model('generic_user');
-        $this->generic_user->login_test();
-        
-        // on le renvoie sur la fonction correspondant à son profil
-        switch($this->generic_user->userdata->profile) {
+        if($this->session->userdate('user_id')) { // si l'utilisateur est loggué, on le renvoi à la page d'accueil
+            redirect('main');
+        } else { // sinon on affiche le formulaire d'inscription
             
-            case 'candidat' :
-                redirect('register/candidat');
-                break;
-                
-            case 'recruteur' :
-                redirect('register/pro');
-                break;
             
-        }        
+            
+        }
     }
     
     
@@ -142,10 +133,10 @@ class Register extends CI_Controller
      * 
      */
     function pro() {
-        $this->load->model('generic_user');
-        $this->generic_user->login_test('pro'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.
+        $this->load->model('user');
+        $this->user->login_test('pro'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.
         
-        $step = $this->generic_user->current_register_step();        
+        $step = $this->user->current_register_step();        
         
         switch($step){
             
@@ -159,7 +150,7 @@ class Register extends CI_Controller
                 if ($this->form_validation->run()) {
                     // success                    
                     $this->recruteur->record_profilpro($this->input->post());
-                    $this->generic_user->upgrade_register_step();
+                    $this->user->upgrade_register_step();
                     
                     redirect('register/recruteur');                    
                 }
@@ -191,15 +182,15 @@ class Register extends CI_Controller
      * 
      */   
     function ignore_register() {
-        $this->load->model('generic_user');
-        $this->generic_user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.     
+        $this->load->model('user');
+        $this->user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.     
         
         // obtient la phase en cours via le compte utilisateur       
-        $step = $this->generic_user->current_register_step();
-        $newstep = $this->generic_user->upgrade_register_step();    
+        $step = $this->user->current_register_step();
+        $newstep = $this->user->upgrade_register_step();    
         
         if($newstep == 'finished') : 
-        switch($this->generic_user->userdata->profile) {
+        switch($this->user->userdata->profile) {
             case 'candidat' :
                 redirect('main/welcome');
                 break;
@@ -243,19 +234,19 @@ class Register extends CI_Controller
      * 
      */
     function activated() {        
-        $this->load->model('generic_user');
-        $this->generic_user->login_test();
+        $this->load->model('user');
+        $this->user->login_test();
         
         $params = array(
         'with_options' => true,
         );
         
-        $user = $this->generic_user->get_user($params);
+        $user = $this->user->get_user($params);
                        
         $data['view'] = 'activated';      
         $data['step'] = $user->options->profile_step;
         
-        switch($this->generic_user->profile) {
+        switch($this->user->profile) {
             case 'candidat':
                 $this->load->view('candidat/templates/registration',$data);
                 break;
@@ -277,10 +268,10 @@ class Register extends CI_Controller
     }
     
     function unregister_confirm() {        
-        $this->load->model('generic_user');
-        $this->generic_user->login_test();
-        $this->generic_user->set_id($this->session->userdata('user_id')); // seul l'utilisateur loggué peut se supprimer
-        $this->generic_user->delete_user();
+        $this->load->model('user');
+        $this->user->login_test();
+        $this->user->set_id($this->session->userdata('user_id')); // seul l'utilisateur loggué peut se supprimer
+        $this->user->delete_user();
         $this->load->library('tank_auth');
         $this->tank_auth->logout();
         
