@@ -185,7 +185,7 @@ class Generic_user extends Users {
                 
                 
                 // description
-                if($with_description) {
+                if(isset($with_description)) {
                     $q = $this->db->where('user_id', $user->id)->get('user_description');
                     if($q->num_rows() == 1 && $q->row()->description != '') {
                         $user->description = $q->row()->description;

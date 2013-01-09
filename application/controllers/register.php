@@ -23,7 +23,7 @@ class Register extends CI_Controller
                 break;
                 
             case 'recruteur' :
-                redirect('register/recruteur');
+                redirect('register/pro');
                 break;
             
         }        
@@ -138,12 +138,12 @@ class Register extends CI_Controller
     }
     
     /**
-     * Enregistrement d'un recruteur
+     * Enregistrement d'un compte pro
      * 
      */
-    function recruteur() {
+    function pro() {
         $this->load->model('generic_user');
-        $this->generic_user->login_test('recruteur'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.
+        $this->generic_user->login_test('pro'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.
         
         $step = $this->generic_user->current_register_step();        
         
@@ -177,7 +177,7 @@ class Register extends CI_Controller
                 
             case 'finished' :
                 // on redirige sur le dashboard
-                redirect('recruteur/welcome');
+                redirect('pro/welcome');
                 break;                
         }
     }

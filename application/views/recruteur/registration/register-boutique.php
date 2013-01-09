@@ -1,1 +1,0 @@
-<h2>Création de l'espace boutique</h2>

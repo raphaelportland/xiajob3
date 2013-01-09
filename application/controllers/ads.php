@@ -32,9 +32,27 @@ class Ads extends CI_Controller
      * Création d'annonce emploi
      * 
      */
-    function job_ad() {
+    function job_ad($step = 1) {
+        
+        $rubrique = array(
+            'name' => 'Annonce emploi',
+            'folder' => 'job',
+        );
+        
+        $data['rubrique'] = $rubrique;
+        $data['step'] = $step;
+        $data['view'] = 'ads/ad_template';         
+        
+        if($this->input->post('submit1')) { // formulaire étape 1
+            
+            // ici traitement du formulaire
+            
+            $data['step'] = 2;
+        }
         
         
+        
+        $this->load->view('common/templates/main-fixed', $data);
         
     }
     

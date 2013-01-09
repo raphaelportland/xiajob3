@@ -13,6 +13,9 @@ class Temp extends CI_Controller
         echo("Controleur temporaire <br />
         /d/XX : supprime l'utilisateur XX<br />
         /a/XX : lien d'activation de l'utilisateur XX<br />");
+        
+        phpinfo();        
+        
     }
     
     
@@ -64,11 +67,6 @@ class Temp extends CI_Controller
         $this->load->model('books');
         code($this->books->get_book_by_id($book_id, true));
     }
-    
-    
-    function info() {
-        phpinfo();
-    } 
     
     
     

@@ -99,7 +99,7 @@ class Books extends CI_Model {
             $this->db->limit($limit);
         } 
         
-        $q = $this->db->get('featured_books');
+        $q = $this->db->group_by('book_id')->get('featured_books');
         
         if($q->num_rows() > 0) {
  
