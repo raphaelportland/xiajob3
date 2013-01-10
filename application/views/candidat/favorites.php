@@ -1,4 +1,4 @@
-<h2>Vos Books favoris</h2>
+<h1>Vos Books favoris</h1>
 
 <?php foreach ($books as $key => $book) {
     $book->context = 'favorites';

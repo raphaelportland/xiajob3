@@ -55,11 +55,13 @@ class Social extends CI_Controller
 
     function favorites() {
         
+        if(!$this->session->userdata('user_id')) {
+            redirect('main');
+        }
         
         $this->load->model('social_model');
-        $favs = $this->social_model->get_user_favs($this->session->userdata('user_id'));
         
-        //stop_code($favs);
+        $favs = $this->social_model->get_user_favs($this->session->userdata('user_id'));
         
         $this->load->model('books');
         

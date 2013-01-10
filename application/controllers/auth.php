@@ -134,7 +134,7 @@ class Auth extends CI_Controller
 	{
 		if ($this->tank_auth->is_logged_in()) {									// logged in
 
-		    $user_id = $this->tank_auth->get_user_id();
+		    redirect('main');
         
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
 			redirect('/auth/send_again/');
