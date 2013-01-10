@@ -132,7 +132,7 @@ $optin_cgu = array(
                 <li>Créer votre profil/CV floral professionnel</li>
                 <li>Déposer des florbooks à votre nom</li>
                 <li>Ajouter des books en favoris</li>
-                <li>Créer des alertes emploi</li>
+                <li>Créer des alertes emploi (bientôt!)</li>
                 <li>et bien d'autres ... </li>
             </ul>
             <div class='control-group'>
@@ -149,16 +149,18 @@ $optin_cgu = array(
     <div class='span6'>
             <h2>Un compte pro</h2>        
         <div class='well'>
+            <strong>Prochainement...</strong>
             <ul>
                 <li>Créer une ou plusieurs pages magasin</li>
-                <li>Déposer des florbooks au nom d'un magasin</li>
+                <li>Déposer des florbooks au nom de vos magasins</li>
                 <li>Déposer des annonces (recrutement, vente magasin, recherche de partenaire)</li>
                 <li>et bien d'autres !</li>
             </ul>
             <div class='control-group'>
                 <div class='controls'>
                 <br />
-                <?php echo form_submit('submit_pro', "Créer mon compte pro","class='btn btn-warning btn-large'"); ?>
+                <?php //echo form_submit('submit_pro', "Créer mon compte pro","class='btn btn-warning btn-large'"); ?>
+                <?= anchor('pages/coming_soon',"Créer mon compte pro", "title=\"C'est pour bientôt !\" class='btn btn-large disabled'"); ?>
                 </div>
             </div>              
         </div>

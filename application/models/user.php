@@ -250,9 +250,46 @@ class User extends Users {
         // si l'id n'est pas défini dans les paramètres, on prend celui de l'objet (celui de l'utilisateur courant)
         if(!isset($user_id)) { $user_id = $this->user_id; }
         
-        $this->db->select('*, user_data.username as pseudo');
+        
+        // on commence par récupérer son profil dans la table options
+        $q = $this->db
+                ->select('value')
+                ->where('option', 'profile')
+                ->where('user_id', $user_id)
+                ->get('user_options');
                 
-        $this->db->from('users')
+        if($q->num_rows() == 1) {
+            
+            $profile = $q->row()->value;
+        } else {
+            redirect('404');
+        }
+        
+        
+        
+        if($profile == 'pro') { // en cas de compte pro
+            $basic_info = $this->get_pro_basics($user_id);
+        }
+        
+        if($profile == 'perso') { // en cas de compte perso
+            $basic_info = $this->get_perso_basics($user_id, $params);
+        }
+        
+        return $basic_info;
+    }
+        
+    /**
+     * Infos de base des comptes perso
+     * 
+     */
+    function get_perso_basics($user_id, $params) {
+         
+        if(isset($params)) {
+            extract($params);
+        }
+        
+        $this->db->select('*, user_data.username as pseudo')
+            ->from('users')
             ->join('user_data','user_data.user_id = users.id')
             ->where('users.id',$user_id);
                 
@@ -268,7 +305,7 @@ class User extends Users {
             $basic_info->last_name = $user->nom;
             $basic_info->full_name = $user->prenom. ' ' .$user->nom;
             $basic_info->username = $user->pseudo;
-            $basic_info->profile = $user->profile;
+            $basic_info->profile = 'perso';
             $basic_info->email = $user->email;
             
             
@@ -300,6 +337,15 @@ class User extends Users {
         } else {
             return false;
         }
+    }
+    
+    
+    
+    /**
+     * Récupère les infos de base sur l'utilisateur
+     */
+    function get_pro_basics($user_id) {
+        
     }
     
     
@@ -658,19 +704,19 @@ class User extends Users {
     
     /**
      * Renvoie le profil de l'utilisateur
-     * candidat ou recruteur
      * 
      */
     function profile() {
         
         $q = $this->db
-        ->select('profile')
-        ->from('user_data')
+        ->select('value')
+        ->from('user_options')
+        ->where('option', 'profile')
         ->where('user_id', $this->user_id)
         ->get();
         
         if($q->num_rows() == 1) {
-            return $q->row()->profile;
+            return $q->row()->value;
         } else {
             return false;
         }
@@ -828,14 +874,18 @@ class User extends Users {
      * 
      * 
      */
-    function register_options($data) {
+    function register_options($data, $user_id = null) {
+        
+        if(!$user_id) {
+            $user_id = $this->user_id; // je ne suis pas sûr que ce cas existe encore
+        }
         
         $options = array();
         
         $i = 0;
         
         foreach ($data as $option => $value) {
-            $options[$i]['user_id'] = $this->user_id;
+            $options[$i]['user_id'] = $user_id;
             $options[$i]['option'] = $option;
             $options[$i]['value'] = $value;
             $i++;

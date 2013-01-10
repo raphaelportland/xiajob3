@@ -186,20 +186,20 @@ class Auth extends CI_Controller
 						$email_activation))) {									// success
 					
 					
+					// on charge le modèle
+                    $this->load->model('user');
             
                     if($this->input->post('submit_pro')) {
-                        $data['profile'] = 'pro';
+                        $options['profile'] = 'pro';
                     }
                     
                     if($this->input->post('submit_perso')) {
-                        $data['profile'] = 'perso';
+                        $options['profile'] = 'perso';
+                        
+                        // on crée un enregistrement dans la table "user_data"
+                        $user_data['user_id'] = $data['user_id'];
+                        $this->user->register_userdata($user_data);                        
                     }
-					
-                    // on enregistre dans la table user_options
-                    
-                    $user_data['profile'] = $profile;
-                    $user_data['user_id'] = $data['user_id'];
-                    
                     
                     /* CGU
                      * La case bloque l'enregistrement du formulaire
@@ -207,11 +207,13 @@ class Auth extends CI_Controller
                      * avant de l'enregistrer en base de données */
                     $optin_cgu = $this->input->post('optin_cgu');
                     if($optin_cgu == 1) {
-                        $this->user->register_optin($user_data['user_id'], 'optin_cgu');
+                        $this->user->register_optin($data['user_id'], 'optin_cgu');
                     }
                     
-                    $this->user->register_options($options);
-                    $this->user->register_userdata($user_data);
+                    $this->user->register_options($options, $data['user_id']);
+                    
+                    
+
 																		
 					// montage des messages pour l'utilisateur :	
 						
@@ -225,7 +227,7 @@ class Auth extends CI_Controller
 						unset($data['password']); // Clear password (just for any case)
 						
 						
-                        redirect('register/waiting_activation/'.$profile);
+                        redirect('register/waiting_activation/'.$options['profile']);
                         
 
 						//$this->_show_message($this->lang->line('auth_message_registration_completed_1'));
@@ -256,15 +258,9 @@ class Auth extends CI_Controller
 			$data['use_username'] = $use_username;
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
-            //$data['profile'] = $profile;
-			
-			//$data['view'] = 'registration-form';
             $data['step'] = 1;
-            
-            
             $data['view'] = 'registration/registration-form';
 
-			//$this->load->view($tpl, $data);
 			$this->load->view('common/templates/main-fixed', $data);
 
 		}
@@ -320,32 +316,22 @@ class Auth extends CI_Controller
 
 		// Activate user
 		if ($this->tank_auth->activate_user($user_id, $new_email_key)) {		// success
-       
-            $this->load->model('tank_auth/users');
-            $this->load->model('user');
-            $this->user->set_id($user_id);
-            
-            // on passe à l'étape 2
-            $this->user->upgrade_register_step();
         
             // on récupère les infos sur l'utilisateur
+            $this->load->model('tank_auth/users');
             $user = $this->users->get_user_by_id($user_id, true);  
                   
-            $profile = $this->user->profile();   
+            //$profile = $this->user->profile();   
             
             if($this->tank_auth->login($user->email, $password, true, false, true)) {
 
                 // s'il est bien loggué, on le renvoie sur la page de remerciement
-                
-                
-                
                 redirect('register/activated');
             }
 
-            else {
+            else {             
                 echo("login impossible");
-                code($user);
-                code($profile);
+                code($user_id);
             }
             
 			

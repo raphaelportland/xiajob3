@@ -53,6 +53,8 @@ class Book extends CI_Controller
         $data['view'] = 'books/popular';    
         $this->load->view('common/templates/main-fixed',$data);    
      }
+    
+
 
 
     function search() {
@@ -69,12 +71,12 @@ class Book extends CI_Controller
     }  
     
     /**
-     * Affiche la liste des books d'un candidat
+     * Affiche la liste des books d'un utilisateur
      * 
      */
     function my_books() {
-        $this->load->model('candidat');
-        $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.         
+        $this->load->model('user');
+        $this->user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.         
 
         $books_params = array(
         'with_fav_count' => true,
@@ -109,7 +111,7 @@ class Book extends CI_Controller
     function edit($id) {
 
         $this->load->model('user');        
-        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         $this->load->model('books');
         
@@ -153,7 +155,7 @@ class Book extends CI_Controller
      */
     function del_book($id) {
         $this->load->model('user');        
-        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         // vérifie que l'utilisateur est bien le propriétaire
         if($this->user->is_book_owner($id)) {           
@@ -212,7 +214,7 @@ class Book extends CI_Controller
      */
     function add_pics($book_id) {
         $this->load->model('user');        
-        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->user->login_test(); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
 
         $this->load->model('books');
         
@@ -406,16 +408,18 @@ class Book extends CI_Controller
     }
 
     // renvoie sur la page de la photo suivante du book
-    function next_pic($book_id, $pic_order) {
+    function next_pic($book_id, $pic_id) {
         $this->load->model('books');
-        $next_pic = $this->books->get_next_pic($book_id, $pic_order);
+        //$next_pic = $this->books->get_next_pic($book_id, $pic_id);
+        $next_pic = $this->books->get_another_pic('next', $book_id, $pic_id);
         redirect('book/show/'.$book_id.'/picture/'.$next_pic);
     }
     
     // renvoie sur la page de la photo précédente
-    function previous_pic($book_id, $pic_order) {
+    function previous_pic($book_id, $pic_id) {
         $this->load->model('books');
-        $previous_pic = $this->books->get_previous_pic($book_id, $pic_order);
+        //$previous_pic = $this->books->get_previous_pic($book_id, $pic_id);
+        $previous_pic = $this->books->get_another_pic('previous', $book_id, $pic_id);
         redirect('book/show/'.$book_id.'/picture/'.$previous_pic);
     }
     

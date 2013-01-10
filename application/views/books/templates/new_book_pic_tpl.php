@@ -90,8 +90,8 @@
     </div>
     
     <!-- Navigation entre les photos -->
-    <a class="carousel-control left" href="<?= site_url('book/previous_pic/'.$picture->book_id.'/'.$picture->order); ?>">&lsaquo;</a>
-    <a class="carousel-control right" href="<?= site_url('book/next_pic/'.$picture->book_id.'/'.$picture->order); ?>">&rsaquo;</a>    
+    <a class="carousel-control left" href="<?= site_url('book/previous_pic/'.$picture->book_id.'/'.$picture->id); ?>">&lsaquo;</a>
+    <a class="carousel-control right" href="<?= site_url('book/next_pic/'.$picture->book_id.'/'.$picture->id); ?>">&rsaquo;</a>    
 </div>   
 
 

@@ -25,9 +25,9 @@ class Register extends CI_Controller
      * Enregistrement d'un candidat
      * 
      */
-    function candidat() {
+    /*function candidat() {
         $this->load->model('candidat');        
-        $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.     
+        $this->candidat->login_test('perso'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.     
 
         $step = $this->candidat->current_register_step();
 
@@ -126,7 +126,7 @@ class Register extends CI_Controller
                 redirect('auth/register/candidat');
                 break;           
         }         
-    }
+    }*/
     
     /**
      * Enregistrement d'un compte pro
@@ -211,12 +211,12 @@ class Register extends CI_Controller
      * 
      */
     function waiting_activation($profile) {
-        $data['step'] = 2;
-        $data['view'] = "register-waiting-activation";
+        //$data['step'] = 2;
+        $data['view'] = "candidat/registration/register-waiting-activation";
         
         switch($profile) {
-            case 'candidat' :
-                $this->load->view('candidat/templates/registration',$data);                
+            case 'perso' :
+                $this->load->view('common/templates/main-fixed',$data);                
                 break;
             case 'recruteur' :
                 $this->load->view('recruteur/templates/registration',$data);
@@ -243,12 +243,13 @@ class Register extends CI_Controller
         
         $user = $this->user->get_user($params);
                        
-        $data['view'] = 'activated';      
-        $data['step'] = $user->options->profile_step;
+            
+        //$data['step'] = $user->options->profile_step;
         
         switch($this->user->profile) {
-            case 'candidat':
-                $this->load->view('candidat/templates/registration',$data);
+            case 'perso':
+                $data['view'] = 'candidat/registration/activated';  
+                $this->load->view('common/templates/main-fixed',$data);
                 break;
             case 'recruteur': 
                 $this->load->view('recruteur/templates/registration',$data);

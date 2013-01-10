@@ -125,6 +125,10 @@ class Picture_model extends CI_Model {
         return $pic_url;
     }
     
+    
+    
+    
+    
         
     
 }

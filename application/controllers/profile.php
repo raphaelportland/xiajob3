@@ -17,7 +17,7 @@ class Profile extends CI_Controller
         $this->load->model('user');
         $this->user->set_id($user_id);
         
-        if($this->user->profile() == 'candidat') :
+        if($this->user->profile() == 'perso') :
             
             $params = array(
             'with_resume' => true,

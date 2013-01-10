@@ -19,19 +19,16 @@ class Main extends CI_Controller
         
             $this->load->model('books');
             $data['books'] = $this->books->get_popular(4);
-        
-            //$data['books'] = $this->books->books;     
             $data['view'] = 'candidat/home';
-        
             $this->load->view('common/templates/main-fixed',$data);
                             
         } else { // s'il est loggué
             $this->load->model('user');
             $profile = $this->user->profile();
          
-            if($profile == 'candidat') : redirect('main/welcome');
+            if($profile == 'perso') : redirect('main/welcome');
             else : redirect('recruteur/welcome');
-            endif;                    
+            endif;
         }           
     }   
     
@@ -46,7 +43,7 @@ class Main extends CI_Controller
      */
     function welcome() {
         $this->load->model('user');
-        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas. 
+        $this->user->login_test('perso'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas. 
         
         $params = array(
         'with_options' => true,
@@ -165,7 +162,7 @@ class Main extends CI_Controller
         }
         
         $this->load->model('user');        
-        $this->user->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->user->login_test('perso'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         $data['user'] = $this->user->get_user($params);
         
@@ -186,7 +183,7 @@ class Main extends CI_Controller
      */
     function add_recomp() {
         $this->load->model('candidat');        
-        $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->candidat->login_test('perso'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         if($this->input->post('submit')) :
                 $this->load->library('form_validation');                
@@ -218,7 +215,7 @@ class Main extends CI_Controller
      */
     function add_diplome() {
         $this->load->model('candidat');        
-        $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->candidat->login_test('perso'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         if($this->input->post('submit')) :
                 $this->load->library('form_validation');                
@@ -249,7 +246,7 @@ class Main extends CI_Controller
      */
     function add_xp() {
         $this->load->model('candidat');        
-        $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->candidat->login_test('perso'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
         
         if($this->input->post('submit')) :
                 $this->load->library('form_validation');                
@@ -280,7 +277,7 @@ class Main extends CI_Controller
      */
     function del($type,$id) {
         $this->load->model('candidat');        
-        $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
+        $this->candidat->login_test('perso'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.        
 
         $this->candidat->delete_info($type,$id);
         
@@ -292,7 +289,7 @@ class Main extends CI_Controller
     
     function edit($type, $id) {
         $this->load->model('candidat');        
-        $this->candidat->login_test('candidat'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.           
+        $this->candidat->login_test('perso'); // vérifie si l'utilisateur est connecté et le boule s'il ne l'est pas.           
         
         if($this->input->post('submit')) {          
             $this->candidat->update_attrib($type,$id,$this->input->post());           

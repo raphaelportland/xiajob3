@@ -76,7 +76,7 @@ $captcha = array(
 </div>
 
 <center>
-Pas encore inscrit ? <?php echo anchor('auth/register/candidat', 'Créez votre compte gratuitement'); ?>   
+Pas encore inscrit ? <?php echo anchor('auth/register', 'Créez votre compte gratuitement'); ?>   
 </center>
 
 		

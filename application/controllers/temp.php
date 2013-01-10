@@ -168,6 +168,77 @@ class Temp extends CI_Controller
         
         echo ("Ordre ajouté à toutes les photos");
     }
+
+
+    /**
+     * Teste la migration 8
+     * Ne réalise aucun import/suppression réel en base de données
+     */
+    function test_mig_8($sens = 'up') {
+        
+        switch($sens) {
+            case 'up' :
+                // on récupère tous les profils        
+                $q = $this->db->get('user_data');
+                $old_data = $q->result();
+                
+                code($old_data);
+                
+                $new_data = array();
+                
+                foreach ($old_data as $key => $user) {
+                    // on prépare le batch
+                    $new_data[] = array(
+                        'user_id' => $user->user_id,
+                        'option' => 'profile',
+                        'value' => $user->profile,
+                    ); 
+                }
+                code($new_data);                  
+                break;
+            
+            case 'down' :
+                
+                // on recrée le champ profil dans la table user_data
+                $field = array(
+                
+                    'profile' => array(
+                        'type' => 'varchar',
+                        'constraint' => '255',
+                        ),
+                );
+                
+                $this->dbforge->add_column('user_data', $field);  
+                
+                
+                // on récupère tous les profils
+                $q = $this->db
+                ->from('user_options')
+                ->where('option','profile')
+                ->get();
+                
+                $old_data = $q->result();
+                
+                code($old_data);     
+                
+                foreach ($old_data as $key => $user) {
+                    
+                    if($user->value == 'perso' || $user->value == 'candidat') :
+                        
+                        code('Compte perso<br />'.$user);                    
+                        // si compte perso : update table user_data
+                        // $this->db->where('user_id', $user->user_id)->update('user_data', array('profile', $user->value));
+                    
+                    else :
+                        code('Compte pro<br />'.$user);
+                        // si compte pro : ne fait rien (il n'y avait pas de table pour les comptes pro)
+                        
+                    endif;
+                }
+                break;
+        }
+                
+    }
     
  
     

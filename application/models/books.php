@@ -562,15 +562,15 @@ class Books extends CI_Model {
      */
     function import_img($image) {
         
-        // on récupère l'ordre d'image le plus grand du book
-        $order = $this->get_max_pic_order($image->book);
+        // on récupère l'ordre d'image le plus grand du book (ne fonctionne pas bien pour cause d'appels concurrents)
+        //$order = $this->get_max_pic_order($image->book);
         
         $import = array(
         'pic' => $image->name,
         'book_id' => $image->book,
         'pic_url' => $image->url,
         'th_url' => $image->thumbnail_url,
-        'order' => $order+1,
+        'order' => 0,
         'view_url' => '',
         );
         
@@ -584,10 +584,16 @@ class Books extends CI_Model {
         
         // si le book n'a pas de couverture, on utilise l'image qui vient d'être chargée
         if(!$this->has_cover($image->book)) $this->update_cover_pic($image->book, $new_pic_id);
+
     }
     
     
-    // renvoie la plus grande valeur d'ordre des photos du book
+    /*
+     * Renvoie la plus grande valeur d'ordre des photos du book.
+     * Le script pose un problème : il y a des appels simultanés
+     * et donc lors du chargement d'un book plusieurs photos ont le même ordre
+     * ...
+     */
     function get_max_pic_order($book_id) {
 
         $q = $this->db
@@ -601,7 +607,7 @@ class Books extends CI_Model {
         if($q->num_rows() == 1) {
             return $q->row()->order;
         } else {
-            return 1;
+            return 0;
         }
         
     }
@@ -1011,26 +1017,32 @@ class Books extends CI_Model {
      * ou de la première si on est arrivés à la dernière photo
      * 
      */
-    function get_next_pic($book_id, $pic_order) {
+    function get_next_pic($book_id, $pic_id) {
         
         $q = $this->db
                 ->select('id')
                 ->from('book_pics')
                 ->where('book_id',$book_id)
                 ->where('order', $pic_order + 1)
+                ->limit(1)
                 ->get();
                 
+        
+        //code($q->result());
+                                        
         if($q->num_rows() == 1 ) {
             return $q->row()->id;
         } else { // on a atteint la dernière photo on retourne à la première
             
             $q = $this->db
-                    ->select('id')
+                    //->select('id')
                     ->from('book_pics')
                     ->where('book_id',$book_id)
                     ->where('order',1)
+                    ->limit(1)
                     ->get();
                     
+            stop_code($q->result());                    
             return $q->row()->id;           
         }
         
@@ -1063,6 +1075,49 @@ class Books extends CI_Model {
                     ->get();
                     
             return $q->row()->id;           
+        }
+        
+    }
+    
+    
+    /**
+     * Comme l'ordre fonctionne mal 
+     * (enregistrement de plusieurs ordres identiques)
+     * pour causes d'enregistrements concurrents dans la base de données
+     * on met en place cette fonction qui affiche les photos dans l'ordre de leur id
+     * 
+     */
+    function get_another_pic($direction = 'next', $book_id, $current_pic_id) {
+        
+        $q = $this->db->select('id')->from('book_pics')
+                ->where('book_id', $book_id)
+                ->order_by('id', 'asc')
+                ->get();
+                
+        if($q->num_rows() > 0) { // s'il y a bien des photos dans ce book
+            
+            $pic_list = $q->result();
+        
+            foreach ($pic_list as $key => $pic) {
+                if($pic->id == $current_pic_id) {
+                    $current = $key;
+                }
+            }
+            
+            if($direction == 'next') {
+                if(isset($pic_list[$current + 1])) {
+                    return $pic_list[$current + 1]->id; 
+                } else {
+                    return $pic_list[0]->id;
+                }  
+            } else {
+                if(isset($pic_list[$current - 1])) {
+                    return $pic_list[$current-1]->id;
+                } else {
+                    return end($pic_list)->id;
+                }
+            }
+            
         }
         
     }
