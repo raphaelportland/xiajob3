@@ -132,7 +132,7 @@ $optin_cgu = array(
                 <li>Créer votre profil/CV floral professionnel</li>
                 <li>Déposer des florbooks à votre nom</li>
                 <li>Ajouter des books en favoris</li>
-                <li>Créer des alertes emploi (bientôt!)</li>
+                <li>Créer des alertes emploi (bientôt !)</li>
                 <li>et bien d'autres ... </li>
             </ul>
             <div class='control-group'>
