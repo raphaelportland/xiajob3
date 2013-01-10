@@ -200,6 +200,7 @@ class User extends Users {
             // resume : dans la classe Candidat
             if(isset($with_resume)) :                
                 $this->load->model('candidat');
+                $this->candidat->set_id($user_id);
                 $user->resume = new stdClass();
                 
                 if(isset($with_awards)) :

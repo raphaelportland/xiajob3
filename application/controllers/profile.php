@@ -46,10 +46,7 @@ class Profile extends CI_Controller
             
         endif;
         
-        //code($data);
-        
         $data['view'] = 'candidat/profile/public-profile';
-
         $this->load->view('common/templates/main-fixed',$data);
         
     }

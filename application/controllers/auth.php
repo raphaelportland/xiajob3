@@ -77,7 +77,7 @@ class Auth extends CI_Controller
                     $profile = $this->user->profile();
                     $this->user->get_username();
                     
-                    if($profile == 'candidat') : redirect('main/welcome'); 
+                    if($profile == 'perso') : redirect('main/welcome'); 
                     else : redirect('recruteur/welcome');
                     endif;   
 
