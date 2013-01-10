@@ -11,10 +11,6 @@
         <p>Il semble que notre informatique n’ait pas envie de faire ça. <br />
         Nous sommes désolés, elle est parfois têtue.</p>
         <p>Pouvez-vous nous décrire le problème ?</p>
-        
-        
-
-        
         </div>        
     </div>
 </div>

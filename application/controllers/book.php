@@ -14,9 +14,9 @@ class Book extends CI_Controller
     function index() {
         
         $this->load->model('books');
-        $this->books->get_featured_books(4);
-        $this->books->get_latest(8);      
+        $this->books->get_featured_books(4);    
         $this->books->get_popular(8);
+        $this->books->get_latest(8);  
                 
         $data['books'] = $this->books->books;
 
