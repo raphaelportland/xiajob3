@@ -139,6 +139,48 @@ class Admin extends CI_Controller
             redirect('admin/manage_admins');
         }
         
-    }    
+    }
+    
+    
+    /**
+     * Affiche la liste des utilisateurs
+     */
+    function users_perso() {
+        $this->load->model('user');
+        if($this->user->is_admin()) { // il est bien administrateur       
+            $this->load->model('admin_model');
+            $data['users'] = $this->admin_model->get_all_users();       
+            $data['rubrique'] = 'Gestion des utilisateurs';
+            $data['view'] = 'admin/user-perso-management';
+            $this->load->view('admin/admin-template', $data); 
+        }         
+    }  
+    
+    /**
+     * suspens un compte utilisateur
+     */
+    function ban_user($user_id) {
+        $this->load->model('user');
+        if($this->user->is_admin()) { // il est bien administrateur
+            $this->load->model('admin_model');
+            $this->admin_model->ban_user($user_id);
+            
+            redirect('admin/users_perso');
+        }        
+    }
+
+    /**
+     * réactive un compte utilisateur
+     */
+    function unban_user($user_id) {
+        $this->load->model('user');
+        if($this->user->is_admin()) { // il est bien administrateur
+            $this->load->model('admin_model');
+            $this->admin_model->unban_user($user_id);
+            
+            redirect('admin/users_perso');
+        }        
+    }
+      
 }
     

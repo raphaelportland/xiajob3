@@ -25,7 +25,7 @@ $lang['auth_message_new_password_failed'] = 'Votre clef d\'activation est incorr
 $lang['auth_message_new_email_sent'] = 'Un courriel de confirmation a été envoyé à %s. Suivez les instruction du courriel pour confirmer ce changement d\'adresse.';
 $lang['auth_message_new_email_activated'] = 'Votre adresse courriel a été changée avec succès.';
 $lang['auth_message_new_email_failed'] = 'Votre clef d\'activation est incorrecte ou expirée. Vérifiez votre courriel à nouveau.';
-$lang['auth_message_banned'] = 'Vous êtes banni.';
+$lang['auth_message_banned'] = '<strong>Connexion impossible</strong><br />';
 $lang['auth_message_unregistered'] = 'Votre compte a été détruit...';
 
 // Email subjects

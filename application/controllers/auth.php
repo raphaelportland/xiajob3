@@ -85,7 +85,8 @@ class Auth extends CI_Controller
 
 				} else {
 					$errors = $this->tank_auth->get_error_message();
-					if (isset($errors['banned'])) {								// banned user
+
+					if (isset($errors['banned'])) { // banned user
 						$this->_show_message($this->lang->line('auth_message_banned').' '.$errors['banned']);
 
 					} elseif (isset($errors['not_activated'])) {				// not activated user
@@ -133,7 +134,6 @@ class Auth extends CI_Controller
 	function register()
 	{
 		if ($this->tank_auth->is_logged_in()) {									// logged in
-
 		    redirect('main');
         
 		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
@@ -143,7 +143,6 @@ class Auth extends CI_Controller
 			$this->_show_message($this->lang->line('auth_message_registration_disabled'));
 
 		} else {
-		    
             // l'utilisateur n'est pas encore enregistré          
             
 			$use_username = $this->config->item('use_username', 'tank_auth');

@@ -70,6 +70,53 @@ class Admin_model extends CI_Model {
     function del_admin($id) {
         $this->db->where('user_id', $id)->where('option','is_admin')->where('value',1)->delete('user_options');
     }
-    
+
+
+    /**
+     * Renvoie la liste de tous les utilisateurs
+     * 
+     */
+    function get_all_users($profile = 'all') {
+        
+        $q = $this->db->select('id, banned, ban_reason')->get('users');
+        
+        
+        if($q->num_rows() > 0) {
+            
+            $this->load->model('user');
+            $users = array();
+            
+            foreach ($q->result() as $key => $user) {
+                $params['user_id'] = $user->id;
+                $users[$user->id] = $this->user->get_user($params);
+                $users[$user->id]->ban_status = $user->banned;
+                $users[$user->id]->ban_reason = $user->ban_reason;
+            }
+            
+            return $users;
+        }
+        
+    }
+
+    /**
+     * Suspension d'un compte
+     */
+    function ban_user($user_id) {
+        
+        $ban_reason = "Votre compte a été suspendu. Merci de contacter l'équipe.";
+        
+        $this->db->where('id', $user_id)->update('users', array('banned' => 1, 'ban_reason'  => $ban_reason));
+        
+        
+    }
+
+    /**
+     * Réactivation d'un compte
+     */
+    function unban_user($user_id) {
+        
+        $this->db->where('id', $user_id)->update('users', array('banned' => 0, 'ban_reason' => null));
+        
+    }    
     
 }

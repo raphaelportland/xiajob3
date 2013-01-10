@@ -1,8 +1,19 @@
+<?php $this->load->view('common/head'); ?>
+
 <?php 
-
-$this->load->view('common/head');
-
-echo "<div class='alert alert-info'><strong>Information</strong><br />$message</div>"; 
-
-$this->load->view('common/footer'); 
+if($this->session->userdata('user_id')) {
+    $this->load->view('common/private-head-nav');    
+} else {
+    $this->load->view('common/public-head-nav');     
+} 
 ?>
+    
+<div class="container">   
+    
+<h1>Information</h1>
+
+<div class='alert alert-info'><?= $message; ?></div>
+
+</div>
+
+<?php $this->load->view('common/footer'); ?>
