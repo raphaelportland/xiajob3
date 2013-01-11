@@ -19,7 +19,7 @@ class Migration_Add_optin_table extends CI_Migration {
         
             'user_id' => array(
                 'type' => 'INT',
-                'default' => 11,
+                'constraint' => 11,
                 ),
         );
         
