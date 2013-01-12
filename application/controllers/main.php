@@ -106,7 +106,7 @@ class Main extends CI_Controller
         if($rubrique == 1) {                                  
             // on récupère les listes nécessaires à l'onglet 1
             $this->load->model('liste');
-            $data['comp_list'] = $this->liste->competences();
+            //$data['comp_list'] = $this->liste->competences();
             $data['recomp_list'] = $this->liste->recompenses();
             $data['formation_list'] = $this->liste->formations();
             $data['diplome_list'] = $this->liste->diplomes();                                       
@@ -191,6 +191,10 @@ class Main extends CI_Controller
                      
                 if($this->form_validation->run() != FALSE) :            
                     $this->candidat->add('recomp', $this->input->post());
+                    
+                    $message = "Votre récompense a bien été enregistrée";
+                    $this->session->set_flashdata('message', $message);
+                    
                 else :
                     $flashmessage = "L'année doit être renseignée";
                     $this->session->set_flashdata('error', $flashmessage);    
@@ -223,12 +227,16 @@ class Main extends CI_Controller
                      
                 if($this->form_validation->run() != FALSE) :            
                     $this->candidat->add('diplome', $this->input->post());  
+                    
+                    $message = "Votre diplôme a bien été enregistré";
+                    $this->session->set_flashdata('message', $message);                    
+                    
                 else :
                     $flashmessage = "L'année du diplôme doit être renseignée";
                     $this->session->set_flashdata('error', $flashmessage);    
                     
                     $data = $this->input->post();
-                    code($data);
+                    //code($data);
                     $this->session->set_userdata('failed_diplome_input', $data);                                    
                 endif;                  
         endif;
@@ -255,12 +263,16 @@ class Main extends CI_Controller
                      
                 if($this->form_validation->run() != FALSE) :            
                     $this->candidat->add('xp', $this->input->post());  
+                    
+                    $message = "Votre expérience pro a bien été enregistrée";
+                    $this->session->set_flashdata('message', $message);
+                                        
                 else :
                     $flashmessage = "Les dates doivent être renseignées";
                     $this->session->set_flashdata('error', $flashmessage);    
                     
                     $data = $this->input->post();
-                    code($data);
+                    //code($data);
                     $this->session->set_userdata('failed_xp_input', $data);                                    
                 endif;
                            

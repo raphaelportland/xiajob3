@@ -153,7 +153,7 @@ $informatique = array(
 
 
 
-<?php echo form_submit("submit","Mettre à jour mes informations", "class='btn btn-pink pull-right'");?>
+<?php echo form_submit("submit","Enregistrer mes compétences", "class='btn btn-pink pull-right'");?>
 <?php echo form_close(); ?>
 
 

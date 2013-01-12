@@ -449,8 +449,8 @@ class Candidat extends User {
                 
                 $this->db->insert('user_recomp',$data);
                 
-                $message = "La récompense a bien été ajoutée";
-                $this->session->set_flashdata('message', $message);          
+                //$message = "La récompense a bien été ajoutée";
+                //$this->session->set_flashdata('message', $message);          
                 break;
                 
             case 'diplome' :
@@ -465,8 +465,8 @@ class Candidat extends User {
                 
                 $this->db->insert('user_formations',$data);
                 
-                $message = "La formation a bien été enregistrée";
-                $this->session->set_flashdata('message', $message);                  
+                //$message = "La formation a bien été enregistrée";
+                //$this->session->set_flashdata('message', $message);                  
                 break;
                 
             case 'xp':
@@ -483,8 +483,8 @@ class Candidat extends User {
                 );
                 $this->db->insert('user_expepro',$data);
                 
-                $message = "L'expérience a bien été enregistrée";
-                $this->session->set_flashdata('message', $message);                 
+                //$message = "L'expérience a bien été enregistrée";
+                //$this->session->set_flashdata('message', $message);                 
             	break;     
         }
     }
@@ -858,7 +858,10 @@ class Candidat extends User {
                 ->where('user_id',$this->user_id)
                 ->where('option', $key)
                 ->update('user_options',$option);           
-        }      
+        } 
+        
+        $message = 'Vos compétences ont bien été enregistrées';
+        $this->session->set_userdata('fb_message', $message);     
     }
 
 

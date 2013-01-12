@@ -2,6 +2,18 @@
 
 <?php $this->load->view('candidat/profile/profile_submenu'); ?>
 
+<?php if($this->session->userdata('fb_message')) : ?>
+<div class="alert alert-success">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <?php 
+        echo $this->session->userdata('fb_message'); 
+        $this->session->unset_userdata('fb_message');
+    ?>
+</div>    
+<?php endif; ?>
+
+
+
 <?php if($this->session->flashdata('message')) : ?>
     
 <div class="alert alert-success">

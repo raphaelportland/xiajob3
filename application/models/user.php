@@ -858,8 +858,8 @@ class User extends Users {
             endif;
 
         }        
-        $flashmessage = "Options mises à jour.";
-        $this->session->set_flashdata('message', $flashmessage); 
+        //$flashmessage = "Options mises à jour.";
+        //$this->session->set_flashdata('message', $flashmessage); 
     }
     
  
@@ -1059,6 +1059,10 @@ class User extends Users {
                 else { $user_data['mobile_phone'] = ''; }
                 
                 $this->update_userdata($user_data);
+                
+                
+                $message = "Vos informations personnelles ont été mises à jour.";
+                $this->session->set_userdata('fb_message', $message);
                 
                                
                 break;
