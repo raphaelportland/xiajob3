@@ -6,10 +6,10 @@
                     
                     <ul class="unstyled">
                          <li><?php echo anchor('pages/meet_the_gnomes','Qui sommes nous ?'); ?></li>
-                         <li><?php echo anchor('pages/pitch','florBooks en quelques mots'); ?></li>
+                         <li><?php echo anchor('pages/pitch','FlorBooks en quelques mots'); ?></li>
                          <li><?php echo anchor('pages/team','Est-ce que l\'équipe est sympa ?'); ?></li>
                          <li><?php echo anchor('pages/participate','Envie de participer ?'); ?></li>
-                         <li><?php echo anchor('pages/faq','FAQ'); ?></li>
+                         <li><?php echo anchor('pages/faq','Questions courantes'); ?></li>
                          <li><?php echo anchor('social/contact','Laissez nous un message'); ?></li>
                     </ul>
                     
@@ -32,7 +32,7 @@
                     <br />  
                     <p>Cela veut dire que le site n'est <strong>pas encore finalisé</strong>.</p>
                     <p>On travaille dur pour tout améliorer ! <br />
-                    Vous avez vu un défaut ? <?php echo anchor('social/contact', 'dites-le nous ici !'); ?></p>          
+                    Quelque chose cloche? <?php echo anchor('social/contact', 'dites-le nous ici !'); ?></p>          
                 </div>
             </div> 
             
