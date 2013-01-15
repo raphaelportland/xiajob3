@@ -60,6 +60,40 @@ class Liste extends CI_Model {
         return $fleur_list;
        
     }
+    
+    
+    
+    
+    /**
+     * Renvoie la liste des villes
+     * les met en cache aussi !
+     */
+     function cities($lang = 'fr') {
+         
+         $prefix = 'geo_'.$lang.'_';
+         
+         $this->db->cache_on();
+         
+         $q = $this->db
+         ->select($prefix.'city.id,'.$prefix.'city.name_city, '.$prefix.'city.cp, '.$prefix.'province.name_province')
+         ->from($prefix.'city')
+         ->join($prefix.'province', $prefix.'city.id_province = '.$prefix.'province.id','left')
+         ->get();
+         
+         $city_global = $q->result();
+         
+         $cities = array();
+         
+         foreach ($city_global as $key => $city) {
+             $cities[$city->id] = $city;
+         }
+         
+         $this->db->cache_off();
+         
+         stop_code($cities);
+         
+         return $cities;
+     }
 
 
 

@@ -448,9 +448,6 @@ class Candidat extends User {
                 );
                 
                 $this->db->insert('user_recomp',$data);
-                
-                //$message = "La récompense a bien été ajoutée";
-                //$this->session->set_flashdata('message', $message);          
                 break;
                 
             case 'diplome' :
@@ -463,10 +460,7 @@ class Candidat extends User {
                     'autre_diplome' => $source['custom_diplome'],                    
                 );
                 
-                $this->db->insert('user_formations',$data);
-                
-                //$message = "La formation a bien été enregistrée";
-                //$this->session->set_flashdata('message', $message);                  
+                $this->db->insert('user_formations',$data);                 
                 break;
                 
             case 'xp':
@@ -481,10 +475,7 @@ class Candidat extends User {
             	'month_end' => $source['month_end1'],
             	'year_end' => $source['year_end1'],
                 );
-                $this->db->insert('user_expepro',$data);
-                
-                //$message = "L'expérience a bien été enregistrée";
-                //$this->session->set_flashdata('message', $message);                 
+                $this->db->insert('user_expepro',$data);              
             	break;     
         }
     }

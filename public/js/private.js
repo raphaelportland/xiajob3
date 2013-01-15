@@ -66,25 +66,14 @@ $('.autosubmit-input-link').click(function(){
 	return false;
 });
 
-
-
-
-
-
 	$('.autosubmit').focusout(function() {
 		$('form#ajax_form').trigger('submit');
 	});
 
-  
-	/*$('.private-link').click(function(){
-	
-		book_id = $(this).attr('data-book_id');
-		
-		$('#share-modal-'+book_id).modal('show');
-		
-		return false; 
-		
-	});*/	
-	  
+
+
+	 
+	 
+	 
 
 }); 

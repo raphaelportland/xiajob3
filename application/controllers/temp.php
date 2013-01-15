@@ -47,6 +47,20 @@ class Temp extends CI_Controller
     }  
     
     
+    function cities() {
+        $data['view'] = 'geo/city_select';
+        $this->load->view('common/templates/main-fixed', $data);
+    }
+    
+    
+    function get_city() {
+        $this->load->model('geo_model');
+        $this->geo_model->set_lang('fr');
+        $this->geo_model->get_city();
+    }
+    
+    
+    
     function get_user($user_id) {        
         code($user_id . ' user');        
         $this->load->model('user');

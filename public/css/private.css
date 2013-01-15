@@ -539,3 +539,8 @@ span.title-btn {
   color: #ffffff;
   background-color: #D84B6D;
 }
+
+
+span.hidden {
+	display: none;
+}
