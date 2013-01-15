@@ -54,4 +54,23 @@ class Pages extends CI_Controller
         $data['view'] = 'common/pages/faq';
         $this->load->view('common/templates/main-fixed', $data);           
     }  
+
+
+    function privacy() {
+        $data['view'] = 'common/pages/privacy';
+        $this->load->view('common/templates/main-fixed', $data);
+    }
+
+
+    function property() {
+        $data['view'] = 'common/pages/property';
+        $this->load->view('common/templates/main-fixed', $data);
+    }
+    
+    
+
+    function legal() {
+        $data['view'] = 'common/pages/legal';
+        $this->load->view('common/templates/main-fixed', $data);
+    }    
 }

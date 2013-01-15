@@ -21,9 +21,9 @@
                     <ul class="unstyled">
                         <li><?php echo anchor('pages/cgu', 'Conditions générales'); ?></li>
                         <li><?php echo anchor('social/contact','Signalez un abus'); ?></li>
-                        <li><?php echo anchor('pages/coming_soon','Confidentialité'); ?></li>
-                        <li><?php echo anchor('pages/coming_soon','Propriété intellectuelle'); ?></li>
-                        <li><?php echo anchor('pages/coming_soon','Mentions Légales'); ?></li>
+                        <li><?php echo anchor('pages/privacy','Confidentialité'); ?></li>
+                        <li><?php echo anchor('pages/property','Propriété intellectuelle'); ?></li>
+                        <li><?php echo anchor('pages/legal','Mentions Légales'); ?></li>
                     </ul>      
                 </div>
                 
