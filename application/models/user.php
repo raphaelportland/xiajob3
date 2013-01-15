@@ -581,6 +581,7 @@ class User extends Users {
         
         $options = array(
             'profile_step' => '1',
+            'profile' => 'perso',
         );
         
         $this->register_options($options);
@@ -591,7 +592,6 @@ class User extends Users {
         
         $user_data = array(
             'user_id' => $this->user_id,
-            'profile' => $facebook_user['profile'],
             'prenom' => $facebook_user['first_name'],
             'nom' => $facebook_user['last_name'],
             'dob' => $french_dob, 
