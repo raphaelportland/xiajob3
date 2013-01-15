@@ -21,7 +21,7 @@
 
 
 
-<?= anchor('ads/job_ad', '<i class="icon-chevron-left"></i> Retourner à l\'étape 1', 'class="btn pull-left"'); ?>
+<?= anchor('ads/job_ad/1', '<i class="icon-chevron-left"></i> Retourner à l\'étape 2', 'class="btn pull-left"'); ?>
 
 <div class='btn-group'>
     

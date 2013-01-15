@@ -32,7 +32,7 @@ class Ads extends CI_Controller
      * Création d'annonce emploi
      * 
      */
-    function job_ad($step = 1) {
+    function job_ad($step = 0) {
         
         $rubrique = array(
             'name' => 'Annonce emploi',
@@ -41,7 +41,17 @@ class Ads extends CI_Controller
         
         $data['rubrique'] = $rubrique;
         $data['step'] = $step;
-        $data['view'] = 'ads/ad_template';         
+        $data['view'] = 'ads/ad_template';    
+        
+        
+        if($this->input->post('submit0')) { // formulaire étape 1
+            
+            // ici traitement du formulaire
+            
+            $data['step'] = 1;
+        }        
+        
+             
         
         if($this->input->post('submit1')) { // formulaire étape 1
             

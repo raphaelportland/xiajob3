@@ -23,7 +23,18 @@
     <!-- Les infos sous le book -->
     <div class='book-th-bot'>
         <div class='book-name'>
-            <?php echo anchor('book/show/'.$id, $name); ?>
+            <?php 
+            
+            $long_name = $name;
+            
+            if(strlen($name) > 21) {
+
+                $name = substr($name,0,20).'&hellip;';
+            
+            } ?>
+            
+            
+            <?php echo anchor('book/show/'.$id, $name, 'title="'.$long_name.'"'); ?>
         </div>
         
         <?php if(isset($owner)) : ?>            

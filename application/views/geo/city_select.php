@@ -1,21 +1,16 @@
-<br /><br /><br />
+    <label><strong>Ville</strong> (tapez le début du nom)</label>
+    <input id='city' type='text' placeholder="Tapez le début du nom"/><br />
+    <input id='hidden-city-id' type='hidden' />
 
-
-<form>
-
-<input id='city' type='text' placeholder="Tapez votre recherche"/><br />
-<input id='testid' type='hidden' />
-
-</form>
 
 
 <script type="text/javascript">
 var options = {
-    script: "<?= site_url('temp/get_city').'?'; ?>",
+    script: "<?= site_url('geo/autocomplete_city').'?'; ?>",
     varname: "q",
     json: true,
     maxresults: 35,
-    callback: function (obj) { document.getElementById('testid').value = obj.id; }
+    callback: function (obj) { document.getElementById('hidden-city-id').value = obj.id; }
 };
 var as = new bsn.AutoSuggest('city', options);    
 </script>

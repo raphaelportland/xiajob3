@@ -19,8 +19,9 @@
 <!-- Compétences -->
 <p class='lead'>Compétences recherchées <small class='muted'>(optionnel)</small></p>
 
+<?= anchor('ads/job_ad', '<i class="icon-chevron-left"></i> Retourner à l\'étape 1', 'class="btn pull-left"'); ?>
 
-<button type='submit' class="btn btn-success pull-right" name='submit2' value="submit2">
+<button type='submit' class="btn btn-success pull-right" name='submit1' value="submit2">
     Suivant <i class='icon-chevron-right icon-white'></i>  
 </button>
 <?= form_close(); ?>

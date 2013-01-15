@@ -544,3 +544,7 @@ span.title-btn {
 span.hidden {
 	display: none;
 }
+
+.autosuggest {
+	background: white;
+}

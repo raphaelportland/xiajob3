@@ -56,15 +56,15 @@ class Geo_model extends CI_Model
         
         // la chaîne miniaturisée, les espaces au milieu remplacés par des tirets
         $match_elmt = str_replace(' ', '-', strtolower(trim($partial_name)));
-        
+        $match_elmt = convert_accented_characters($match_elmt);
         
         if(substr($match_elmt,0,2) == "l'") {
             $match_elmt = substr($match_elmt, 2);
+        } elseif(substr($match_elmt, 0, 3) == 'le-' || substr($match_elmt, 0, 3) == 'la-') {
+            $match_elmt = substr($match_elmt, 3);
+        } elseif(substr($match_elmt, 0, 4) == 'les-') {
+            $match_elmt = substr($match_elmt, 4);
         }
-        
-        $match_elmt = convert_accented_characters($match_elmt);
-        
-        //code($match_elmt);
         
         $q = $this->db
         ->select("geo_".$this->lang."_city.id, geo_".$this->lang."_city.name_city, geo_".$this->lang."_city.cp,
