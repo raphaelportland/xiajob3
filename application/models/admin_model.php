@@ -76,23 +76,22 @@ class Admin_model extends CI_Model {
      * Renvoie la liste de tous les utilisateurs
      * 
      */
-    function get_all_users($profile = 'all') {
+    function get_all_users() {
         
         $q = $this->db->select('id, banned, ban_reason')->get('users');
-        
         
         if($q->num_rows() > 0) {
             
             $this->load->model('user');
-            $users = array();
             
+            $users = array();
             foreach ($q->result() as $key => $user) {
+            
                 $params['user_id'] = $user->id;
                 $users[$user->id] = $this->user->get_user($params);
                 $users[$user->id]->ban_status = $user->banned;
                 $users[$user->id]->ban_reason = $user->ban_reason;
             }
-            
             return $users;
         }
         

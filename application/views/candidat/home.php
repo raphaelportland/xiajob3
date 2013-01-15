@@ -25,7 +25,7 @@
             <h2>Pas encore inscrit ?</h2>
             
             <?= anchor('auth/register', 'Inscrivez-vous ici', 'class="btn btn-primary"'); ?><br /><br />
-            <?php echo anchor('extlinks/facebook_request/candidat',' ','title="Utilisez facebook pour vous connecter" class="fbconnect-btn"'); ?>        
+            <?php echo anchor('extlinks/facebook_request',' ','title="Utilisez facebook pour vous connecter" class="fbconnect-btn"'); ?>        
             
         </center>
 

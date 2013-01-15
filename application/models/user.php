@@ -252,6 +252,7 @@ class User extends Users {
         if(!isset($user_id)) { $user_id = $this->user_id; }
         
         
+        
         // on commence par récupérer son profil dans la table options
         $q = $this->db
                 ->select('value')
@@ -474,21 +475,25 @@ class User extends Users {
     function facebook_log_in($facebook_user) {
         
         // on récupère l'id de l'utilisateur
-        $q = $this->db->select('users.facebook_id, users.id, opt_in.optin_cgu')
+        $q = $this->db->select('users.facebook_id, users.id')
                 ->from('users')
-                ->join('opt_in', 'opt_in.user_id = users.id')
                 ->where('facebook_id',$facebook_user['id'])
                 ->get();
         
         if($q->num_rows() == 1) :
             
             $user = $q->row();
-            
+
             $this->user_id = $user->id;            
             $username = $this->get_username($user->id);
             
+            
+            
             // on vérifie s'il a accepté les CGU
-            if($user->optin_cgu != 1) {
+            
+            $q2 = $this->db->select('optin_cgu')->from('opt_in')->where('user_id', $user->id)->where('optin_cgu', 1)->get();
+            
+            if($q2->num_rows() != 1) {
                 // si ce n'est pas le cas on le redirige vers les CGU
                 $secret_session = serialize(array(
                     'user_id' => $user->id,
@@ -497,7 +502,7 @@ class User extends Users {
                 ));
                     
                 $this->session->set_userdata('secret_session',$secret_session);
-                redirect('pages/cgu');
+                redirect('main/cgu');
             }          
             
             // on met l'utilisateur en session
@@ -525,8 +530,14 @@ class User extends Users {
         $secret_session = $this->session->userdata('secret_session');
         $infos = unserialize($secret_session);
         
-        // on met à jour la variable optin_cgu
-        $this->db->where('user_id', $infos['user_id'])->update('opt_in', array('optin_cgu' => 1));        
+        // on met à jour la variable optin_cgu dans la table opt_in
+        
+        $data = array(
+        'user_id' => $infos['user_id'],
+        'optin_cgu' => 1
+        );
+        
+        $this->db->insert('opt_in', $data);       
         
         // on met l'utilisateur en session pour de bon
         $this->session->set_userdata($infos);

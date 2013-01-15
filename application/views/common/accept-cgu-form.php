@@ -6,6 +6,6 @@
     <?php $this->load->view('common/pages/cgu'); ?>
 </div>
 
-<?php echo anchor('fleurjob/valid_cgu',"J'accepte et je continue sur florBooks", "class='btn btn-success'"); ?>
+<?php echo anchor('main/valid_cgu',"J'accepte et je continue sur florBooks", "class='btn btn-success'"); ?>
 &nbsp;
-<?php echo anchor('fleurjob/decline_cgu',"Je refuse et je quitte florBooks", "class='btn btn-danger'"); ?>
+<?php echo anchor('main/decline_cgu',"Je refuse et je quitte florBooks", "class='btn btn-danger'"); ?>

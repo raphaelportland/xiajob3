@@ -8,12 +8,12 @@
 class ExtLinks extends CI_Controller
 {
     
-    public function facebook_request($profile) {
+    public function facebook_request() {
         
         $this->load->library('fbconnect');
         
         $data = array(
-            'redirect_uri' => site_url('extlinks/handle_facebook_login/'.$profile),
+            'redirect_uri' => site_url('extlinks/handle_facebook_login/'),
             'scope' => $this->fbconnect->scope,
             
         );
@@ -22,17 +22,18 @@ class ExtLinks extends CI_Controller
         
     }
     
-    public function handle_facebook_login($profile) {
+    public function handle_facebook_login() {
         
         $this->load->library('fbconnect');
         
         if($this->fbconnect->user) {            
             
             $facebook_user = $this->fbconnect->user;
-            $facebook_user['profile'] = $profile;
+            //$facebook_user['profile'] = $profile;
             
             $this->load->model('user');            
             if($this->user->is_facebook_member($facebook_user['id'])) {
+            
                 // l'utilisateur a déjà un compte via facebook
                 $this->user->facebook_log_in($facebook_user);
                 redirect('main');
