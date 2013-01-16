@@ -11,3 +11,7 @@
     florBooks va vous permettre de créer <strong>votre profil pro</strong>, votre <strong>book en ligne</strong>, 
     et de pouvoir répondre aux annonces postées <strong>par des recruteurs partout en France</strong>.
 </p>
+
+<div class='alert'><strong>Attention</strong><br />
+    L'email d'activation peut mettre quelques minutes pour arriver, patience si vous ne le voyez pas tout de suite dans votre boite mail !<br />
+    Pensez également à vérifier votre dossier spam.</div>
