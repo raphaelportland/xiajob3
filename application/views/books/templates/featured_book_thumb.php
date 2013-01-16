@@ -6,8 +6,8 @@ $second_pic = $cover->th_url;
 
 $long_name = $name;
 
-if(strlen($name) > 16) {
-    $name = substr($name,0,16).'...';
+if(strlen($name) > 20) {
+    $name = substr($name,0,20).'...';
 } 
 
 $long_desc = $description;
