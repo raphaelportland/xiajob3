@@ -42,8 +42,8 @@
     <p class='lead'>Mes favoris <?= anchor('social/favorites','Voir / Modifier', 'class="btn"'); ?></p>    
     <div class='row'>
         <div class='span12'>
-        <?php         
-        if(!isset($user->favorites)) :
+        <?php 
+        if($user->favorites == null) :
             echo "<p>Vous n'avez pas de florBooks favoris pour le moment</p>";
             
         elseif(count($user->favorites) == 1) :
