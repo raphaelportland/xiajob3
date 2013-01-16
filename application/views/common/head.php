@@ -38,3 +38,4 @@
 
     </head>
     <body>
+    <?php $this->load->view('common/analytics'); ?>

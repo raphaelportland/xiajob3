@@ -27,3 +27,4 @@
         <script type="text/javascript" src="<?php echo base_url();?>public/js/book-tpl.js" ></script>
     </head>
     <body>
+    <?php $this->load->view('common/analytics'); ?>
