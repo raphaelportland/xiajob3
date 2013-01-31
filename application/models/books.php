@@ -33,12 +33,13 @@ class Books extends CI_Model {
         
         parent::__construct();   
         
+        /*
         if($owner == null) {
             $this->owner = $this->tank_auth->get_user_id();            
         } else {
             $this->owner = $owner;
         } 
-        
+        */
     } 
    
     
@@ -93,13 +94,27 @@ class Books extends CI_Model {
      */
     function get_featured_books($limit = null) {
         
-        $this->db->select('book_id')->order_by('id','desc');
+        // pour n'avoir que des books qui existent encore on croise avec la table des books
+        $q1 = $this->db->select('book_id')->from('featured_books')->get();
+        if($q1->num_rows() > 0) {
+            $temp_result = $q1->result();
+            foreach($temp_result as $key => $feat_book) {
+                $featured_array[] = $feat_book->book_id;
+            }
+        } else {
+            $featured_array = null;
+        }
+        
+        $this->db->select('id')
+        ->from('user_book')
+        ->where_in('id',$featured_array)
+        ->order_by('id','desc');
                 
         if(isset($limit)) {
             $this->db->limit($limit);
         } 
         
-        $q = $this->db->group_by('book_id')->get('featured_books');
+        $q = $this->db->get(); //$this->db->group_by('featured_books.book_id')->get();
         
         if($q->num_rows() > 0) {
  
@@ -116,7 +131,7 @@ class Books extends CI_Model {
                                    
             foreach ($result as $key => $book) {
                 
-                $info = $this->get_book($book->book_id, $params);
+                $info = $this->get_book($book->id, $params);
                 if($info->id != '') { // on ne garde que les books non vide
                     $books[$key] = $info;
                 }
