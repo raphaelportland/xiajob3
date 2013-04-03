@@ -182,6 +182,56 @@ class Admin extends CI_Controller
             redirect('admin/users_perso');
         }        
     }
+	
+	
+	/* Insert abusive category data */
+	function abusive_category(){
+	
+		$this->load->model('admin_model');
+		$this->load->helper(array('form', 'url'));
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('abusiveWord', 'Not Blank', 'required');
+		if ($this->form_validation->run() == FALSE)
+		{
+			$this->load->view('admin/admin-abusive-words');
+		}else{
+		    $abusiveWord = $_REQUEST['abusiveWord'];
+			$insert_id = $this->admin_model->abusive_insert($abusiveWord);
+			if(isset($insert_id)){
+			$data['msg'] = 'Sucess';
+			$this->load->view('admin/admin-abusive-words',$data);
+			}else{
+			$data['msg'] = 'Not Inserted';
+			$this->load->view('admin/admin-abusive-words',$data);
+			
+			}
+		}
+		
+	}
+	
+		/* List of abusive comment */
+	function abusive_comment($book_id){
+	     $this->load->model('admin_model');
+		 $data['comments']=$this->admin_model->abusive_comment_list();
+		 $this->load->view('admin/admin-abusive-comment_list',$data);
+	}
+	
+	
+	/* List of abusive comment */
+	function book_archive($book_id, $type = ''){
+	     if($type == 'archive')
+		    $bookstatus='1'; 
+			else 
+			 $bookstatus='0'; 
+			
+			
+			
+	     $this->load->model('admin_model');
+		 $this->admin_model->abusive_book_archive($book_id, $bookstatus);
+		 //$this->load->view('admin/admin-abusive-comment_list',$data);
+		redirect('admin/abusive_comment');
+	}
+	
       
 }
     

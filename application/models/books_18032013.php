@@ -183,9 +183,7 @@ class Books extends CI_Model {
         //->distinct('book_id')
         ->select('book_id, count(fj_user_fav.id) as nb_fav')
         ->group_by('book_id')
-        ->from('user_fav')
-		->join('user_book','user_book.id=user_fav.book_id')
-		->where('user_book.status',0);
+        ->from('user_fav');
         
         if(isset($limit)) {
             $this->db->limit($limit);
@@ -237,11 +235,9 @@ class Books extends CI_Model {
         ->select('book_id')
         ->group_by('book_id')
         ->from('like_dislike')
-		->join('user_book','user_book.id = like_dislike.book_id')
-		->where('user_book.status',0)
-	    -> where ('fj_like_dislike.status',1)
-	    -> having ('count(fj_like_dislike.status)>',1);
-	
+	-> where ('status',1)
+	-> having ('count(status)>',1)
+	-> order_by ('count(status)','desc');
 	
 		
 		//SELECT book_id FROM `fj_like_dislike` where status = 1 group by book_id having count(status)>=2 

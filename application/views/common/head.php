@@ -2,7 +2,7 @@
 <html lang='fr'>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
         
         <!-- CSS -->
         <link rel="stylesheet" href="<?= base_url(); ?>public/bootstrap/css/bootstrap.min.css" type="text/css" media="all" />
@@ -15,7 +15,8 @@
         <link rel="stylesheet" href="<?= base_url(); ?>public/css/autosuggest_inquisitor.css" type="text/css" media="all"/>
 
         <!-- Google fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Yesteryear|Grand+Hotel&subset=latin-ext' rel='stylesheet' type='text/css'>
+        <!--<link href='http://fonts.googleapis.com/css?family=Yesteryear|Grand+Hotel&subset=latin-ext' rel='stylesheet' type='text/css'>-->
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
         
      
         <title>florBooks</title>

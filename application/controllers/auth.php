@@ -77,8 +77,8 @@ class Auth extends CI_Controller
                     $profile = $this->user->profile();
                     $this->user->get_username();
                     
-                    if($profile == 'perso') : redirect('main/welcome'); 
-                    else : redirect('recruteur/welcome');
+                    if($profile == 'perso') : redirect('wall'); 
+                    else : redirect('wall'); /* redirect('admin');*/
                     endif;   
 
 
@@ -123,7 +123,7 @@ class Auth extends CI_Controller
 
 		//$this->_show_message($this->lang->line('auth_message_logged_out'));
         
-        redirect('main');
+        redirect('wall');
 	}
 
 	/**

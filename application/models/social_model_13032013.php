@@ -11,7 +11,7 @@ class Social_model extends CI_Model {
     function add_fav($data) {
         
         $is_fav = $this->is_fav($data);
-       
+        
         if(!$is_fav) {
             
             if($this->db->insert('user_fav', $data)) {
@@ -20,10 +20,9 @@ class Social_model extends CI_Model {
                 return "3"; // error code
             }
         } else {
-		 
             return "2"; // already in favs
         } 
-       
+        
         return('nothing');   
     }
     
@@ -46,7 +45,7 @@ class Social_model extends CI_Model {
     }
     function is_fav_count($data) {
         $q = $this->db
-        ->select('id,book_id')
+        ->select('id')
         ->from('user_fav')
         ->where('user_id', $data['user_id'])
         ->where('book_id', $data['book_id'])

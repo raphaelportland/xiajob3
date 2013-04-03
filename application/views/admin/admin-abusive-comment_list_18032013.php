@@ -20,17 +20,38 @@ $this->load->view('common/private-head-nav');
             <li><?= anchor('admin/users_perso','<i class="icon icon-user"></i> Utilisateurs compte perso'); ?></li>
             <li><?= anchor('','<i class="icon icon-briefcase"></i> Utilisateurs compte pro', 'class="muted"'); ?></li>
             <li><?= anchor('','<i class="icon icon-book"></i> florBooks', 'class="muted"'); ?></li>
-            <li><?= anchor('admin/featured_book','<i class="icon icon-bookmark"></i> florBooks à la une'); ?></li>
+            <li><?= anchor('admin/featured_book','<i class="icon icon-bookmark"></i> florBooks &agrave; la une'); ?></li>
 			<li><?= anchor('admin/abusive_category','<i class="icon icon-bookmark"></i> Category Of Abusive'); ?></li>
 			<li><?= anchor('admin/abusive_comment','<i class="icon icon-bookmark"></i> List Of Abusive Comments'); ?></li>
         </ul>    
     </div>  
-    
     <div class='span9'>
-        
-        <!-- Contenu de la page -->
-        <?php $this->load->view($view); ?>
-        
+	    <table width="100%">
+			<tr>
+				<td>
+					<strong>Serial#</strong>
+				</td>
+				<td>
+					<strong>Comment</strong>
+				</td>
+				<td>
+					<strong>Category</strong>
+				</td>
+			</tr>
+		<?php
+		    $count=0;
+            foreach($comments as $val=>$comment):
+			$count++;
+			?>
+				<tr>
+					<td><?php echo $count;?></td>
+					<td><?php echo $comment->absuive_comment;?></td>
+					<td><?php echo $comment->abusive_word; ?></td>
+				</tr>
+			<?php		
+			endforeach;
+		?>
+		</table>		
     </div>  
 </div>
 

@@ -138,34 +138,20 @@ class Admin_model extends CI_Model {
 	
 	function abusive_comment_list(){
 	     $comments = new stdClass();
-		/*select 
-		fj_abusive_comment.absuive_id,
-		fj_abusive_comment.absuive_category_id,
-		fj_abusive_comment.bookId,fj_abusive_comment.absuive_comment,
-		fj_abusive_word.abusive_word from fj_abusive_comment LEFT JOIN fj_abusive_word ON fj_abusive_comment.absuive_category_id = fj_abusive_word.ID*/
+		 /*select 
+fj_abusive_comment.absuive_id,
+fj_abusive_comment.absuive_category_id,
+fj_abusive_comment.bookId,fj_abusive_comment.absuive_comment,
+fj_abusive_word.abusive_word from fj_abusive_comment LEFT JOIN fj_abusive_word ON fj_abusive_comment.absuive_category_id = fj_abusive_word.ID*/
 		 
 		 
 		 $comments = $this->db->query('select 
-		fj_abusive_comment.absuive_id,fj_user_book.name,
-		fj_user_book.id, fj_abusive_comment.bookId, fj_user_book.status,
-		fj_abusive_comment.absuive_category_id,
-		fj_abusive_comment.bookId,fj_abusive_comment.absuive_comment,
-		fj_abusive_word.abusive_word from fj_abusive_comment LEFT JOIN fj_abusive_word ON fj_abusive_comment.absuive_category_id = fj_abusive_word.ID  LEFT JOIN fj_user_book ON fj_abusive_comment.bookId = fj_user_book.id group by fj_user_book.id');
+fj_abusive_comment.absuive_id,
+fj_abusive_comment.absuive_category_id,
+fj_abusive_comment.bookId,fj_abusive_comment.absuive_comment,
+fj_abusive_word.abusive_word from fj_abusive_comment LEFT JOIN fj_abusive_word ON fj_abusive_comment.absuive_category_id = fj_abusive_word.ID');
 		                 
-   return $comments->result();
-		 
-		 
-		 
-		 
+         return $comments->result();
 	}
-	
-	/**
-     * Suspension d'un compte
-     */
-    function abusive_book_archive($book_id, $bookstatus) {
-     $this->db->where('id', $book_id)->update('user_book', array('status' => $bookstatus));
-        
-        
-    }
     
 }

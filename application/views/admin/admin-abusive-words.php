@@ -20,17 +20,21 @@ $this->load->view('common/private-head-nav');
             <li><?= anchor('admin/users_perso','<i class="icon icon-user"></i> Utilisateurs compte perso'); ?></li>
             <li><?= anchor('','<i class="icon icon-briefcase"></i> Utilisateurs compte pro', 'class="muted"'); ?></li>
             <li><?= anchor('','<i class="icon icon-book"></i> florBooks', 'class="muted"'); ?></li>
-            <li><?= anchor('admin/featured_book','<i class="icon icon-bookmark"></i> florBooks à la une'); ?></li>
+            <li><?= anchor('admin/featured_book','<i class="icon icon-bookmark"></i> florBooks &agrave; la une'); ?></li>
 			<li><?= anchor('admin/abusive_category','<i class="icon icon-bookmark"></i> Category Of Abusive'); ?></li>
 			<li><?= anchor('admin/abusive_comment','<i class="icon icon-bookmark"></i> List Of Abusive Comments'); ?></li>
         </ul>    
     </div>  
-    
     <div class='span9'>
+	    <?php echo $msg;?>
+		<?php echo validation_errors(); ?>
+		<?php 
+			 echo form_open('admin/abusive_category');
+		?>
         
-        <!-- Contenu de la page -->
-        <?php $this->load->view($view); ?>
-        
+			<input type="text" name="abusiveWord" id="abusiveWord" />
+			<input type="submit" name="submit" value="submit" />	
+		</form>
     </div>  
 </div>
 

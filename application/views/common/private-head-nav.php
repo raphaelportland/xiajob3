@@ -1,7 +1,7 @@
     <div id='topbar' class="navbar navbar-fixed-top">
       <div class="navbar-inner">
           <div class='container-fluid'>
-                <a href='<?= site_url('main'); ?>'><img class="nav pull-left" src='<?= base_url(); ?>/public/img/logo.png' /></a>
+                <a href='<?= site_url('wall'); ?>'><img class="nav pull-left" src='<?= base_url(); ?>/public/img/logo.png' /></a>
                 <img class="nav pull-left" src='<?= base_url(); ?>/public/img/beta.png' />
                 <ul class="nav pull-left">    
                     <li><a>FR</a></li>                           

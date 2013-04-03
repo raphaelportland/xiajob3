@@ -381,7 +381,7 @@ class Book extends CI_Controller
                     //code($data);
                     
                     // on charge le template
-                   $data->view = 'books/templates/new_book_pic_tpl';
+                    $data->view = 'books/templates/new_book_pic_tpl';
                     $this->load->view('common/templates/viewer',$data);
                     break;  
                     

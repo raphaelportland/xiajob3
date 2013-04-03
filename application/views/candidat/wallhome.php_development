@@ -1,0 +1,99 @@
+<?php 
+/**
+ * Homepage New Wall Page
+ */
+?>
+<div class='row'>
+	<h1>New Landing Page</h2>      
+</div>
+
+<div class='row section'>
+	<div style="border:1px solid black">
+	<script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=407397235982056";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+		
+	<?php 
+	    foreach($books as $book=>$val):
+	?>
+		<div style="margin:10px auto 10px;text-align :center;">
+		<?php 
+			$bookImage = "<img src='".base_url().$val->cover->pic_url."' style='height: 403px;'/>";
+			echo anchor('book/show/'.$val->id, $bookImage);
+		?>
+		<div class="fb-comments" data-href="<?php echo base_url()?>index.php/book/show/<?php echo $val->id ?>" data-width="470" data-num-posts="2" style="display:block;"></div>
+		<div style="float:left;">FaceBook Comment Count<div class="fb-comments-count" data-href="<?php echo base_url()?>index.php/book/show/<?php echo $val->id ?>"></div></div>
+		<?php
+		
+		//$title=urlencode('Title of Your iFrame Tab');
+		$url1 = base_url().'book/show/'.$val->id;
+		//$url=urlencode($url1);
+		//$summary=urlencode('Custom message that summarizes what your tab is about, or just a simple message to tell people to check out your tab.');
+		$image=urlencode($bookImage);
+		?>
+<div class="facebook_sharer"></div>
+<div class="fb_share">
+    <a share_url="<?php echo $url1; ?>" href="http://www.facebook.com/sharer.php?" name="fb_share" rel="nofollow" type="button_count">Share</a>
+	<a href="https://twitter.com/share" data-url="<?php echo $url1;?>" class="twitter-share-button" data-lang="en">Tweet</a>
+</div>
+             <?php echo $msg;?>
+			 <?php echo validation_errors(); ?>
+			<div id="reportAbuseForm_<?php echo $val->id;?>">
+			
+			<?php echo form_open('wall/abusive_comment');?>
+				<font size="2" color="maroon"><b>TEXTAREA VALUES:</b></font><br>
+
+				<textarea id="txtholder" class="txtholder" name="txtholder" rows="8" cols="45"></textarea>
+				<select name="reportAbuseCategory" id="reportAbuseCategory">
+				     <option value='' select="selected">Selected</option>
+					 <?php 
+					      
+						 foreach($word as $val1=>$key1):
+						 ?>
+						 <option value="<?php echo $key1->ID;?>"><?php echo $key1->abusive_word;?></option>
+						 <?php
+						 endforeach;
+					 ?>
+				</select>
+
+				<input type="submit" id="submit" Value="submit" name="submit" />
+			</form>
+			
+			</div>
+			<div id="reportAbuse_<?php echo $val->id;?>" style="cursor:pointer;">Report Abuse</div>
+             <script>
+				$('#reportAbuseForm_<?php echo $val->id;?>').css('display','none'); 
+				$('#reportAbuse_<?php echo $val->id;?>').click (function () {
+				     $('#reportAbuseForm_<?php echo $val->id;?>').toggle('slow'); 
+				   });
+				
+			 </script> 
+
+			<div style="margin-top:10px;">
+			<?php
+				foreach($val->pictures as $pic):
+					$imageURL = "<img style='margin-left:10px;margin-bottom:10px;height: 118px;' src='".base_url().$pic->th_url."' />";
+					echo anchor('book/show/'.$val->id.'/picture/'.$pic->id, $imageURL);
+				endforeach;
+			?>
+			</div>
+			<div class="clear"></div>	
+        </div>
+        <div class="clear"></div>		
+	<?php 
+		endforeach;
+	?>
+	</div>
+</div>        
+     
+       
+       
+
+
