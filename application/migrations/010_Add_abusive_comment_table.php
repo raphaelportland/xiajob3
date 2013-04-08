@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 /**
- *  Table contenant les annonces emploi + table d'expérience
+ *  Table contenant les annonces emploi + table d'expÃ©rience
  * 
  */  
 class Migration_Add_abusive_comment_table extends CI_Migration {
@@ -14,14 +13,13 @@ class Migration_Add_abusive_comment_table extends CI_Migration {
          * 
          */
         
-     
-        $this->dbforge->add_field('absuive_id');        
-        
-        $this->dbforge->create_table('abusive_comment'); 
-        
-    
         $fields = array(
             
+    		  'absuive_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+				 'auto_increment' => TRUE
+                ),
           
             'absuive_category_id' => array(
                 'type' => 'INT',
@@ -42,8 +40,10 @@ class Migration_Add_abusive_comment_table extends CI_Migration {
             
         );
         
-        $this->dbforge->add_column('abusive_comment', $fields);  
-           
+		
+		$this->dbforge->add_field($fields);
+		$this->dbforge->add_key('absuive_id', TRUE);
+		$this->dbforge->create_table('abusive_comment');        
         
     }
     
