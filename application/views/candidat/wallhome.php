@@ -16,7 +16,7 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 		     ?><script type="text/javascript">alert('<?php echo $msg;?>');</script><?php
 		 }
 		?>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()."public/css/$css"?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()."public/css/style.css"?>">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="<?php echo base_url('/public');?>" type="text/javascript"></script>
 <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
