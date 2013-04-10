@@ -4,17 +4,18 @@
 *
 */
 
+
 class Wall extends CI_Controller
 {
           
     /**
      * Accueil du site Candidat
-     * Dispatche les utilisateurs entre loggués et non loggués
+     * Dispatche les utilisateurs entre logguï¿½s et non logguï¿½s
      * 
      */
     function index() {
          
-        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggué      
+        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas logguï¿½      
 			$this->load->model('books');
 			$this->load->model('admin_model');
 			$this->load->model('social_model');
@@ -36,7 +37,7 @@ class Wall extends CI_Controller
 			$data['likeDislikeCount'] = $likeDislike;
 			$data['view'] = 'candidat/wallhome';
             $this->load->view('common/templates/wall-fixed',$data);
-        } else { // s'il est loggué
+        } else { // s'il est logguï¿½
 		
             $this->load->model('books');   
 			$this->load->model('admin_model');
@@ -74,12 +75,12 @@ class Wall extends CI_Controller
 	
 	 /**
      * Accueil du site Candidat
-     * Dispatche les utilisateurs entre loggués et non loggués
+     * Dispatche les utilisateurs entre logguï¿½s et non logguï¿½s
      * 
      */
     function bestbook() {
          
-        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggué      
+        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas logguï¿½      
 			$this->load->model('books');
 			$this->load->model('admin_model');
 			$this->load->model('social_model');
@@ -101,7 +102,7 @@ class Wall extends CI_Controller
 			$data['likeDislikeCount'] = $likeDislike;
 			$data['view'] = 'candidat/bookhome';
             $this->load->view('common/templates/wall-fixed',$data);
-        } else { // s'il est loggué
+        } else { // s'il est logguï¿½
 		
             $this->load->model('books');   
 			$this->load->model('admin_model');
@@ -176,10 +177,10 @@ class Wall extends CI_Controller
             
             switch($result){
                 case '1' :
-                    $msg = "Ce book a bien été ajouté à vos favoris";
+                    $msg = "Ce book a bien ï¿½tï¿½ ajoutï¿½ ï¿½ vos favoris";
                     break;
                 case '2' : 
-                    $msg = "Ce book est déjà dans vos favoris";
+                    $msg = "Ce book est dï¿½jï¿½ dans vos favoris";
                     break;
                 case '3' :
                     $msg = "Error";
