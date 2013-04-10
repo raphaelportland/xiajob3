@@ -177,7 +177,7 @@ function updateLikeDislike(formId) {
                             <ul class="overview">
                                 <?php
 									foreach($val->pictures as $pic):
-										$imageURL = "<img src='".base_url()."public/phpthumb/thumbnail.php?file=".base_url().$pic->th_url."&maxw=118&maxh=118' />";
+										$imageURL = "<img src='".base_url()."public/phpthumb/thumbnail.php?file=../../".$pic->th_url."&maxw=118&maxh=118' />";
 										echo '<li>'.anchor('book/show/'.$val->id.'/picture/'.$pic->id, $imageURL).'</li>';
 									endforeach;
 								?>
