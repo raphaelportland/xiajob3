@@ -154,7 +154,7 @@ function send_report(form_Id, typeURL,id) {
 	?>
         <div class="lower_cont">
         	<div class="portfolio_name" style="padding-top:15px;">
-            	<h4><?php echo $val->book_name;?> - by <?php echo $val->owner->first_name;?> <span>(<?php echo $val->pic_nb;?> photos)</span></h4>
+            	<h2><?php echo $val->book_name;?> - by <?php echo $val->owner->first_name;?> <span>(<?php echo $val->pic_nb;?> photos)</span></h2>
                 <p><?php echo $val->description;?>, <?php echo $val->owner->first_name;?></p>
             </div>
             
