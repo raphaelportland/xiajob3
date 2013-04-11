@@ -137,8 +137,8 @@ function updateLikeDislike(formId) {
 						
 <div class="wrapper">
     <div class="top_buttons">
-        	<div class="best"><a href="<?php echo base_url();?>/index.php/wall/bestbook">BEST</a></div>
-            <div class="best" style="background-color:#EEEEEE"><a href="<?php echo base_url();?>/index.php/wall">VOTE</a></div>
+        	<div class="best"><a href="<?php echo base_url();?>index.php/wall/bestbook">BEST</a></div>
+            <div class="best" style="background-color:#EEEEEE"><a href="<?php echo base_url();?>index.php/wall">VOTE</a></div>
             <div class="filter"><a href="#">filter by country...</a></div>
             <div class="clr"></div>
         </div>
