@@ -16,7 +16,7 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 		     ?><script type="text/javascript">alert('<?php echo $msg;?>');</script><?php
 		 }
 		?>
-<link rel="stylesheet" type="text/css" href="<?php echo base_url()."public/css/$css"?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url()."public/css/style.css"?>">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="<?php echo base_url('/public');?>" type="text/javascript"></script>
 <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
@@ -143,8 +143,8 @@ function send_report(form_Id, typeURL,id) {
 						
 <div class="wrapper">
     	<div class="top_buttons">
-        	<div class="best" style="background-color:#EEEEEE"><a href="<?php echo base_url();?>/index.php/wall/bestbook">BEST</a></div>
-            <div class="best"><a href="<?php echo base_url();?>/index.php/wall">VOTE</a></div>
+        	<div class="best" style="background-color:#EEEEEE"><a href="<?php echo base_url();?>index.php/wall/bestbook">BEST</a></div>
+            <div class="best"><a href="<?php echo base_url();?>index.php/wall">VOTE</a></div>
             <div class="filter"><a href="#">filter by country...</a></div>
             <div class="clr"></div>
         </div>
