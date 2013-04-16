@@ -387,7 +387,7 @@ function updateLikeDislike(formId) {
 					
 					<?php 
 				  $asd = '';
-				  if(count($favcount > 0 ) {
+				  if(count($favcount) > 0 ) {
 				  foreach($favcount as $favcountnum=>$valCountfav): ?>
 				  <?php if($val->id==$favcountnum AND $valCountfav==1){ 
 				     $asd = $valCountfav;
