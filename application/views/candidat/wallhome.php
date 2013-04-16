@@ -288,7 +288,12 @@ function updateLikeDislike(formId) {
 							</div>
 							<input type="hidden" name="preserve" id="preserve<?php echo $val->id;?>" value="<?php echo $imageValue[$val->id];?>"/>
 							<input type="hidden" name="like" id="curretLikeStatus<?php echo $val->id;?>" value="<?php echo $imageValue1;?>"/>
-							<?php  if (!isset($likeDislikeUid)) $likeDislikeUid = ''; { ?><input type="hidden" name="likeUserId" value="<?php echo $likeDislikeUid;?>"/> <?php } else {?><input type="hidden" name="likeUserId" value="<?php echo $likeDislikeUid;?>"/><?php } ?>
+							<?php  if (!isset($likeDislikeUid)) {
+							$likeDislikeUid = '';  ?>
+							<input type="hidden" name="likeUserId" value="<?php echo $likeDislikeUid;?>"/> <?php }
+							else{?>
+							<input type="hidden" name="likeUserId" value="<?php echo $likeDislikeUid;?>"/>
+							<?php } ?>
 							<input type="hidden" name="likeBookId" value="<?php echo $val->id;?>"/>
                         </div>
                     </div>
