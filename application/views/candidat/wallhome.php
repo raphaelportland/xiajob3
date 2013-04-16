@@ -11,8 +11,8 @@ header("Cache-Control: maxage=".$expires);
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 ?>
 
-<?php $new_msg = $msg;
-		 if($new_msg!=''){
+<?php $msg;
+		 if(isset($new_msg){
 		     ?><script type="text/javascript">alert('<?php echo $msg;?>');</script><?php
 		 }
 		?>
@@ -392,7 +392,7 @@ function updateLikeDislike(formId) {
 					
 					<?php 
 				  $asd = '';
-				  if(count($favcount) > 0 ) {
+				  if(isset($favcount)) {
 				  foreach($favcount as $favcountnum=>$valCountfav): ?>
 				  <?php if($val->id==$favcountnum AND $valCountfav==1){ 
 				     $asd = $valCountfav;
