@@ -10,13 +10,13 @@ class Wall extends CI_Controller
           
     /**
      * Accueil du site Candidat
-     * Dispatche les utilisateurs entre loggu�s et non loggu�s
+     * Dispatche les utilisateurs entre loggu?s et non loggu?s
      * 
      */
     function index() {
         $likeDislike=array();
 	$likeDislikeNew=array();
-        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggu�      
+        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggu?      
 			$this->load->model('books');
 			$this->load->model('admin_model');
 			$this->load->model('social_model');
@@ -36,7 +36,7 @@ class Wall extends CI_Controller
 			$data['likeDislikeCount'] = $likeDislike;
 			$data['view'] = 'candidat/wallhome';
             $this->load->view('common/templates/wall-fixed',$data);
-        } else { // s'il est loggu�
+        } else { // s'il est loggu?
 		
             $this->load->model('books');   
 			$this->load->model('admin_model');
@@ -72,20 +72,19 @@ class Wall extends CI_Controller
 	
 	 /**
      * Accueil du site Candidat
-     * Dispatche les utilisateurs entre loggu�s et non loggu�s
+     * Dispatche les utilisateurs entre loggu?s et non loggu?s
      * 
      */
     function bestbook() {
-         
-        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggu�      
+      $likeDislike=array();
+	  $likeDislikeNew=array();
+        if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggu?      
 			$this->load->model('books');
 			$this->load->model('admin_model');
 			$this->load->model('social_model');
 			$data['css'] = $this->config->item('css'); 
 			$data['word'] = $this->admin_model->abusive_words_list();
 			$data['books'] = $this->books->get_bestbook(4);
-			$likeDislike=array();
-			
 			foreach($data['books'] as $newData){
 			     $ndata['user_id']=$this->session->userdata('user_id');
 				 $ndata['book_id']=$newData->id;
@@ -99,7 +98,7 @@ class Wall extends CI_Controller
 			$data['likeDislikeCount'] = $likeDislike;
 			$data['view'] = 'candidat/bookhome';
             $this->load->view('common/templates/wall-fixed',$data);
-        } else { // s'il est loggu�
+        } else { // s'il est loggu?
 		
             $this->load->model('books');   
 			$this->load->model('admin_model');
@@ -107,8 +106,6 @@ class Wall extends CI_Controller
 			$data['css'] = $this->config->item('css'); 
 			$data['word'] = $this->admin_model->abusive_words_list();
 			$data['books'] = $this->books->get_bestbook(4);
-			$likeDislike=array();
-			$likeDislikeNew=array();
 			foreach($data['books'] as $newData){
 			     $ndata['user_id']=$this->session->userdata('user_id');
 				 $ndata['book_id']=$newData->id;
@@ -174,10 +171,10 @@ class Wall extends CI_Controller
             
             switch($result){
                 case '1' :
-                    $msg = "Ce book a bien �t� ajout� � vos favoris";
+                    $msg = "Ce book a bien ?t? ajout? ? vos favoris";
                     break;
                 case '2' : 
-                    $msg = "Ce book est d�j� dans vos favoris";
+                    $msg = "Ce book est d?j? dans vos favoris";
                     break;
                 case '3' :
                     $msg = "Error";
