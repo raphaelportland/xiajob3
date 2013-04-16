@@ -144,6 +144,9 @@ function updateLikeDislike(formId) {
         </div>
 		
 	<?php 
+	 echo "<pre>";
+	 print_r($books);
+	 
 		foreach($books as $book=>$val):
 	?>
         <div class="lower_cont">
