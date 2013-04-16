@@ -11,8 +11,8 @@ header("Cache-Control: maxage=".$expires);
 header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 ?>
 
-<?php $msg;
-		 if($msg!=''){
+<?php $new_msg = $msg;
+		 if($new_msg!=''){
 		     ?><script type="text/javascript">alert('<?php echo $msg;?>');</script><?php
 		 }
 		?>
