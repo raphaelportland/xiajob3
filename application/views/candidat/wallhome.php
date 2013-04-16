@@ -12,7 +12,7 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 ?>
 
 <?php $msg;
-		 if(isset($new_msg){
+		 if(isset($new_msg)){
 		     ?><script type="text/javascript">alert('<?php echo $msg;?>');</script><?php
 		 }
 		?>
