@@ -14,7 +14,8 @@ class Wall extends CI_Controller
      * 
      */
     function index() {
-         
+        $likeDislike=array();
+	$likeDislikeNew=array();
         if (!$this->tank_auth->is_logged_in()) {  // si l'utilisateur n'est pas loggu�      
 			$this->load->model('books');
 			$this->load->model('admin_model');
@@ -22,8 +23,6 @@ class Wall extends CI_Controller
 			$data['css'] = $this->config->item('css'); 
 			$data['word'] = $this->admin_model->abusive_words_list();
 			$data['books'] = $this->books->get_popular(4);
-			$likeDislike=array();
-			
 			foreach($data['books'] as $newData){
 			     $ndata['user_id']=$this->session->userdata('user_id');
 				 $ndata['book_id']=$newData->id;
@@ -45,8 +44,6 @@ class Wall extends CI_Controller
 			$data['css'] = $this->config->item('css'); 
 			$data['word'] = $this->admin_model->abusive_words_list();
 			$data['books'] = $this->books->get_popular(4);
-			$likeDislike=array();
-			$likeDislikeNew=array();
 			foreach($data['books'] as $newData){
 			     $ndata['user_id']=$this->session->userdata('user_id');
 				 $ndata['book_id']=$newData->id;
