@@ -387,11 +387,12 @@ function updateLikeDislike(formId) {
 					
 					<?php 
 				  $asd = '';
+				  if(count($favcount > 0 ) {
 				  foreach($favcount as $favcountnum=>$valCountfav): ?>
 				  <?php if($val->id==$favcountnum AND $valCountfav==1){ 
 				     $asd = $valCountfav;
 				  }
-				  endforeach;?>
+				  endforeach; }?>
 				  <?php if($asd==1){?>
 				  <form id="del_fav_<?php echo $val->id; ?>"> 
                     <div class="favourite_<?php echo $val->id;?> abc" id="favourite_<?php echo $val->id;?>">
