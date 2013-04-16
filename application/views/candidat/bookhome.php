@@ -12,7 +12,7 @@ header('Expires: ' . gmdate('D, d M Y H:i:s', time()+$expires) . ' GMT');
 ?>
 
 <?php $msg;
-		 if($msg!=''){
+		if(isset($new_msg)){
 		     ?><script type="text/javascript">alert('<?php echo $msg;?>');</script><?php
 		 }
 		?>
@@ -293,7 +293,12 @@ function send_report(form_Id, typeURL,id) {
 							</div>
 							<input type="hidden" name="preserve" id="preserve<?php echo $val->id;?>" value="<?php echo $imageValue[$val->id];?>"/>
 							<input type="hidden" name="like" id="curretLikeStatus<?php echo $val->id;?>" value="<?php echo $imageValue1;?>"/>
+							<?php  if (!isset($likeDislikeUid)) {
+							$likeDislikeUid = '';  ?>
+							<input type="hidden" name="likeUserId" value="<?php echo $likeDislikeUid;?>"/> <?php }
+							else{?>
 							<input type="hidden" name="likeUserId" value="<?php echo $likeDislikeUid;?>"/>
+							<?php } ?>
 							<input type="hidden" name="likeBookId" value="<?php echo $val->id;?>"/>
                         </div>
                     </div>
@@ -392,11 +397,12 @@ function send_report(form_Id, typeURL,id) {
 					
 					<?php 
 				  $asd = '';
+				   if(isset($favcount)) {
 				  foreach($favcount as $favcountnum=>$valCountfav): ?>
 				  <?php if($val->id==$favcountnum AND $valCountfav==1){ 
 				     $asd = $valCountfav;
 				  }
-				  endforeach;?>
+				  endforeach; }?>
 				  <?php if($asd==1){?>
 				  <form id="del_fav_<?php echo $val->id; ?>" action = "<?php echo base_url()?>index.php/wall/del_fav"> 
                     <div class="favourite_<?php echo $val->id;?> abc" id="favourite_<?php echo $val->id;?>">
